@@ -7,9 +7,9 @@ export default function About() {
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-8">About Me</h2>
           <p className="text-slate-300 mb-6">
-            Senior Software Engineer with 8+ years of experience building scalable web applications.
-            Expert in React, Node.js, and AWS cloud infrastructure. Led multiple successful projects
-            for Fortune 500 companies.
+          I’m Hithesh Rai Purushothama, a senior in Electrical and Electronic Engineering at ASU with a focus on renewable energy, material research, and AI applications. 
+          With hands-on experience in perovskite solar cells, AI-driven edge devices, and NASA's rover systems, 
+          I aim to drive innovation in sustainable technology through technical skills in programming, material synthesis, and low-power electronics.
           </p>
           <p className="text-slate-300">
             Passionate about clean code, performance optimization, and mentoring junior developers.
