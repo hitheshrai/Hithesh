@@ -1,8 +1,18 @@
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: 'https://hitheshrai.github.io/Hitheshrai.github.io-/', // replace with your repo name
+  base: '/Hithesh/', // Replace with your repo name if deploying to GitHub Pages
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'three': ['three'],
+          'react-three-fiber': ['@react-three/fiber']
+        }
+      },
+    },
+  },
 });

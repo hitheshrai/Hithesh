@@ -1,12 +1,47 @@
+/* index.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html {
+  color-scheme: dark; /* Helps avoid a flash of light mode */
+}
+
 body {
-  margin: 0;
+  background-color: #000000; /* Dark mode background */
+  color: #FFFFFF; /* Dark mode text color */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body.light-mode {
+  background-color: #FAFAFA; /* Light mode background */
+  color: #333333; /* Light mode text color */
+}
+
+.glass-effect {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.glass-effect:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.03);
+}
+
+.dark .glass-effect {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-effect:hover {
+  background: rgba(0, 0, 0, 0.5);
+  transform: scale(1.05);
 }
