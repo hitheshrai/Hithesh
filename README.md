@@ -1,4 +1,5 @@
-# Hithesh Rai Purushothama Portfolio
+# Hithesh Rai Purushothama Portfolio: [https://hitheshrai.github.io/Hithesh/](https://hitheshrai.github.io/Hithesh/)
+
 
 Welcome to my portfolio project! This repository showcases my educational background, research experience, and engineering projects in renewable energy, material science, and AI. Initially developed with **Bolt.new** and refined using **ChatGPT-4**, this portfolio serves as an interactive platform to display my journey and contributions in Electrical and Electronic Engineering.
 
