@@ -1,5 +1,3 @@
-// src/components/About.tsx
-
 import React from 'react';
 import Tilt from 'react-parallax-tilt';
 
@@ -20,8 +18,7 @@ export default function About() {
             <h2 className="text-xl md:text-2xl font-semibold text-primary dark:text-textDark mb-4">About Me</h2>
 
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
-              I am a senior in Electrical and Electronic Engineering at ASU with a focus on renewable energy, 
-              material research, and AI applications. Currently, I am working with the{' '}
+              I am a senior at Arizona State University majoring in Electrical and Electronics Engineering, with strong interests in renewable energy, material science, and low-power AI applications. Currently, I am an Undergraduate Research Assistant in the{' '}
               <a 
                 href="https://rolston.lab.asu.edu/" 
                 className="text-primary hover:underline dark:text-textDark" 
@@ -29,11 +26,11 @@ export default function About() {
                 rel="noopener noreferrer"
               >
                 Rolston Lab
-              </a>, where I contribute to innovative projects in sustainable technology.
+              </a>, working on perovskite-based alphavoltaic thin films for sustainable energy solutions.
             </p>
             
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
-              Additionally, I am a Senior Studio Associate at the{' '}
+              I also serve as a Senior Studio Associate at the{' '}
               <a 
                 href="https://nextlab.asu.edu/" 
                 className="text-primary hover:underline dark:text-textDark" 
@@ -41,12 +38,11 @@ export default function About() {
                 rel="noopener noreferrer"
               >
                 Next Lab
-              </a>, leading the Gen AI team in developing cutting-edge AI applications.
+              </a>, where I lead the Gen AI Guild. My focus is on developing large language models optimized for low-power devices, aligning with my passion for sustainable AI technologies.
             </p>
             
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-              With hands-on experience in perovskite solar cells, AI-driven edge devices, and low-power electronics, I aim to drive 
-              innovation in sustainable technology through my technical skills in programming and material synthesis.
+              I am actively seeking internship opportunities for Summer 2024 and exploring PhD programs for Fall 2026 to further my research and career in sustainable technology and advanced AI applications.
             </p>
           </div>
         </Tilt>
