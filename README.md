@@ -1,12 +1,9 @@
-Here’s an even more concise version of your README, focusing on your background and tools used to create the website:
-
----
 
 # Hithesh Rai Purushothama Portfolio
 
 | Senior EE at Arizona State University | Undergraduate Researcher at Rolston Lab | Senior Studio Associate at Next Lab |
 
-Welcome to my portfolio repository! This site highlights my journey in Electrical and Electronic Engineering, with a focus on renewable energy, material research, and AI applications. The website was developed using Bolt AI, ChatGPT, and Perplexity to create an interactive platform showcasing my skills and experience.
+Welcome to my portfolio repository! This site highlights my journey in Electrical and Electronic Engineering, with a focus on renewable energy, material research, and AI applications. The website was developed using Bolt AI (Template), ChatGPT 4 (Debuging), and Perplexity to create an interactive platform showcasing my skills and experience.
 
 ---
 
