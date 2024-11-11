@@ -5,25 +5,30 @@ import React from 'react';
 export default function Articles() {
   const articles = [
     {
-      title: "Exploring the Potential of Quantum Computing in Renewable Energy",
-      description: "An in-depth look at how quantum computing can optimize renewable energy sources and applications.",
-      link: "https://example.com/quantum-computing-renewable-energy",
+      title: "Hithesh Rai Purushothama: A Journey in Engineering and Leadership",
+      description: "A feature on Hithesh’s contributions to semiconductors, robotics, and materials science, showcasing his leadership in various student organizations and projects.",
+      link: "https://ecee.engineering.asu.edu/2023/03/hithesh-rai-purushothama/",
     },
     {
-      title: "AI in Material Science: Transforming Research in Sustainable Technology",
-      description: "How AI-driven algorithms are changing the way we approach material research and sustainable technology.",
-      link: "https://example.com/ai-in-material-science",
+      title: "Sommer in Berlin: Einblicke in das Leben eines Forschungspraktikanten",
+      description: "Hithesh’s summer internship experience at Helmholtz-Zentrum Berlin, diving into perovskite research, exploring Berlin’s vibrant culture, and embracing unforgettable moments.",
+      link: "https://science.hzbblog.de/sommer-in-berlin-einblicke-in-das-leben-eines-forschungspraktikanten",
     },
     {
-      title: "Perovskite Solar Cells: A Game Changer for the Future of Solar Energy",
-      description: "An exploration into perovskite solar cells, their efficiency, and potential for mainstream adoption.",
-      link: "https://example.com/perovskite-solar-cells",
+      title: "SURF Students at Purdue: A Summer of Research",
+      description: "The SURF program at Purdue welcomes Hithesh, focusing on perovskite solar cell research and collaborating with the Letian Dou Group.",
+      link: "https://letiandougroup.com/2023/05/25/surf-students/",
     },
     {
-      title: "Understanding Quantum Materials and Their Applications in Modern Electronics",
-      description: "A deep dive into quantum materials and their impact on the next generation of electronic devices.",
-      link: "https://example.com/quantum-materials",
+      title: "Revolutionizing Formaldehyde Lead Halide Perovskite Solar Cells",
+      description: "A FURI research project focusing on ionic additives for improving stability in perovskite solar cells, under the mentorship of Professor Nick Rolston.",
+      link: "https://forge.engineering.asu.edu/participant/rai-purushothama-hithesh/",
     },
+    {
+      title: "Measuring and Controlling Mobile Ion Concentration in Perovskite Thin Films",
+      description: "This FURI Spring 2023 project explores ion migration control to enhance the stability of perovskite solar cells using cutting-edge characterization tools.",
+      link: "https://forge.engineering.asu.edu/furiproject/measuring-and-controlling-mobile-ion-concentration-to-improve-operational-stability-in-perovskite-thin-films/",
+    }
   ];
 
   return (

@@ -1,28 +1,34 @@
+// src/App.tsx
+
 import React, { Suspense, lazy } from 'react';
 import Header from './components/Header';
 import About from './components/About';
 import Projects from './components/Projects';
-import Articles from './components/Articles';
+import Articles from './components/Articles'
 import Contact from './components/Contact';
+import Timeline from './components/Timeline';
 
 const AtomVisualization = lazy(() => import('./components/AtomVisualization'));
 
 function App() {
   return (
     <div className="relative">
-      {/* Atom Visualization Background (Lazy Loaded) */}
-      <Suspense fallback={<div>Loading...</div>}>
-        <div className="absolute inset-0 -z-10">
+      {/* Centered Atom Visualization */}
+      <div className="fixed inset-0 flex justify-center items-center z-0 opacity-30 pointer-events-none">
+        <Suspense fallback={<div>Loading...</div>}>
           <AtomVisualization />
-        </div>
-      </Suspense>
+        </Suspense>
+      </div>
 
       {/* Main Content */}
-      <Header />
-      <About />
-      <Projects />
-      <Articles />
-      <Contact />
+      <div className="relative z-10 max-w-4xl mx-auto px-4">
+        <Header />
+        <About />
+        <Projects />
+        <Timeline />
+        <Articles />
+        <Contact />
+      </div>
     </div>
   );
 }

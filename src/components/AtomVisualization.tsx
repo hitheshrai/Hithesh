@@ -34,7 +34,7 @@ function AtomNucleus() {
 
 export default function AtomVisualization() {
   return (
-    <Canvas style={{ height: '100vh', width: '100%' }}>
+    <Canvas className="atom-canvas">
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} />
 

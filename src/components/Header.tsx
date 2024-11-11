@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Mail, Linkedin } from 'lucide-react';
+import { Github, Mail, Linkedin, Twitter } from 'lucide-react'; // Import Twitter icon
 import DarkModeToggle from './DarkModeToggle';
 
 const Header = () => {
@@ -74,6 +74,14 @@ const Header = () => {
         >
           <Mail size={24} />
         </a>
+        <a
+  href="https://x.com/hitheshrai"  // Link to Twitter (X) profile
+  className="p-1 md:p-2 transition-transform transform duration-300 hover:scale-110 hover:text-blue-500 dark:hover:text-white"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Twitter size={24} /> {/* Twitter icon */}
+</a>
       </div>
 
       {/* Call to Action Button */}

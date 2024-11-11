@@ -1,47 +1,103 @@
-/* index.css */
-
+/* Tailwind Directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
-  color-scheme: dark; /* Helps avoid a flash of light mode */
+/* Solar-Inspired Color Scheme */
+:root {
+  --bg-color: #FFFBF0; /* Light, warm background color */
+  --text-color: #333333;
+  --accent-color: #FFA500; /* Warm orange accent */
+  --card-bg-color: #FFF7E0; /* Light yellow card background */
 }
 
+html.dark {
+  --bg-color: #1a202c; /* Darker background for contrast */
+  --text-color: #FFFFFF;
+  --accent-color: #FFD700; /* Golden accent color in dark mode */
+  --card-bg-color: #2d3748; /* Dark background for cards */
+}
+
+/* Body Background and Text */
 body {
-  background-color: #000000; /* Dark mode background */
-  color: #FFFFFF; /* Dark mode text color */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
-body.light-mode {
-  background-color: #FAFAFA; /* Light mode background */
-  color: #333333; /* Light mode text color */
+/* Timeline, Featured Projects, and Articles Structure */
+.timeline, .featured-projects, .articles {
+  position: relative;
+  max-width: 900px; /* Width for the sections */
+  margin: 0 auto;
+  padding: 3rem 1rem;
 }
 
-.glass-effect {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* Title Styling with Solar Theme */
+.timeline-title, .featured-title, .articles-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--accent-color);
+}
+
+/* Timeline Item, Featured Project, and Article Styling */
+.timeline-item, .featured-item, .article-item {
+  position: relative;
+  width: 90%; /* Wider cards for consistency */
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
   border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, background 0.3s ease;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1), inset 0px 0px 10px rgba(255, 165, 0, 0.15);
+  border: 1px solid rgba(255, 165, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-.glass-effect:hover {
-  background: rgba(255, 255, 255, 0.6);
-  transform: scale(1.03);
+/* Hover Effect with Enhanced Solar Shadow */
+.timeline-item:hover, .featured-item:hover, .article-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 24px rgba(255, 165, 0, 0.3);
 }
 
-.dark .glass-effect {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Circular Marker (Standalone for Visual Interest) */
+.timeline-item::before, .featured-item::before, .article-item::before {
+  content: '';
+  position: absolute;
+  top: 1.5rem;
+  left: -15px; /* Positioned on the left of each item */
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
 }
 
-.dark .glass-effect:hover {
-  background: rgba(0, 0, 0, 0.5);
-  transform: scale(1.05);
+/* Bullet Point Alignment for Descriptions */
+.timeline-item .description, .featured-item .description, .article-item .description {
+  padding-left: 1rem;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .timeline, .featured-projects, .articles {
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .timeline-item, .featured-item, .article-item {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateX(0);
+  }
+
+  .timeline-item::before, .featured-item::before, .article-item::before {
+    left: 10px;
+  }
 }
