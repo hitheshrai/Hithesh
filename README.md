@@ -34,7 +34,3 @@ npm start
 ---
 
 For more information, visit my [portfolio website](https://hitheshrai.github.io/Hithesh/).
-
----
-
-This README provides a streamlined overview, focusing on your profile and the tools used to build the site. Let me know if this works or if you'd like further adjustments!
