@@ -42,7 +42,7 @@ export default function About() {
             </p>
             
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-              I am actively seeking internship opportunities for Summer 2024 and exploring PhD programs for Fall 2026 to further my research and career in sustainable technology and advanced AI applications.
+              I’m actively seeking internship or co-op opportunities for Fall 2025. I expect to graduate in December 2025 and am open to full-time roles starting Spring 2026. I’m also exploring PhD programs for Fall 2026 to further my research and career in sustainable technology and advanced AI applications.
             </p>
           </div>
         </Tilt>
