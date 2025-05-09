@@ -4,16 +4,11 @@ import React from 'react';
 
 export default function Projects() {
   const projects = [
-    {
-  title: "Blade-Coated CsPbX₃ Films for Alphavoltaic and Optoelectronic Devices",
-  description: "Guest researcher project under Dr. Nick Rolston exploring scalable blade coating of cesium lead halide perovskite films for alphavoltaics. Focused on ethanol-based deposition using PVP/PEG for improved film uniformity and thickness under ambient conditions.",
-  link: "https://forge.engineering.asu.edu/participant/rai-purushothama-hithesh/"
-    },
 
     {
       title: "Synthesis and Characterization of Halide Perovskite for Solar Cells",
       description: "Intel-funded project focusing on synthesis and optical/electrical characterization of perovskite thin films for solar applications. Involved spin coating and spectroscopic analysis.",
-      link: "https://rolston.lab.asu.edu/our-work-explained/" 
+      link: "https://forge.engineering.asu.edu/participant/rai-purushothama-hithesh/" 
     },
     {
       title: "Probing Structural Instability in Perovskite-based Ferroelectric Materials",

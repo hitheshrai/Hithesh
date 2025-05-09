@@ -3,10 +3,10 @@
 import React from "react";
 
 // Importing logos
-import asuLogo from "/workspaces/Hitheshrai.github.io-/ASU12.jpg";
-import helmholtzLogo from "/workspaces/Hitheshrai.github.io-/helmholtz_zentrum_berlin_logo.jpeg";
-import purdueLogo from "/workspaces/Hitheshrai.github.io-/Purdue.jpeg";
-import nextLabLogo from "/workspaces/Hitheshrai.github.io-/channels4_profile.jpg";
+import asuLogo from "/workspaces/Hithesh/ASU12.jpg";
+import helmholtzLogo from "/workspaces/Hithesh/helmholtz_zentrum_berlin_logo.jpeg";
+import purdueLogo from "/workspaces/Hithesh/Purdue.jpeg";
+import nextLabLogo from "/workspaces/Hithesh/channels4_profile.jpg";
 
 const timelineData = [
   {
