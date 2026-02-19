@@ -1,4 +1,3 @@
-import React from 'react';
 import Tilt from 'react-parallax-tilt';
 
 export default function About() {
@@ -15,34 +14,40 @@ export default function About() {
           className="max-w-3xl mx-auto"
         >
           <div className="p-4 md:p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-            <h2 className="text-xl md:text-2xl font-semibold text-primary dark:text-textDark mb-4">About Me</h2>
+            <h2 className="text-xl md:text-2xl font-semibold text-primary dark:text-textDark mb-4">
+              About Me
+            </h2>
 
-            <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
-              I am a senior at Arizona State University majoring in Electrical and Electronics Engineering, with strong interests in renewable energy, material science, and low-power AI applications. Currently, I am an Undergraduate Research Assistant in the{' '}
-              <a 
-                href="https://rolston.lab.asu.edu/" 
-                className="text-primary hover:underline dark:text-textDark" 
-                target="_blank" 
+            <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+              I’m a Master’s student in Artificial Intelligence Engineering (Materials Science & Engineering) at Arizona State University, working at the intersection of AI, renewable energy systems, and advanced materials. My work spans from cleanroom fabrication of perovskite thin films to deploying AI systems on edge devices for energy-aware applications.
+            </p>
+
+            <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+              At the{' '}
+              <a
+                href="https://rolston.lab.asu.edu/"
+                className="text-primary hover:underline dark:text-textDark"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 Rolston Lab
-              </a>, working on perovskite-based alphavoltaic thin films for sustainable energy solutions.
+              </a>, I work on perovskite-based optoelectronic and energy-conversion devices, focusing on fabrication, characterization, and scaling pathways from lab to manufacturable systems.
             </p>
-            
-            <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
-              I also serve as a Senior Studio Associate at the{' '}
-              <a 
-                href="https://nextlab.asu.edu/" 
-                className="text-primary hover:underline dark:text-textDark" 
-                target="_blank" 
+
+            <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+              At{' '}
+              <a
+                href="https://nextlab.asu.edu/"
+                className="text-primary hover:underline dark:text-textDark"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 Next Lab
-              </a>, where I lead the Gen AI Guild. My focus is on developing large language models optimized for low-power devices, aligning with my passion for sustainable AI technologies.
+              </a>, I lead AI-focused initiatives, building and benchmarking large language model workflows, RAG systems, and low-power inference pipelines on NVIDIA Jetson devices. My focus is translating complex technical systems into deployable, reliable tools.
             </p>
-            
+
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-              I’m actively seeking internship or co-op opportunities for Fall 2025. I expect to graduate in December 2025 and am open to full-time roles starting Spring 2026. I’m also exploring PhD programs for Fall 2026 to further my research and career in sustainable technology and advanced AI applications.
+              Long term, I aim to build intelligent infrastructure tools that accelerate the energy transition — combining AI systems, geospatial data, and energy modeling to make renewable deployment faster and more scalable.
             </p>
           </div>
         </Tilt>
