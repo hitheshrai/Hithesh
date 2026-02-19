@@ -1,7 +1,5 @@
 // src/components/Articles.tsx
 
-import React from 'react';
-
 export default function Articles() {
   const articles = [
     {
