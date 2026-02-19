@@ -1,10 +1,10 @@
+// src/components/TimelineInterestJourney.tsx
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * Interest Journey with Framer Motion transitions
- * - Left: timeline items (stages)
- * - Right: cinematic panel with smooth fade/slide when active changes
+ * Path: India → Tempe → West Lafayette → Berlin → Neuchâtel → Tempe
  */
 
 type Stage = {
@@ -12,7 +12,7 @@ type Stage = {
   short: string;
   date: string;
   institute?: string;
-  location?: string;
+  location: string; // single-location string like "Tempe, AZ"
   narrative: string;
   interests: string[];
 };
@@ -23,19 +23,19 @@ const stages: Stage[] = [
     short: "Electrical Engineering — Foundations",
     date: "2021 – 2022",
     institute: "Early coursework",
-    location: "India → Arizona",
+    location: "India",
     narrative:
       "Started with electrical engineering fundamentals — circuits, signals, and systems. This laid the foundation for hardware-aware thinking.",
     interests: ["Circuits", "Signals", "Embedded Systems"],
   },
   {
-    id: "renewables",
-    short: "Renewable Energy — Hands-on",
+    id: "tempe-start",
+    short: "Transition to Renewable Energy",
     date: "2022 – 2023",
     institute: "ASU lab work",
     location: "Tempe, AZ",
     narrative:
-      "Moved into renewable energy—fabrication and testing of PV materials and systems. Began caring about real-world energy problems and scale.",
+      "Moved to Tempe and began hands-on work in renewable energy — fabrication and testing of PV materials and systems, focusing on real-world energy problems and scale.",
     interests: ["Photovoltaics", "Materials", "Energy Systems"],
   },
   {
@@ -45,7 +45,7 @@ const stages: Stage[] = [
     institute: "Purdue (SURF)",
     location: "West Lafayette, IN",
     narrative:
-      "Engaged deeply with data — curated device databases, ran trend analysis, and learned how data drives experimental decisions.",
+      "At Purdue, I engaged deeply with data — curated device databases, ran trend analysis, and learned how data drives experimental decisions.",
     interests: ["Data Analysis", "Databases", "ML for Materials"],
   },
   {
@@ -55,7 +55,7 @@ const stages: Stage[] = [
     institute: "Helmholtz Zentrum Berlin",
     location: "Berlin, Germany",
     narrative:
-      "Shifted focus to structural and local-order analysis (PDF/XRD), connecting composition to instability and failure modes.",
+      "Conducted local-order and structural analysis (PDF/XRD), connecting composition to instability and failure modes — a turning point in material understanding.",
     interests: ["Diffraction", "PDF Analysis", "Materials Characterization"],
   },
   {
@@ -65,7 +65,7 @@ const stages: Stage[] = [
     institute: "EPFL",
     location: "Neuchâtel, Switzerland",
     narrative:
-      "Worked on device fabrication and encapsulation; connected materials processing choices to device performance and long-term stability.",
+      "Worked on device fabrication and encapsulation; linked materials processing decisions to device performance and long-term stability.",
     interests: ["Device Fabrication", "ALD", "Stability Testing"],
   },
   {
@@ -75,19 +75,18 @@ const stages: Stage[] = [
     institute: "Next Lab / ASU",
     location: "Tempe, AZ",
     narrative:
-      "Integrated AI and edge inference into research workflows — RAG pipelines, Jetson deployments, and automation that reduces friction in experiments.",
+      "Returned to Tempe to focus on integrating AI and edge inference into research workflows — RAG pipelines, Jetson deployments, and automation to reduce friction in experiments.",
     interests: ["RAG", "Edge AI", "Automation", "Self-driving Labs"],
   },
-  {
-    id: "today",
-    short: "Current Focus — Synthesis",
-    date: "Now",
-    institute: "Synthesis (research + systems)",
-    location: "Tempe ↔ Remote ↔ Europe",
-    narrative:
-      "Synthesis of energy, materials and automation: aiming for autonomous, energy-efficient discovery and deployable infrastructure.",
-    interests: ["Energy Materials", "Autonomous Labs", "Energy-efficient Deployment"],
-  },
+];
+
+const FULL_PATH = [
+  "India",
+  "Tempe",
+  "West Lafayette",
+  "Berlin",
+  "Neuchâtel",
+  "Tempe",
 ];
 
 export default function TimelineInterestJourney(): JSX.Element {
@@ -111,11 +110,13 @@ export default function TimelineInterestJourney(): JSX.Element {
     return () => obs.disconnect();
   }, []);
 
-  const progress = Math.round((active / (stages.length - 1)) * 100);
+  // Map active stage to progress across FULL_PATH segments.
+  // We'll compute a percentage along the full path: active index maps to (index)/(stages.length -1)
+  const progressPercent = Math.round((active / (stages.length - 1)) * 100);
 
-  // motion variants
+  // Animation variants for right panel
   const panelVariants = {
-    enter: { opacity: 0, x: 12 },
+    enter: { opacity: 0, x: 10 },
     center: { opacity: 1, x: 0 },
     exit: { opacity: 0, x: -8 },
   };
@@ -123,13 +124,14 @@ export default function TimelineInterestJourney(): JSX.Element {
   return (
     <section className="py-16">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-        {/* Left column: timeline */}
+        {/* Left: timeline */}
         <div className="lg:col-span-2">
           <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-8">
             My Interest Journey
           </h2>
 
           <div className="relative">
+            {/* left vertical line */}
             <div className="absolute left-4 top-0 bottom-0 w-px bg-slate-300 dark:bg-slate-700" />
 
             <div className="space-y-14">
@@ -147,9 +149,7 @@ export default function TimelineInterestJourney(): JSX.Element {
                       className={`absolute -left-6 top-1 w-4 h-4 rounded-full ring-4 ring-white dark:ring-slate-900 ${
                         isActive ? "bg-accent scale-110" : "bg-slate-500 dark:bg-slate-400 scale-100"
                       }`}
-                      style={{
-                        transition: "transform 300ms ease, background-color 300ms ease",
-                      }}
+                      style={{ transition: "transform 300ms ease, background-color 300ms ease" }}
                       aria-hidden
                     />
 
@@ -171,12 +171,12 @@ export default function TimelineInterestJourney(): JSX.Element {
           </div>
         </div>
 
-        {/* Right column: cinematic panel */}
+        {/* Right: cinematic panel */}
         <aside className="sticky top-24 self-start">
           <div className="w-full max-w-md p-6 bg-white dark:bg-slate-900 rounded-xl shadow border border-slate-200 dark:border-slate-700">
             <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">Journey</div>
 
-            <div className="min-h-[88px]">
+            <div className="min-h-[92px]">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={stages[active].id}
@@ -217,20 +217,27 @@ export default function TimelineInterestJourney(): JSX.Element {
               </AnimatePresence>
             </div>
 
-            {/* Progress bar */}
+            {/* Path visualization + progress */}
             <div className="mt-6">
               <div className="text-xs text-slate-400 mb-2">Path</div>
+
+              {/* textual full path */}
+              <div className="text-sm text-slate-700 dark:text-slate-200 font-medium mb-2">
+                {FULL_PATH.join(" — ")}
+              </div>
+
+              {/* progress bar */}
               <div className="flex items-center text-sm">
                 <span className="mr-2 text-slate-700 dark:text-slate-200 font-medium">India</span>
                 <div className="flex-1 h-1 bg-slate-200 dark:bg-slate-800 mx-3 rounded-full overflow-hidden">
                   <motion.div
                     className="h-1 bg-accent rounded-full"
-                    animate={{ width: `${progress}%` }}
+                    animate={{ width: `${progressPercent}%` }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                   />
                 </div>
                 <span className="ml-2 text-slate-700 dark:text-slate-200 font-medium">
-                  {(stages[active].location || "").split(",")[0]}
+                  {stages[active].location.split(",")[0]}
                 </span>
               </div>
             </div>
