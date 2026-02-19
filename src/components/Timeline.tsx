@@ -223,7 +223,7 @@ export default function TimelineInterestJourney(): JSX.Element {
 
               {/* textual full path */}
               <div className="text-sm text-slate-700 dark:text-slate-200 font-medium mb-2">
-                {FULL_PATH.join(" — ")}
+                {FULL_PATH.join(" → ")}
               </div>
 
               {/* progress bar */}
