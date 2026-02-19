@@ -8,7 +8,7 @@ import Articles from './components/Articles'
 import Contact from './components/Contact';
 import Timeline from './components/Timeline';
 
-const AtomVisualization = lazy(() => import('./components/AtomVisualization'));
+const AtomVisualization = lazy(() => import('./components/PerovskiteVisualizer'));
 
 function App() {
   return (

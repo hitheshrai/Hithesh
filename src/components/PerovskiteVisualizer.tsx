@@ -19,7 +19,6 @@ function UnitCell({
   showBonds: boolean;
   atomSizes: AtomSizes;
 }) {
-  const s = a / 2;
 
   const { cornerPositions, facePositions, edgeGeometry } = useMemo(() => {
     const half = a / 2;
