@@ -1,10 +1,15 @@
 // src/components/TimelineInterestJourney.tsx
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 /**
- * Interest Journey with Framer Motion transitions
- * Path: India → Tempe → West Lafayette → Berlin → Neuchâtel → Tempe
+ * TimelineInterestJourney — polished:
+ * - Safe IntersectionObserver
+ * - Keyboard navigation (arrows)
+ * - prefers-reduced-motion support
+ * - aria roles
+ * - responsive spacing
+ * - segmented path SVG with active node
  */
 
 type Stage = {
@@ -20,22 +25,22 @@ type Stage = {
 const stages: Stage[] = [
   {
     id: "ee-start",
-    short: "Electrical Engineering — Foundations",
-    date: "2021 – 2022",
-    institute: "Early coursework",
+    short: "Electrical Engineering → AI Engineering",
+    date: "2021 – Present",
+    institute: "ASU — B.S.E EEE / M.S. AI Engineering",
     location: "India",
     narrative:
-      "Started with electrical engineering fundamentals — circuits, signals, and systems. This laid the foundation for hardware-aware thinking.",
-    interests: ["Circuits", "Signals", "Embedded Systems"],
+      "Completed a B.S.E in Electrical and Electronic Engineering at ASU (Aug 2021 – Dec 2025), building a hardware-aware foundation in circuits, signals, and embedded systems. Now continuing at ASU as an M.S. student in AI Engineering (Materials Science and Engineering), Jan 2026 – May 2027.",
+    interests: ["Circuits", "Signals", "Embedded Systems", "AI Engineering"],
   },
   {
     id: "tempe-start",
     short: "Transition to Renewable Energy",
-    date: "2022 – 2023",
-    institute: "ASU lab work",
+    date: "Sep 2022 – Present",
+    institute: "Renewable Energy Materials & Devices Lab, ASU",
     location: "Tempe, AZ",
     narrative:
-      "Moved to Tempe and began hands-on work in renewable energy — fabrication and testing of PV materials and systems, focusing on real-world energy problems and scale.",
+      "Joined ASU's Renewable Energy Materials & Devices Lab and have been doing hands-on work here ever since — fabrication and characterization of perovskite thin films, solar cells, and alphavoltaic devices, with a focus on understanding degradation and improving stability.",
     interests: ["Photovoltaics", "Materials", "Energy Systems"],
   },
   {
@@ -70,43 +75,66 @@ const stages: Stage[] = [
   },
   {
     id: "nextlab-ai",
-    short: "AI for Social Good & Edge — Next Lab",
+    short: "AI & Edge Systems — Next Lab",
     date: "2026 – Present",
     institute: "Next Lab / ASU",
     location: "Tempe, AZ",
     narrative:
-      "Returned to Tempe to focus on integrating AI and edge inference into research workflows — RAG pipelines, Jetson deployments, and automation to reduce friction in experiments.",
+      "Returned to Tempe to integrate AI and edge inference into research workflows — LangChain-based RAG pipelines, NVIDIA Jetson deployments, benchmarking latency and power, and automating lab documentation to reduce friction in experiments.",
     interests: ["RAG", "Edge AI", "Automation", "Self-driving Labs"],
   },
 ];
 
-// FIX 1: Derive FULL_PATH from stages so it never goes out of sync
+// derive path and final destination automatically
 const FULL_PATH = stages.map((s) => s.location.split(",")[0]);
-
-// FIX 2: Derive final destination label from the last stage
 const FINAL_DESTINATION = FULL_PATH[FULL_PATH.length - 1];
 
 export default function TimelineInterestJourney() {
-  // FIX 3: Removed explicit `: JSX.Element` return type — inferred automatically
   const [active, setActive] = useState(0);
   const refs = useRef<Array<HTMLDivElement | null>>([]);
+  const shouldReduce = useReducedMotion();
 
+  // safe IntersectionObserver setup
   useEffect(() => {
+    const nodes = refs.current.filter(Boolean) as Element[];
+    if (nodes.length === 0) return;
+
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             const idx = Number(e.target.getAttribute("data-idx"));
-            setActive(idx);
+            if (!Number.isNaN(idx)) setActive(idx);
           }
         });
       },
       { root: null, rootMargin: "-40% 0px -40% 0px", threshold: 0 }
     );
 
-    refs.current.forEach((r) => r && obs.observe(r));
-    return () => obs.disconnect();
+    nodes.forEach((n) => obs.observe(n));
+    return () => nodes.forEach((n) => obs.unobserve(n));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // keyboard navigation + scrollIntoView
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+        setActive((a) => Math.min(a + 1, stages.length - 1));
+      } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        setActive((a) => Math.max(0, a - 1));
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  // when `active` changes programmatically (keyboard or observer), bring that item into view
+  useEffect(() => {
+    const node = refs.current[active];
+    if (!node) return;
+    node.scrollIntoView({ behavior: shouldReduce ? "auto" : "smooth", block: "center" });
+  }, [active, shouldReduce]);
 
   const progressPercent = Math.round((active / (stages.length - 1)) * 100);
 
@@ -116,17 +144,71 @@ export default function TimelineInterestJourney() {
     exit: { opacity: 0, x: -8 },
   };
 
+  // small helper to render segmented path SVG
+  const renderPathSVG = () => {
+    const nodes = FULL_PATH;
+    const width = 220;
+    const padding = 12;
+    const step = (width - padding * 2) / (nodes.length - 1);
+    return (
+      <svg width="100%" height="44" viewBox={`0 0 ${width} 44`} preserveAspectRatio="xMidYMid meet">
+        {/* line */}
+        <line
+          x1={padding}
+          y1={22}
+          x2={width - padding}
+          y2={22}
+          stroke="#e5e7eb"
+          strokeWidth={2}
+          strokeLinecap="round"
+        />
+        {/* nodes */}
+        {nodes.map((n, i) => {
+          const cx = padding + step * i;
+          const isActive = i === active;
+          return (
+            <g key={n}>
+              <circle
+                cx={cx}
+                cy={22}
+                r={isActive ? 6.2 : 4.5}
+                fill={isActive ? "var(--tw-color-accent, #1f6feb)" : "#94a3b8"}
+                stroke={isActive ? "#fff" : "none"}
+                strokeWidth={isActive ? 1.5 : 0}
+                style={{ transition: "all 240ms ease" }}
+              />
+              {/* small label (visible on wider layouts) */}
+              <text
+                x={cx}
+                y={38}
+                fontSize={8}
+                textAnchor="middle"
+                fill="#64748b"
+                style={{ fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto" }}
+              >
+                {n}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+    );
+  };
+
   return (
     <section className="py-16">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
         {/* Left: timeline */}
         <div className="lg:col-span-2">
-          <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-8">
-            My Interest Journey
+          <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-2">
+            Where the Research Has Taken Me
           </h2>
+          <p className="text-base text-slate-500 dark:text-slate-400 mb-8 font-light tracking-wide">
+            From circuits to crystal structure — a short trajectory.
+          </p>
 
-          <div className="relative">
-            {/* Vertical line: pinned at left-4 (16px) */}
+          <div className="relative" role="list" aria-label="Research stages">
+            {/* Vertical line */}
             <div className="absolute left-4 top-0 bottom-0 w-px bg-slate-300 dark:bg-slate-700" />
 
             <div className="space-y-14">
@@ -137,18 +219,15 @@ export default function TimelineInterestJourney() {
                     key={s.id}
                     ref={(el) => (refs.current[i] = el)}
                     data-idx={i}
-                    // FIX 4: pl-10 (40px) keeps content clear of the dot;
-                    // dot is positioned absolutely at left-4 (aligns with the line),
-                    // then pulled left by half its width (w-2 = 8px → -translate-x-1/2)
-                    className="relative pl-10"
+                    role="listitem"
+                    aria-current={isActive ? "true" : undefined}
+                    className="relative pl-8 sm:pl-10"
                     aria-labelledby={`stage-${s.id}`}
                   >
-                    {/* FIX 4: Dot correctly centered on the left-4 line */}
+                    {/* Dot */}
                     <div
                       className={`absolute left-4 top-1.5 w-3 h-3 -translate-x-1/2 rounded-full ring-2 ring-white dark:ring-slate-900 transition-all duration-300 ${
-                        isActive
-                          ? "bg-accent scale-125"
-                          : "bg-slate-400 dark:bg-slate-500 scale-100"
+                        isActive ? "bg-accent scale-125" : "bg-slate-400 dark:bg-slate-500 scale-100"
                       }`}
                       aria-hidden
                     />
@@ -157,10 +236,7 @@ export default function TimelineInterestJourney() {
                       {s.date}
                     </div>
 
-                    <h3
-                      id={`stage-${s.id}`}
-                      className="text-lg md:text-xl font-medium mb-3"
-                    >
+                    <h3 id={`stage-${s.id}`} className="text-lg md:text-xl font-medium mb-3">
                       {s.short}
                     </h3>
 
@@ -177,29 +253,20 @@ export default function TimelineInterestJourney() {
         {/* Right: sticky panel */}
         <aside className="sticky top-24 self-start">
           <div className="w-full max-w-md p-6 bg-white dark:bg-slate-900 rounded-xl shadow border border-slate-200 dark:border-slate-700">
-            <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">
-              Journey
-            </div>
+            <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">Research Trajectory</div>
 
-            {/*
-              FIX 5: Removed fixed min-h-[92px] — content now flows naturally.
-              AnimatePresence handles the transition without a height constraint
-              that could clip wrapped interest tags on narrow screens.
-            */}
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={stages[active].id}
                 variants={panelVariants}
-                initial="enter"
+                initial={shouldReduce ? "center" : "enter"}
                 animate="center"
-                exit="exit"
-                transition={{ duration: 0.36, ease: "easeOut" }}
+                exit={shouldReduce ? "center" : "exit"}
+                transition={{ duration: shouldReduce ? 0 : 0.36, ease: "easeOut" }}
               >
                 <div>
                   <div className="text-xs text-slate-400 mb-1">Stage</div>
-                  <div className="text-lg font-semibold">
-                    {stages[active].short}
-                  </div>
+                  <div className="text-lg font-semibold">{stages[active].short}</div>
                   <div className="text-sm text-slate-500 mt-1">
                     {stages[active].institute} • {stages[active].location}
                   </div>
@@ -227,31 +294,26 @@ export default function TimelineInterestJourney() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Path visualization + progress */}
+            {/* Path visualization + segmented nodes */}
             <div className="mt-6">
               <div className="text-xs text-slate-400 mb-2">Path</div>
 
-              {/* FIX 1 (visible effect): derived path stays in sync with stages */}
-              <div className="text-sm text-slate-700 dark:text-slate-200 font-medium mb-2">
+              <div className="text-sm text-slate-700 dark:text-slate-200 font-medium mb-3">
                 {FULL_PATH.join(" → ")}
               </div>
 
-              {/* FIX 6: Right label is always the final destination ("Tempe"),
-                  not the current location — avoids "India → India" at step 0 */}
+              <div className="mb-3">{renderPathSVG()}</div>
+
               <div className="flex items-center text-sm">
-                <span className="mr-2 text-slate-700 dark:text-slate-200 font-medium">
-                  {FULL_PATH[0]}
-                </span>
+                <span className="mr-2 text-slate-700 dark:text-slate-200 font-medium">{FULL_PATH[0]}</span>
                 <div className="flex-1 h-1 bg-slate-200 dark:bg-slate-800 mx-1 rounded-full overflow-hidden">
                   <motion.div
                     className="h-1 bg-accent rounded-full"
                     animate={{ width: `${progressPercent}%` }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    transition={{ duration: shouldReduce ? 0 : 0.5, ease: "easeOut" }}
                   />
                 </div>
-                <span className="ml-2 text-slate-700 dark:text-slate-200 font-medium">
-                  {FINAL_DESTINATION}
-                </span>
+                <span className="ml-2 text-slate-700 dark:text-slate-200 font-medium">{FINAL_DESTINATION}</span>
               </div>
             </div>
 
@@ -265,9 +327,7 @@ export default function TimelineInterestJourney() {
               </a>
             </div>
 
-            <div className="mt-4 text-xs text-slate-400">
-              Scroll to explore — the right panel updates smoothly.
-            </div>
+            <div className="mt-4 text-xs text-slate-400">Use arrow keys — or scroll — to explore.</div>
           </div>
         </aside>
       </div>
