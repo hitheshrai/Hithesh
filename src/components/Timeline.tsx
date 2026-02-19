@@ -4,39 +4,12 @@ import React from "react";
 
 const timelineData = [
   {
-    title: "Autonomous AI Workflows for Edge Deployment",
-    date: "2026 – Present",
-    description: [
-      "Designed retrieval-augmented systems for structured scientific workflows.",
-      "Benchmarked large language models under memory and power constraints.",
-      "Optimized inference pipelines for energy-efficient deployment.",
-    ],
-  },
-  {
     title: "Blade-Coated Perovskite Thin Films for Energy Conversion",
     date: "2022 – Present",
     description: [
       "Fabrication of perovskite thin films using spin and blade coating.",
       "Device characterization via solar simulation and XRD.",
       "Efficiency optimization and defect control for scalable processing.",
-    ],
-  },
-  {
-    title: "Single-Junction Perovskite Device Fabrication",
-    date: "Summer 2025",
-    description: [
-      "Fabricated devices reaching ~19% efficiency.",
-      "Atomic layer deposition of transport layers.",
-      "Encapsulation and stability pathway analysis.",
-    ],
-  },
-  {
-    title: "Structural Instability in Ferroelectric Materials",
-    date: "Summer 2024",
-    description: [
-      "Pair Distribution Function (PDF) analysis of local structure.",
-      "X-ray and neutron diffraction for phase transition studies.",
-      "Correlation of composition-driven structural instabilities.",
     ],
   },
   {
@@ -49,11 +22,38 @@ const timelineData = [
     ],
   },
   {
+    title: "Structural Instability in Ferroelectric Materials",
+    date: "Summer 2024",
+    description: [
+      "Pair Distribution Function (PDF) analysis of local structure.",
+      "X-ray and neutron diffraction for phase transition studies.",
+      "Correlation of composition-driven structural instabilities.",
+    ],
+  },
+  {
+    title: "Single-Junction Perovskite Device Fabrication",
+    date: "Summer 2025",
+    description: [
+      "Fabricated devices reaching ~19% efficiency.",
+      "Atomic layer deposition of transport layers.",
+      "Encapsulation and stability pathway analysis.",
+    ],
+  },
+  {
     title: "Battery Energy Storage System (BESS) Modeling",
     date: "2025",
     description: [
       "Grid-scale storage modeling and PV integration analysis.",
       "System-level optimization and digital twin evaluation.",
+    ],
+  },
+  {
+    title: "Autonomous AI Workflows for Edge Deployment",
+    date: "2026 – Present",
+    description: [
+      "Designed retrieval-augmented systems for structured scientific workflows.",
+      "Benchmarked large language models under memory and power constraints.",
+      "Optimized inference pipelines for energy-efficient deployment.",
     ],
   },
 ];
