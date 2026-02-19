@@ -3,27 +3,19 @@
 
 | Senior EE at Arizona State University | Undergraduate Researcher at Rolston Lab | Senior Studio Associate at Next Lab |
 
-Welcome to my portfolio repository! This site highlights my journey in Electrical and Electronic Engineering, with a focus on renewable energy, material research, and AI applications. The website was developed using Bolt AI (Template), ChatGPT 4 (Debuging), and Perplexity to create an interactive platform showcasing my skills and experience.
+Welcome to my portfolio website! This site showcases my work in Electrical and Electronic Engineering, renewable energy systems, advanced materials research, and AI applications.
 
 ---
 
 ## About Me
 
-I am a senior in Electrical and Electronic Engineering at ASU, passionate about renewable energy, material research, and AI. I currently work with the Rolston Lab on sustainable technology projects and lead the Gen AI team at Next Lab, where we focus on efficient AI applications.
+I am a Master's student in Artificial Intelligence Engineering (Materials Science & Engineering) at Arizona State University, working at the intersection of AI, renewable energy systems, and advanced materials. I conduct research with the Rolston Lab on perovskite devices and lead AI initiatives at Next Lab, focusing on efficient and deployable AI systems.
 
 ---
 
-## Installation
+## View My Portfolio
 
-To run this portfolio locally:
-```bash
-git clone https://github.com/hitheshrai/hitheshrai.github.io
-cd hitheshrai.github.io
-npm install
-npm start
-```
-
----
+Visit my [portfolio website](https://hitheshrai.github.io/Hithesh/) to explore my experience, projects, and research.
 
 ## Contact
 
