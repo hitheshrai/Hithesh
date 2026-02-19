@@ -3,6 +3,12 @@
 export default function Articles() {
   const articles = [
     {
+      title: "Doing Research in Switzerland - ThinkSwiss Scholarship",
+      description:
+        "Short video about my research visit to EPFL supported by the ThinkSwiss scholarship — fabrication and testing of perovskite thin films.",
+      link: "https://www.youtube.com/watch?v=UHKrYFusstU",
+    },
+    {
       title: "Hithesh Rai Purushothama: A Journey in Engineering and Leadership",
       description: "A feature on Hithesh’s contributions to semiconductors, robotics, and materials science, showcasing his leadership in various student organizations and projects.",
       link: "https://ecee.engineering.asu.edu/2023/03/hithesh-rai-purushothama/",
