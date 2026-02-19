@@ -1,6 +1,6 @@
 // src/App.tsx
 
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import Header from './components/Header';
 import About from './components/About';
 import Projects from './components/Projects';
