@@ -1,25 +1,30 @@
+# Hithesh Rai Purushothama
 
-# Hithesh Rai Purushothama Portfolio
-Welcome to my portfolio website! This site showcases my work in Electrical and Electronic Engineering, renewable energy systems, advanced materials research, and AI applications.
-
----
-
-## About Me
-
-I am a Master's student in Artificial Intelligence Engineering (Materials Science & Engineering) at Arizona State University, working at the intersection of AI, renewable energy systems, and advanced materials. I conduct research with the Rolston Lab on perovskite devices and lead AI initiatives at Next Lab, focusing on efficient and deployable AI systems.
+**AI systems for energy materials discovery and autonomous device optimization.**
 
 ---
 
-## View My Portfolio
+## Research Direction
 
-Visit my [portfolio website](https://hitheshrai.github.io/Hithesh/) to explore my experience, projects, and research.
+Building intelligent infrastructure that accelerates the energy transition through AI-driven materials characterization, device physics modeling, and autonomous synthesis workflows. Current focus: perovskite photovoltaics, efficiency prediction, and scalable fabrication pathways.
+
+---
+
+## Active Work
+
+**Perovskite Device Engineering** — Fabrication, characterization, and computational analysis of halide perovskite films for photovoltaic and optoelectronic applications.
+
+**AI on Edge Systems** — Low-power LLM inference, RAG pipelines, and deployment optimization on constrained hardware for real-time energy applications.
+
+**Materials-AI Integration** — Bridging experimental crystallography, phase analysis, and machine learning for predictive material design.
+
+---
+
+## [Explore Full Portfolio](https://hitheshrai.github.io/Hithesh/)
+
+---
 
 ## Contact
 
-- **Email**: [hraipuru@asu.edu](mailto:hraipuru@asu.edu)
-- **LinkedIn**: [linkedin.com/in/hithesh-rai-p](https://www.linkedin.com/in/hithesh-rai-p/)
-- **GitHub**: [github.com/hitheshrai](https://github.com/hitheshrai)
+[Email](mailto:hraipuru@asu.edu) • [LinkedIn](https://www.linkedin.com/in/hithesh-rai-p/) • [GitHub](https://github.com/hitheshrai)
 
----
-
-For more information, visit my [portfolio website](https://hitheshrai.github.io/Hithesh/).
