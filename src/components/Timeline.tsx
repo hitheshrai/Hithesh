@@ -40,7 +40,7 @@ const stages: Stage[] = [
   },
   {
     id: "purdue-data",
-    short: "Data & Analysis — Purdue",
+    short: "Data & Analysis – Purdue",
     date: "Summer 2023",
     institute: "Purdue (SURF)",
     location: "West Lafayette, IN",
@@ -70,12 +70,12 @@ const stages: Stage[] = [
   },
   {
     id: "nextlab-ai",
-    short: "AI & Edge Systems — Next Lab",
+    short: "AI & Edge Systems – Next Lab",
     date: "2026 – Present",
     institute: "Next Lab / ASU",
     location: "Tempe, AZ",
     narrative:
-      "At Next Lab, I apply AI to research workflows and edge systems — building retrieval-augmented pipelines, benchmarking inference on NVIDIA Jetson devices for latency and power, and automating documentation processes to improve lab efficiency.",
+      "At Next Lab, I apply AI to research workflows and edge systems – building retrieval-augmented pipelines, benchmarking inference on NVIDIA Jetson devices for latency and power, and automating documentation processes to improve lab efficiency.",
     interests: ["RAG", "Edge AI", "Automation", "Self-driving Labs"],
   },
 ];
