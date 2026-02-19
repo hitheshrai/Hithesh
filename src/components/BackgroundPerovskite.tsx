@@ -133,6 +133,7 @@ export default function BackgroundPerovskite({
         gl={{ antialias: true, alpha: true }}
         camera={{ position: [6, 6, 6], fov: 35 }}
         dpr={dpr}
+        frameloop="demand"
       >
         <ambientLight intensity={0.9} color={"#ffffff"} />
         <directionalLight
