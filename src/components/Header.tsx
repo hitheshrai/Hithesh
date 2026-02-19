@@ -1,7 +1,7 @@
 // src/components/Header.tsx
 
 import { motion } from 'framer-motion';
-import { Github, Mail, Linkedin, Twitter } from 'lucide-react';
+import { Github, Mail, Linkedin, X } from 'lucide-react';
 import DarkModeToggle from './DarkModeToggle';
 
 const Header = () => {
@@ -86,7 +86,7 @@ const Header = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Twitter size={24} />
+          <X size={24} />
         </a>
       </div>
 
