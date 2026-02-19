@@ -19,7 +19,7 @@ export default function About() {
             </h2>
 
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-5">
-              I’m deeply interested in energy materials and the development of self-driving laboratories — intelligent systems that can autonomously design, fabricate, test, and optimize new materials. I’m fascinated by how AI can accelerate discovery in energy-conversion technologies by closing the loop between experimentation and computation.
+              I’m deeply interested in energy materials and the development of self-driving laboratories – intelligent systems that can autonomously design, fabricate, test, and optimize new materials. I’m fascinated by how AI can accelerate discovery in energy-conversion technologies by closing the loop between experimentation and computation.
             </p>
 
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-5">
@@ -27,7 +27,7 @@ export default function About() {
             </p>
 
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-              Long term, I aim to contribute to energy-efficient deployment of advanced materials — combining autonomous experimentation, AI-guided optimization, and systems engineering to accelerate scalable clean energy technologies.
+              Long term, I aim to contribute to energy-efficient deployment of advanced materials – combining autonomous experimentation, AI-guided optimization, and systems engineering to accelerate scalable clean energy technologies.
             </p>
           </div>
         </Tilt>
