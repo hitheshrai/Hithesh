@@ -15,7 +15,6 @@ const timelineData = [
     description: [
       "Arizona State University",
       "Focus on AI-driven materials research and renewable energy systems",
-      "Capstone: Modeling Battery Energy Storage Systems (BESS) for grid-scale integration",
     ],
   },
   {
@@ -91,6 +90,7 @@ const timelineData = [
     description: [
       "Arizona State University",
       "Focus on photovoltaics, renewable energy, and power systems",
+      "Capstone: Modeling Battery Energy Storage Systems (BESS) for grid-scale integration"
     ],
   },
 ];
