@@ -20,8 +20,13 @@ const stages: Stage[] = [
     institute: "ASU — B.S.E EEE / M.S. AI Engineering",
     location: "India",
     narrative:
-      "Completed a B.S.E in Electrical and Electronic Engineering at ASU (Aug 2021 – Dec 2025), building a hardware-aware foundation in circuits, signals, and embedded systems. Now continuing at ASU as an M.S. student in AI Engineering (Materials Science and Engineering), Jan 2026 – May 2027.",
-    interests: ["Circuits", "Signals", "Embedded Systems", "AI Engineering"],
+      "B.S.E in Electrical and Electronic Engineering at ASU (Aug 2021 – Dec 2025), where I developed core training in circuits, signals, and embedded systems. I am now continuing at ASU with an M.S. in AI Engineering (Materials Science & Engineering) to connect AI methods with materials research.",
+    interests: [
+      "Optoelectronics",
+      "Semiconductors",
+      "Power Systems",
+      "Renewable Energy",
+    ],
   },
   {
     id: "tempe-start",
@@ -30,7 +35,7 @@ const stages: Stage[] = [
     institute: "Renewable Energy Materials & Devices Lab, ASU",
     location: "Tempe, AZ",
     narrative:
-      "Joined ASU's Renewable Energy Materials & Devices Lab and have been doing hands-on work here ever since — fabrication and characterization of perovskite thin films, solar cells, and alphavoltaic devices, with a focus on understanding degradation and improving stability.",
+      "Research at ASU’s Renewable Energy Materials & Devices Lab focused on fabrication and characterization of perovskite thin films and devices, including alphavoltaic prototypes. My work centers on degradation mechanisms, processing adjustments, and improving stability and reproducibility.",
     interests: ["Photovoltaics", "Materials", "Energy Systems"],
   },
   {
@@ -40,27 +45,27 @@ const stages: Stage[] = [
     institute: "Purdue (SURF)",
     location: "West Lafayette, IN",
     narrative:
-      "At Purdue, I engaged deeply with data — curated device databases, ran trend analysis, and learned how data drives experimental decisions.",
+      "At Purdue (SURF), I compiled comparative device and processing datasets, conducted trend analysis, and used data-driven evaluation to inform experimental design and material selection.",
     interests: ["Data Analysis", "Databases", "ML for Materials"],
   },
   {
     id: "structure-hzb",
-    short: "Structure Analysis — HZB",
+    short: "Structure Analysis – HZB",
     date: "Summer 2024",
     institute: "Helmholtz Zentrum Berlin",
     location: "Berlin, Germany",
     narrative:
-      "Conducted local-order and structural analysis (PDF/XRD), connecting composition to instability and failure modes — a turning point in material understanding.",
+      "Performed Pair Distribution Function (PDF) and X-ray diffraction analysis to study local structure and composition-driven instabilities in perovskite-related systems, linking structural behavior to potential failure pathways.",
     interests: ["Diffraction", "PDF Analysis", "Materials Characterization"],
   },
   {
     id: "device-epfl",
-    short: "Device-Level Fabrication — EPFL",
+    short: "Device-Level Fabrication – EPFL",
     date: "Summer 2025",
     institute: "EPFL",
     location: "Neuchâtel, Switzerland",
     narrative:
-      "Worked on device fabrication and encapsulation; linked materials processing decisions to device performance and long-term stability.",
+      "Worked on fabrication of single-junction perovskite devices, including ALD-based transport layers and thermal evaporation processes. The focus was on connecting materials processing decisions to device performance and stability outcomes.",
     interests: ["Device Fabrication", "ALD", "Stability Testing"],
   },
   {
@@ -70,7 +75,7 @@ const stages: Stage[] = [
     institute: "Next Lab / ASU",
     location: "Tempe, AZ",
     narrative:
-      "Returned to Tempe to integrate AI and edge inference into research workflows — LangChain-based RAG pipelines, NVIDIA Jetson deployments, benchmarking latency and power, and automating lab documentation to reduce friction in experiments.",
+      "At Next Lab, I apply AI to research workflows and edge systems — building retrieval-augmented pipelines, benchmarking inference on NVIDIA Jetson devices for latency and power, and automating documentation processes to improve lab efficiency.",
     interests: ["RAG", "Edge AI", "Automation", "Self-driving Labs"],
   },
 ];
@@ -82,11 +87,9 @@ export default function Timeline() {
   const [active, setActive] = useState(0);
   const refs = useRef<Array<HTMLDivElement | null>>([]);
   const shouldReduce = useReducedMotion();
-
-  // Track whether the last active change came from keyboard (not observer)
   const keyboardNav = useRef(false);
 
-  // IntersectionObserver — updates active stage while scrolling
+  // Scroll-based stage detection
   useEffect(() => {
     const nodes = refs.current.filter(Boolean) as Element[];
     if (nodes.length === 0) return;
@@ -122,16 +125,21 @@ export default function Timeline() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Only scroll into view when triggered by keyboard — NOT on initial load or observer
+  // Scroll only when triggered by keyboard
   useEffect(() => {
     if (!keyboardNav.current) return;
     keyboardNav.current = false;
     const node = refs.current[active];
     if (!node) return;
-    node.scrollIntoView({ behavior: shouldReduce ? "auto" : "smooth", block: "center" });
+    node.scrollIntoView({
+      behavior: shouldReduce ? "auto" : "smooth",
+      block: "center",
+    });
   }, [active, shouldReduce]);
 
-  const progressPercent = Math.round((active / (stages.length - 1)) * 100);
+  const progressPercent = Math.round(
+    (active / (stages.length - 1)) * 100
+  );
 
   const panelVariants = {
     enter: { opacity: 0, x: 10 },
@@ -142,7 +150,7 @@ export default function Timeline() {
   return (
     <section className="py-16">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-        {/* Left: timeline */}
+        {/* Left: Timeline */}
         <div className="lg:col-span-2">
           <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-2">
             Where the Research Has Taken Me
@@ -151,8 +159,11 @@ export default function Timeline() {
             From Circuits to Crystal Structure
           </p>
 
-          <div className="relative" role="list" aria-label="Research stages">
-            {/* Vertical line */}
+          <div
+            className="relative"
+            role="list"
+            aria-label="Research stages"
+          >
             <div className="absolute left-4 top-0 bottom-0 w-px bg-slate-300 dark:bg-slate-700" />
 
             <div className="space-y-14">
@@ -168,14 +179,12 @@ export default function Timeline() {
                     className="relative pl-10"
                     aria-labelledby={`stage-${s.id}`}
                   >
-                    {/* Dot */}
                     <div
                       className={`absolute left-4 top-1.5 w-3 h-3 -translate-x-1/2 rounded-full ring-2 ring-white dark:ring-slate-900 transition-all duration-300 ${
                         isActive
                           ? "bg-accent scale-125"
                           : "bg-slate-400 dark:bg-slate-500 scale-100"
                       }`}
-                      aria-hidden
                     />
 
                     <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
@@ -199,7 +208,7 @@ export default function Timeline() {
           </div>
         </div>
 
-        {/* Right: sticky panel */}
+        {/* Right: Sticky Panel */}
         <aside className="sticky top-24 self-start">
           <div className="w-full max-w-md p-6 bg-white dark:bg-slate-900 rounded-xl shadow border border-slate-200 dark:border-slate-700">
             <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">
@@ -213,13 +222,21 @@ export default function Timeline() {
                 initial={shouldReduce ? "center" : "enter"}
                 animate="center"
                 exit={shouldReduce ? "center" : "exit"}
-                transition={{ duration: shouldReduce ? 0 : 0.36, ease: "easeOut" }}
+                transition={{
+                  duration: shouldReduce ? 0 : 0.36,
+                  ease: "easeOut",
+                }}
               >
                 <div>
-                  <div className="text-xs text-slate-400 mb-1">Stage</div>
-                  <div className="text-lg font-semibold">{stages[active].short}</div>
+                  <div className="text-xs text-slate-400 mb-1">
+                    Stage
+                  </div>
+                  <div className="text-lg font-semibold">
+                    {stages[active].short}
+                  </div>
                   <div className="text-sm text-slate-500 mt-1">
-                    {stages[active].institute} • {stages[active].location}
+                    {stages[active].institute} •{" "}
+                    {stages[active].location}
                   </div>
                 </div>
 
@@ -230,7 +247,9 @@ export default function Timeline() {
                 </div>
 
                 <div className="mt-4">
-                  <div className="text-xs text-slate-400 mb-2">Interests</div>
+                  <div className="text-xs text-slate-400 mb-2">
+                    Interests
+                  </div>
                   <div className="flex flex-wrap gap-2">
                     {stages[active].interests.map((tag) => (
                       <span
@@ -245,9 +264,11 @@ export default function Timeline() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Path + progress bar */}
+            {/* Path + progress */}
             <div className="mt-6">
-              <div className="text-xs text-slate-400 mb-2">Path</div>
+              <div className="text-xs text-slate-400 mb-2">
+                Path
+              </div>
 
               <div className="text-sm text-slate-700 dark:text-slate-200 font-medium mb-2">
                 {FULL_PATH.join(" → ")}
@@ -261,7 +282,10 @@ export default function Timeline() {
                   <motion.div
                     className="h-1 bg-accent rounded-full"
                     animate={{ width: `${progressPercent}%` }}
-                    transition={{ duration: shouldReduce ? 0 : 0.5, ease: "easeOut" }}
+                    transition={{
+                      duration: shouldReduce ? 0 : 0.5,
+                      ease: "easeOut",
+                    }}
                   />
                 </div>
                 <span className="ml-2 text-slate-700 dark:text-slate-200 font-medium">
@@ -274,7 +298,6 @@ export default function Timeline() {
               <a
                 href="#contact"
                 className="inline-block px-4 py-2 bg-accent text-white rounded-md hover:scale-[1.02] transition"
-                aria-label="Contact"
               >
                 Collaborate / Contact
               </a>
