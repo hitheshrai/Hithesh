@@ -106,7 +106,7 @@ function RotatingUnit({ speed = 0.02 }: { speed?: number }) {
   const ref = useRef<THREE.Group | null>(null);
   const shouldReduce = useReducedMotion();
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (!ref.current) return;
     const s = shouldReduce ? 0 : speed;
     ref.current.rotation.y += delta * s;
