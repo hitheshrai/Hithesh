@@ -1,8 +1,5 @@
 
 # Hithesh Rai Purushothama Portfolio
-
-| Senior EE at Arizona State University | Undergraduate Researcher at Rolston Lab | Senior Studio Associate at Next Lab |
-
 Welcome to my portfolio website! This site showcases my work in Electrical and Electronic Engineering, renewable energy systems, advanced materials research, and AI applications.
 
 ---
