@@ -61,7 +61,7 @@ const stages: Stage[] = [
     institute: "Photovoltaics Lab, EPFL",
     location: "Neuchâtel, Switzerland",
     narrative:
-      "Fabricated single-junction perovskite devices reaching 19% efficiency, Learned techniques like Atomic layer deposition and thermal evaporation — funded by the ThinkSwiss Research Scholarship.",
+      "Fabricated single-junction perovskite devices reaching 19% efficiency, learned techniques like atomic layer deposition and thermal evaporation — funded by the ThinkSwiss Research Scholarship.",
     interests: ["Device Fabrication", "ALD", "Thermal Evaporation", "Stability Testing"],
   },
   {
@@ -76,122 +76,8 @@ const stages: Stage[] = [
   },
 ];
 
+// --- Memoized TimelineItem (defined OUTSIDE Timeline to avoid remounting) ---
 
-export default function Timeline() {
-
-  const [active, setActive] = useState(0);
-  const [expanded, setExpanded] = useState<Set<string>>(new Set());
-  const refs = useRef<(HTMLDivElement | null)[]>([]);
-  const shouldReduce = useReducedMotion();
-  const keyboardNav = useRef(false);
-
-  // Callback ref for timeline items
-  const setRef = useCallback((el: HTMLDivElement | null, idx: number) => {
-    refs.current[idx] = el;
-  }, []);
-
-  // Toggle expanded state for a stage
-  const toggleExpanded = useCallback((id: string) => {
-    setExpanded((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  }, []);
-
-  // Scroll-based stage detection
-  useEffect(() => {
-    const nodes = refs.current.filter(Boolean) as Element[];
-    if (nodes.length === 0) return;
-    const obs = new window.IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            const idx = Number(e.target.getAttribute("data-idx"));
-            if (!Number.isNaN(idx)) setActive(idx);
-          }
-        });
-      },
-      { root: null, rootMargin: "-40% 0px -40% 0px", threshold: 0 }
-    );
-    nodes.forEach((n) => obs.observe(n));
-    return () => {
-      obs.disconnect();
-    };
-  }, []);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-        keyboardNav.current = true;
-        setActive((a) => Math.min(a + 1, stages.length - 1));
-      } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-        keyboardNav.current = true;
-        setActive((a) => Math.max(0, a - 1));
-      } else if (e.key === "Enter" || e.key === " ") {
-        // Toggle expand on Enter/Space for the active stage
-        toggleExpanded(stages[active].id);
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [active]);
-
-  // Scroll only when triggered by keyboard
-  useEffect(() => {
-    if (!keyboardNav.current) return;
-    keyboardNav.current = false;
-    const node = refs.current[active];
-    if (!node) return;
-    node.scrollIntoView({
-      behavior: shouldReduce ? "auto" : "smooth",
-      block: "center",
-    });
-  }, [active, shouldReduce]);
-
-  const panelVariants = {
-    enter: { opacity: 0, x: 10 },
-    center: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -8 },
-  };
-
-  return (
-    <section className="relative py-16">
-      <BackgroundPerovskite dpr={1.0} />
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-        {/* Left: Timeline */}
-        <div className="lg:col-span-2">
-          <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-2">
-            Where the Research Has Taken Me
-          </h2>
-          <p className="text-base text-slate-500 dark:text-slate-400 mb-8 font-light tracking-wide">
-            From Circuits to Crystal Structure
-          </p>
-
-          <div
-            className="relative"
-            role="list"
-            aria-label="Research stages"
-          >
-            <div className="absolute left-4 top-0 bottom-0 w-px bg-slate-300 dark:bg-slate-700" />
-
-            <div className="space-y-14">
-              {stages.map((s, i) => (
-                <TimelineItem
-                  key={s.id}
-                  stage={s}
-                  idx={i}
-                  isActive={i === active}
-                  isExpanded={expanded.has(s.id)}
-                  setRef={setRef}
-                  toggleExpanded={toggleExpanded}
-                  shouldReduce={shouldReduce}
-                />
-              ))}
-
-// Memoized TimelineItem for performance
 interface TimelineItemProps {
   stage: Stage;
   idx: number;
@@ -199,7 +85,7 @@ interface TimelineItemProps {
   isExpanded: boolean;
   setRef: (el: HTMLDivElement | null, idx: number) => void;
   toggleExpanded: (id: string) => void;
-  shouldReduce: boolean;
+  shouldReduce: boolean | null;
 }
 
 const TimelineItem = memo(function TimelineItem({
@@ -213,7 +99,7 @@ const TimelineItem = memo(function TimelineItem({
 }: TimelineItemProps) {
   return (
     <div
-      ref={el => setRef(el, idx)}
+      ref={(el) => setRef(el, idx)}
       data-idx={idx}
       role="listitem"
       aria-selected={isActive}
@@ -223,7 +109,9 @@ const TimelineItem = memo(function TimelineItem({
     >
       <div
         className={`absolute left-4 top-1.5 w-3 h-3 -translate-x-1/2 rounded-full ring-2 ring-white dark:ring-slate-900 transition-all duration-300 ${
-          isActive ? "bg-accent scale-125" : "bg-slate-400 dark:bg-slate-500 scale-100"
+          isActive
+            ? "bg-accent scale-125"
+            : "bg-slate-400 dark:bg-slate-500 scale-100"
         }`}
       />
 
@@ -231,7 +119,6 @@ const TimelineItem = memo(function TimelineItem({
         {stage.date}
       </div>
 
-      {/* Clickable header row */}
       <button
         onClick={() => toggleExpanded(stage.id)}
         aria-expanded={isExpanded}
@@ -245,7 +132,6 @@ const TimelineItem = memo(function TimelineItem({
           {stage.short}
         </h3>
 
-        {/* Chevron indicator */}
         <span
           className={`mt-1 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
             isExpanded ? "rotate-180" : "rotate-0"
@@ -268,14 +154,12 @@ const TimelineItem = memo(function TimelineItem({
         </span>
       </button>
 
-      {/* Institute & location shown when collapsed */}
       {!isExpanded && stage.institute && (
         <p className="text-sm text-slate-400 dark:text-slate-500 mt-0.5">
           {stage.institute} · {stage.location}
         </p>
       )}
 
-      {/* Expandable details */}
       <AnimatePresence initial={false}>
         {isExpanded && (
           <motion.div
@@ -301,7 +185,6 @@ const TimelineItem = memo(function TimelineItem({
                 {stage.narrative}
               </p>
 
-              {/* Interest tags */}
               <div className="flex flex-wrap gap-2 mt-4">
                 {stage.interests.map((tag) => (
                   <span
@@ -319,6 +202,109 @@ const TimelineItem = memo(function TimelineItem({
     </div>
   );
 });
+
+// --- Main Timeline component ---
+
+export default function Timeline() {
+  const [active, setActive] = useState(0);
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const refs = useRef<(HTMLDivElement | null)[]>([]);
+  const shouldReduce = useReducedMotion();
+  const keyboardNav = useRef(false);
+
+  const setRef = useCallback((el: HTMLDivElement | null, idx: number) => {
+    refs.current[idx] = el;
+  }, []);
+
+  const toggleExpanded = useCallback((id: string) => {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }, []);
+
+  useEffect(() => {
+    const nodes = refs.current.filter(Boolean) as Element[];
+    if (nodes.length === 0) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const idx = Number(e.target.getAttribute("data-idx"));
+            if (!Number.isNaN(idx)) setActive(idx);
+          }
+        });
+      },
+      { root: null, rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+    );
+    nodes.forEach((n) => obs.observe(n));
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+        keyboardNav.current = true;
+        setActive((a) => Math.min(a + 1, stages.length - 1));
+      } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        keyboardNav.current = true;
+        setActive((a) => Math.max(0, a - 1));
+      } else if (e.key === "Enter" || e.key === " ") {
+        toggleExpanded(stages[active].id);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active, toggleExpanded]);
+
+  useEffect(() => {
+    if (!keyboardNav.current) return;
+    keyboardNav.current = false;
+    const node = refs.current[active];
+    if (!node) return;
+    node.scrollIntoView({
+      behavior: shouldReduce ? "auto" : "smooth",
+      block: "center",
+    });
+  }, [active, shouldReduce]);
+
+  const panelVariants = {
+    enter: { opacity: 0, x: 10 },
+    center: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -8 },
+  };
+
+  return (
+    <section className="relative py-16">
+      <BackgroundPerovskite dpr={1.0} />
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+
+        {/* Left: Timeline */}
+        <div className="lg:col-span-2">
+          <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-2">
+            Where the Research Has Taken Me
+          </h2>
+          <p className="text-base text-slate-500 dark:text-slate-400 mb-8 font-light tracking-wide">
+            From Circuits to Crystal Structure
+          </p>
+
+          <div className="relative" role="list" aria-label="Research stages">
+            <div className="absolute left-4 top-0 bottom-0 w-px bg-slate-300 dark:bg-slate-700" />
+            <div className="space-y-14">
+              {stages.map((s, i) => (
+                <TimelineItem
+                  key={s.id}
+                  stage={s}
+                  idx={i}
+                  isActive={i === active}
+                  isExpanded={expanded.has(s.id)}
+                  setRef={setRef}
+                  toggleExpanded={toggleExpanded}
+                  shouldReduce={shouldReduce}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -343,15 +329,12 @@ const TimelineItem = memo(function TimelineItem({
                 }}
               >
                 <div>
-                  <div className="text-xs text-slate-400 mb-1">
-                    Stage
-                  </div>
+                  <div className="text-xs text-slate-400 mb-1">Stage</div>
                   <div className="text-lg font-semibold">
                     {stages[active].short}
                   </div>
                   <div className="text-sm text-slate-500 mt-1">
-                    {stages[active].institute} •{" "}
-                    {stages[active].location}
+                    {stages[active].institute} • {stages[active].location}
                   </div>
                 </div>
 
@@ -362,9 +345,7 @@ const TimelineItem = memo(function TimelineItem({
                 </div>
 
                 <div className="mt-4">
-                  <div className="text-xs text-slate-400 mb-2">
-                    Interests
-                  </div>
+                  <div className="text-xs text-slate-400 mb-2">Interests</div>
                   <div className="flex flex-wrap gap-2">
                     {stages[active].interests.map((tag) => (
                       <span
