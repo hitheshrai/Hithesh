@@ -21,16 +21,7 @@ function App() {
           <Projects />
           <Timeline />
 
-          {/* Perovskite visualizer as its own section */}
-          <section className="py-16">
-            <h2 className="text-2xl font-serif font-semibold mb-2">Unit Cell Visualizer</h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">
-              Interactive ABX₃ perovskite structure — the material class at the center of my research.
-            </p>
-            <Suspense fallback={<div className="h-[420px] flex items-center justify-center text-slate-400">Loading visualizer…</div>}>
-              <PerovskiteVisualizer />
-            </Suspense>
-          </section>
+      
 
           <Articles />
           <Contact />
