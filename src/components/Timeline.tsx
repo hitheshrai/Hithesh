@@ -193,7 +193,7 @@ export default function Timeline() {
 
 // Memoized TimelineItem for performance
 const TimelineItem = memo(function TimelineItem({
-  stage: s,
+  stage,
   idx,
   isActive,
   isExpanded,
@@ -217,7 +217,7 @@ const TimelineItem = memo(function TimelineItem({
       aria-selected={isActive}
       tabIndex={0}
       className="relative pl-10"
-      aria-labelledby={`stage-${s.id}`}
+      aria-labelledby={`stage-${stage.id}`}
     >
       <div
         className={`absolute left-4 top-1.5 w-3 h-3 -translate-x-1/2 rounded-full ring-2 ring-white dark:ring-slate-900 transition-all duration-300 ${
@@ -226,21 +226,21 @@ const TimelineItem = memo(function TimelineItem({
       />
 
       <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
-        {s.date}
+        {stage.date}
       </div>
 
       {/* Clickable header row */}
       <button
-        onClick={() => toggleExpanded(s.id)}
+        onClick={() => toggleExpanded(stage.id)}
         aria-expanded={isExpanded}
-        aria-controls={`details-${s.id}`}
+        aria-controls={`details-${stage.id}`}
         className="w-full text-left group flex items-start justify-between gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
       >
         <h3
-          id={`stage-${s.id}`}
+          id={`stage-${stage.id}`}
           className="text-lg md:text-xl font-medium mb-1 group-hover:text-accent transition-colors duration-200"
         >
-          {s.short}
+          {stage.short}
         </h3>
 
         {/* Chevron indicator */}
@@ -267,9 +267,9 @@ const TimelineItem = memo(function TimelineItem({
       </button>
 
       {/* Institute & location shown when collapsed */}
-      {!isExpanded && s.institute && (
+      {!isExpanded && stage.institute && (
         <p className="text-sm text-slate-400 dark:text-slate-500 mt-0.5">
-          {s.institute} · {s.location}
+          {stage.institute} · {stage.location}
         </p>
       )}
 
@@ -277,7 +277,7 @@ const TimelineItem = memo(function TimelineItem({
       <AnimatePresence initial={false}>
         {isExpanded && (
           <motion.div
-            id={`details-${s.id}`}
+            id={`details-${stage.id}`}
             key="content"
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -289,19 +289,19 @@ const TimelineItem = memo(function TimelineItem({
             style={{ overflow: "hidden", willChange: "opacity, transform" }}
           >
             <div className="pt-2 pb-1">
-              {s.institute && (
+              {stage.institute && (
                 <p className="text-sm text-slate-400 dark:text-slate-500 mb-3">
-                  {s.institute} · {s.location}
+                  {stage.institute} · {stage.location}
                 </p>
               )}
 
               <p className="text-sm md:text-[0.95rem] text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
-                {s.narrative}
+                {stage.narrative}
               </p>
 
               {/* Interest tags */}
               <div className="flex flex-wrap gap-2 mt-4">
-                {s.interests.map((tag) => (
+                {stage.interests.map((tag) => (
                   <span
                     key={tag}
                     className="text-xs px-2 py-1 rounded-md border text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
