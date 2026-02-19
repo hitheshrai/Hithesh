@@ -1,7 +1,5 @@
 // src/components/Timeline.tsx
 
-import React from "react";
-
 // Import logos (update paths if needed)
 import asuLogo from "../../ASU12.jpg";
 import helmholtzLogo from "../../helmholtz_zentrum_berlin_logo.jpeg";
