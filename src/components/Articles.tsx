@@ -11,7 +11,7 @@ export default function Articles() {
     {
       title: "ASU SolarSPELL & Next Lab Pioneer Offline AI",
       description:
-        "Feature highlighting the development of EDgeAI — an offline conversational AI system built using Meta’s Llama model and optimized for Raspberry Pi devices powering SolarSPELL libraries. The project focuses on equitable AI access for the 4.5 billion people without reliable internet.",
+        "Feature highlighting the development of EDgeAI - an offline conversational AI system built using Meta’s Llama model and optimized for Raspberry Pi devices powering SolarSPELL libraries. The project focuses on equitable AI access for the 4.5 billion people without reliable internet.",
       link: "https://solarspell.org/asu-solarspell-next-lab-pioneer-offline-ai",
     },
     {
