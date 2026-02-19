@@ -45,17 +45,17 @@ const stages: Stage[] = [
   },
   {
     id: "purdue-data",
-    short: "Data & Analysis — Purdue",
+    short: "Data & Analysis – Purdue",
     date: "Summer 2023",
     institute: "Purdue (SURF)",
     location: "West Lafayette, IN",
     narrative:
-      "At Purdue, I engaged deeply with data — curated device databases, ran trend analysis, and learned how data drives experimental decisions.",
+      "At Purdue, I engaged deeply with data – curated device databases, ran trend analysis, and learned how data drives experimental decisions.",
     interests: ["Data Analysis", "Databases", "ML for Materials"],
   },
   {
     id: "structure-hzb",
-    short: "Structure Analysis — HZB",
+    short: "Structure Analysis – HZB",
     date: "Summer 2024",
     institute: "Helmholtz Zentrum Berlin",
     location: "Berlin, Germany",
@@ -65,7 +65,7 @@ const stages: Stage[] = [
   },
   {
     id: "device-epfl",
-    short: "Device-Level Fabrication — EPFL",
+    short: "Device-Level Fabrication – EPFL",
     date: "Summer 2025",
     institute: "EPFL",
     location: "Neuchâtel, Switzerland",
@@ -75,7 +75,7 @@ const stages: Stage[] = [
   },
   {
     id: "nextlab-ai",
-    short: "AI & Edge Systems — Next Lab",
+    short: "AI & Edge Systems – Next Lab",
     date: "2026 – Present",
     institute: "Next Lab / ASU",
     location: "Tempe, AZ",
