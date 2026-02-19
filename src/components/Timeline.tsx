@@ -61,7 +61,7 @@ const stages: Stage[] = [
     institute: "Photovoltaics Lab, EPFL",
     location: "Neuchâtel",
     narrative:
-      "Fabricated single-junction perovskite devices reaching 19% efficiency via ALD SnO₂ transport layers and thermal evaporation — funded by the ThinkSwiss Research Scholarship.",
+      "Fabricated single-junction perovskite devices reaching 19% efficiency, Learned techniques like Atomic layer deposition and thermal evaporation — funded by the ThinkSwiss Research Scholarship.",
     interests: ["Device Fabrication", "ALD", "Thermal Evaporation", "Stability Testing"],
   },
   {
