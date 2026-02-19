@@ -46,7 +46,7 @@ const Header = () => {
 
       {/* Description */}
       <p className="text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-400 mb-8 px-2">
-        Master’s student — AI Engineering & Materials Science (AIE MSE) | Researcher, Rolston Lab | Senior Studio Associate, Next Lab | AI for energy and sustainable systems
+        Master’s student — AI Engineering & Materials Science (AIE MSE) | Researcher, Rolston Lab | Management Intern, Next Lab | AI for energy and sustainable systems
       </p>
 
       {/* Social Links */}
