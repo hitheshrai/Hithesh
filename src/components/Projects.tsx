@@ -1,4 +1,4 @@
-import React from 'react';
+// src/components/Projects.tsx
 
 export default function Projects() {
   const projects = [
@@ -31,13 +31,13 @@ export default function Projects() {
   ];
 
   return (
-    <section className="py-16 bg-white dark:bg-backgroundDark text-black dark:text-textDark">
+    <section className="py-16 bg-white dark:bg-backgroundDark text-black dark:text-textDark border-t border-b border-slate-200 dark:border-slate-700">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-primary dark:text-textDark">Featured Projects</h2>
           <div className="grid gap-8">
             {projects.map((project, index) => (
-              <div key={index} className="bg-slate-100 dark:bg-gray-800 rounded-lg p-6 shadow-md transition-all hover:shadow-lg">
+              <div key={index} className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-lg p-6 shadow-md transition-all hover:shadow-lg border-l-4 border-blue-500 hover:border-blue-600">
                 <h3 className="text-xl font-bold mb-2 text-primary dark:text-textDark">{project.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
                 <div className="flex gap-4 flex-wrap">

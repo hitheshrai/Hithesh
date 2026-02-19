@@ -2,7 +2,7 @@ import Tilt from 'react-parallax-tilt';
 
 export default function About() {
   return (
-    <section className="py-8 md:py-12 bg-white dark:bg-backgroundDark text-black dark:text-textDark">
+    <section className="py-8 md:py-12 bg-gradient-to-r from-slate-50 to-blue-50 dark:bg-gradient-to-r dark:from-slate-800 dark:to-slate-700 text-black dark:text-textDark">
       <div className="container mx-auto px-4">
         <Tilt
           tiltMaxAngleX={10}
@@ -13,7 +13,7 @@ export default function About() {
           glarePosition="all"
           className="max-w-3xl mx-auto"
         >
-          <div className="p-4 md:p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+          <div className="p-4 md:p-6 bg-white dark:bg-slate-900 rounded-lg shadow-lg border border-slate-200 dark:border-slate-600">
             <h2 className="text-xl md:text-2xl font-semibold text-primary dark:text-textDark mb-4">
               About Me
             </h2>

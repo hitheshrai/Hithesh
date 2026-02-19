@@ -8,7 +8,7 @@ const Header = () => {
   const nameText = ['I', 'am', 'Hithesh', 'Rai', 'Purushothama'];
 
   return (
-    <header className="container mx-auto px-4 py-12 md:py-16 relative bg-white dark:bg-backgroundDark text-black dark:text-textDark rounded-xl shadow-lg text-center">
+    <header className="container mx-auto px-4 py-12 md:py-16 relative bg-gradient-to-br from-blue-50 to-slate-50 dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-800 text-black dark:text-textDark rounded-xl shadow-lg text-center border border-slate-200 dark:border-slate-700">
       {/* Dark Mode Toggle */}
       <div className="absolute top-4 right-4">
         <DarkModeToggle />
@@ -46,7 +46,7 @@ const Header = () => {
 
       {/* Description */}
       <p className="text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-400 mb-8 px-2">
-        Master’s student — AI Engineering & Materials Science (AIE MSE) | Researcher, Rolston Lab | Management Intern, Next Lab | AI for energy and sustainable systems
+        Graduate student AI Engineering & Materials Science (AIE MSE) | Researcher, Rolston Lab | Management Intern, Next Lab | AI for energy and sustainable systems
       </p>
 
       {/* Social Links */}
