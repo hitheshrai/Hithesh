@@ -12,7 +12,7 @@ type Stage = {
   short: string;
   date: string;
   institute?: string;
-  location: string; // single-location string like "Tempe, AZ"
+  location: string;
   narrative: string;
   interests: string[];
 };
@@ -80,16 +80,14 @@ const stages: Stage[] = [
   },
 ];
 
-const FULL_PATH = [
-  "India",
-  "Tempe",
-  "West Lafayette",
-  "Berlin",
-  "Neuchâtel",
-  "Tempe",
-];
+// FIX 1: Derive FULL_PATH from stages so it never goes out of sync
+const FULL_PATH = stages.map((s) => s.location.split(",")[0]);
 
-export default function TimelineInterestJourney(): JSX.Element {
+// FIX 2: Derive final destination label from the last stage
+const FINAL_DESTINATION = FULL_PATH[FULL_PATH.length - 1];
+
+export default function TimelineInterestJourney() {
+  // FIX 3: Removed explicit `: JSX.Element` return type — inferred automatically
   const [active, setActive] = useState(0);
   const refs = useRef<Array<HTMLDivElement | null>>([]);
 
@@ -110,11 +108,8 @@ export default function TimelineInterestJourney(): JSX.Element {
     return () => obs.disconnect();
   }, []);
 
-  // Map active stage to progress across FULL_PATH segments.
-  // We'll compute a percentage along the full path: active index maps to (index)/(stages.length -1)
   const progressPercent = Math.round((active / (stages.length - 1)) * 100);
 
-  // Animation variants for right panel
   const panelVariants = {
     enter: { opacity: 0, x: 10 },
     center: { opacity: 1, x: 0 },
@@ -131,7 +126,7 @@ export default function TimelineInterestJourney(): JSX.Element {
           </h2>
 
           <div className="relative">
-            {/* left vertical line */}
+            {/* Vertical line: pinned at left-4 (16px) */}
             <div className="absolute left-4 top-0 bottom-0 w-px bg-slate-300 dark:bg-slate-700" />
 
             <div className="space-y-14">
@@ -142,14 +137,19 @@ export default function TimelineInterestJourney(): JSX.Element {
                     key={s.id}
                     ref={(el) => (refs.current[i] = el)}
                     data-idx={i}
-                    className="relative pl-14"
+                    // FIX 4: pl-10 (40px) keeps content clear of the dot;
+                    // dot is positioned absolutely at left-4 (aligns with the line),
+                    // then pulled left by half its width (w-2 = 8px → -translate-x-1/2)
+                    className="relative pl-10"
                     aria-labelledby={`stage-${s.id}`}
                   >
+                    {/* FIX 4: Dot correctly centered on the left-4 line */}
                     <div
-                      className={`absolute -left-6 top-1 w-4 h-4 rounded-full ring-4 ring-white dark:ring-slate-900 ${
-                        isActive ? "bg-accent scale-110" : "bg-slate-500 dark:bg-slate-400 scale-100"
+                      className={`absolute left-4 top-1.5 w-3 h-3 -translate-x-1/2 rounded-full ring-2 ring-white dark:ring-slate-900 transition-all duration-300 ${
+                        isActive
+                          ? "bg-accent scale-125"
+                          : "bg-slate-400 dark:bg-slate-500 scale-100"
                       }`}
-                      style={{ transition: "transform 300ms ease, background-color 300ms ease" }}
                       aria-hidden
                     />
 
@@ -157,7 +157,10 @@ export default function TimelineInterestJourney(): JSX.Element {
                       {s.date}
                     </div>
 
-                    <h3 id={`stage-${s.id}`} className="text-lg md:text-xl font-medium mb-3">
+                    <h3
+                      id={`stage-${s.id}`}
+                      className="text-lg md:text-xl font-medium mb-3"
+                    >
                       {s.short}
                     </h3>
 
@@ -171,65 +174,75 @@ export default function TimelineInterestJourney(): JSX.Element {
           </div>
         </div>
 
-        {/* Right: cinematic panel */}
+        {/* Right: sticky panel */}
         <aside className="sticky top-24 self-start">
           <div className="w-full max-w-md p-6 bg-white dark:bg-slate-900 rounded-xl shadow border border-slate-200 dark:border-slate-700">
-            <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">Journey</div>
-
-            <div className="min-h-[92px]">
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                  key={stages[active].id}
-                  variants={panelVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: 0.36, ease: "easeOut" }}
-                >
-                  <div>
-                    <div className="text-xs text-slate-400 mb-1">Stage</div>
-                    <div className="text-lg font-semibold">{stages[active].short}</div>
-                    <div className="text-sm text-slate-500 mt-1">
-                      {stages[active].institute} • {stages[active].location}
-                    </div>
-                  </div>
-
-                  <div className="mt-3">
-                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                      {stages[active].narrative}
-                    </p>
-                  </div>
-
-                  <div className="mt-4">
-                    <div className="text-xs text-slate-400 mb-2">Interests</div>
-                    <div className="flex flex-wrap gap-2">
-                      {stages[active].interests.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs px-2 py-1 rounded-md border text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+            <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">
+              Journey
             </div>
+
+            {/*
+              FIX 5: Removed fixed min-h-[92px] — content now flows naturally.
+              AnimatePresence handles the transition without a height constraint
+              that could clip wrapped interest tags on narrow screens.
+            */}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={stages[active].id}
+                variants={panelVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.36, ease: "easeOut" }}
+              >
+                <div>
+                  <div className="text-xs text-slate-400 mb-1">Stage</div>
+                  <div className="text-lg font-semibold">
+                    {stages[active].short}
+                  </div>
+                  <div className="text-sm text-slate-500 mt-1">
+                    {stages[active].institute} • {stages[active].location}
+                  </div>
+                </div>
+
+                <div className="mt-3">
+                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    {stages[active].narrative}
+                  </p>
+                </div>
+
+                <div className="mt-4">
+                  <div className="text-xs text-slate-400 mb-2">Interests</div>
+                  <div className="flex flex-wrap gap-2">
+                    {stages[active].interests.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2 py-1 rounded-md border text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
 
             {/* Path visualization + progress */}
             <div className="mt-6">
               <div className="text-xs text-slate-400 mb-2">Path</div>
 
-              {/* textual full path */}
+              {/* FIX 1 (visible effect): derived path stays in sync with stages */}
               <div className="text-sm text-slate-700 dark:text-slate-200 font-medium mb-2">
                 {FULL_PATH.join(" → ")}
               </div>
 
-              {/* progress bar */}
+              {/* FIX 6: Right label is always the final destination ("Tempe"),
+                  not the current location — avoids "India → India" at step 0 */}
               <div className="flex items-center text-sm">
-                <span className="mr-2 text-slate-700 dark:text-slate-200 font-medium">India</span>
-                <div className="flex-1 h-1 bg-slate-200 dark:bg-slate-800 mx-3 rounded-full overflow-hidden">
+                <span className="mr-2 text-slate-700 dark:text-slate-200 font-medium">
+                  {FULL_PATH[0]}
+                </span>
+                <div className="flex-1 h-1 bg-slate-200 dark:bg-slate-800 mx-1 rounded-full overflow-hidden">
                   <motion.div
                     className="h-1 bg-accent rounded-full"
                     animate={{ width: `${progressPercent}%` }}
@@ -237,7 +250,7 @@ export default function TimelineInterestJourney(): JSX.Element {
                   />
                 </div>
                 <span className="ml-2 text-slate-700 dark:text-slate-200 font-medium">
-                  {stages[active].location.split(",")[0]}
+                  {FINAL_DESTINATION}
                 </span>
               </div>
             </div>
@@ -252,7 +265,9 @@ export default function TimelineInterestJourney(): JSX.Element {
               </a>
             </div>
 
-            <div className="mt-4 text-xs text-slate-400">Scroll to explore — the right panel updates smoothly.</div>
+            <div className="mt-4 text-xs text-slate-400">
+              Scroll to explore — the right panel updates smoothly.
+            </div>
           </div>
         </aside>
       </div>
