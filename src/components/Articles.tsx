@@ -24,7 +24,7 @@ export default function Articles() {
       link: "https://letiandougroup.com/2023/05/25/surf-students/",
     },
     {
-      title: "Revolutionizing Formaldehyde Lead Halide Perovskite Solar Cells",
+      title: "Revolutionizing Formamidinium Lead Halide Perovskite Solar Cells",
       description: "A FURI research project focusing on ionic additives for improving stability in perovskite solar cells, under the mentorship of Professor Nick Rolston.",
       link: "https://forge.engineering.asu.edu/participant/rai-purushothama-hithesh/",
     },
