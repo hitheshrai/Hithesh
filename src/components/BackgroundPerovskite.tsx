@@ -1,7 +1,6 @@
 // src/components/BackgroundPerovskite.tsx
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { useReducedMotion } from "framer-motion";
 
@@ -13,9 +12,9 @@ import { useReducedMotion } from "framer-motion";
  * - Rotates slowly; respects prefers-reduced-motion
  */
 
-// --- Local simplified UnitCell for background ---
 function BgUnitCell({ a = 4.0 }: { a?: number }) {
   const half = a / 2;
+
   const cornerPositions = useMemo(
     () =>
       [
@@ -101,9 +100,8 @@ function BgUnitCell({ a = 4.0 }: { a?: number }) {
   );
 }
 
-// --- Rotating wrapper that respects reduced motion ---
 function RotatingUnit({ speed = 0.02 }: { speed?: number }) {
-  const ref = useRef<THREE.Group | null>(null);
+  const ref = useRef<THREE.Group>(null);
   const shouldReduce = useReducedMotion();
 
   useFrame((_state, delta) => {
@@ -120,11 +118,6 @@ function RotatingUnit({ speed = 0.02 }: { speed?: number }) {
   );
 }
 
-/**
- * BackgroundPerovskite
- * Props:
- *  - dpr: pixel ratio (number or [min,max]) to control canvas resolution for perf
- */
 export default function BackgroundPerovskite({
   dpr = 1.0,
 }: {
@@ -141,19 +134,17 @@ export default function BackgroundPerovskite({
         camera={{ position: [6, 6, 6], fov: 35 }}
         dpr={dpr}
       >
-        {/* soft lights to create a gentle, desaturated look */}
         <ambientLight intensity={0.9} color={"#ffffff"} />
         <directionalLight
           position={[10, 10, 5]}
           intensity={0.6}
           color={"#fff7ef"}
         />
-        <pointLight position={[-10, -10, -10]} intensity={0.2} color={"#cfe8ff"} />
-
-        {/* OrbitControls disabled (decorative only) */}
-        <OrbitControls enabled={false} />
-
-        {/* center, rotated, low-contrast unit cell */}
+        <pointLight
+          position={[-10, -10, -10]}
+          intensity={0.2}
+          color={"#cfe8ff"}
+        />
         <RotatingUnit speed={0.025} />
       </Canvas>
     </div>
