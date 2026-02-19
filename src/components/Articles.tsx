@@ -13,7 +13,7 @@ export default function Articles() {
   description:
     "Feature highlighting the development of EDgeAI — an offline conversational AI system built using Meta’s Llama model and optimized for Raspberry Pi devices powering SolarSPELL libraries. The project focuses on equitable AI access for the 4.5 billion people without reliable internet.",
   link: "https://solarspell.org/asu-solarspell-next-lab-pioneer-offline-ai",
-    }
+    },
     {
       title: "Hithesh Rai Purushothama: A Journey in Engineering and Leadership",
       description: "A feature on Hithesh’s contributions to semiconductors, robotics, and materials science, showcasing his leadership in various student organizations and projects.",
