@@ -1,6 +1,7 @@
 // src/components/Timeline.tsx
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import BackgroundPerovskite from "./BackgroundPerovskite";
 
 type Stage = {
   id: string;
@@ -154,7 +155,8 @@ export default function Timeline() {
   };
 
   return (
-    <section className="py-16">
+    <section className="relative py-16">
+      <BackgroundPerovskite dpr={1.0} />
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
         {/* Left: Timeline */}
         <div className="lg:col-span-2">
@@ -249,14 +251,14 @@ export default function Timeline() {
                         <motion.div
                           id={`details-${s.id}`}
                           key="content"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
+                          initial={{ opacity: 0, y: -6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -4 }}
                           transition={{
-                            duration: shouldReduce ? 0 : 0.3,
-                            ease: "easeInOut",
+                            duration: shouldReduce ? 0 : 0.2,
+                            ease: "easeOut",
                           }}
-                          className="overflow-hidden"
+                          style={{ overflow: "hidden" }}
                         >
                           <div className="pt-2 pb-1">
                             {s.institute && (
