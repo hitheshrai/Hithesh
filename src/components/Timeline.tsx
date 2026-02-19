@@ -1,5 +1,5 @@
 // src/components/Timeline.tsx
-import { useEffect, useRef, useState, useCallback, useMemo, memo } from "react";
+import { useEffect, useRef, useState, useCallback, memo } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import BackgroundPerovskite from "./BackgroundPerovskite";
 
@@ -19,7 +19,7 @@ const stages: Stage[] = [
     short: "Electrical Engineering → AI Engineering",
     date: "2021 – Present",
     institute: "ASU — B.S.E EEE / M.S. AI Engineering",
-    location: "ASU",
+    location: "Tempe, AZ",
     narrative:
       "B.S.E in Electrical & Electronic Engineering (2021–2025), now pursuing an M.S. in AI Engineering (Materials Science) — applying ML to accelerate energy materials research.",
     interests: ["Optoelectronics", "Semiconductors", "Power Systems", "Renewable Energy"],
@@ -29,7 +29,7 @@ const stages: Stage[] = [
     short: "Perovskite Research – ASU Renewable Energy Lab",
     date: "Sep 2022 – Present",
     institute: "Renewable Energy Materials & Devices Lab, ASU",
-    location: "ASU",
+    location: "Tempe, AZ",
     narrative:
       "Fabricated perovskite thin films via spin and blade coating; led an Intel-funded cesium wide-bandgap project that delivered an improved-stability prototype, presented at IEEE PVSC 2024.",
     interests: ["Photovoltaics", "Thin-Film Fabrication", "Materials Characterization", "Energy Systems"],
@@ -39,7 +39,7 @@ const stages: Stage[] = [
     short: "Data & Analysis – Purdue SURF",
     date: "Summer 2023",
     institute: "Letian Dou Group, Purdue University",
-    location: "Purdue",
+    location: "West Lafayette, IN",
     narrative:
       "Built a comparative device-efficiency database in Python/Excel and used the Perovskite Database to identify material-performance trends guiding additive selection.",
     interests: ["Data Analysis", "ML for Materials", "Perovskite Databases", "Stability Studies"],
@@ -49,7 +49,7 @@ const stages: Stage[] = [
     short: "Structure Analysis – HZB",
     date: "Summer 2024",
     institute: "Helmholtz Zentrum Berlin – Quantum Materials Group",
-    location: "Berlin",
+    location: "Berlin, Germany",
     narrative:
       "Used PDF and X-ray/neutron diffraction to reveal structural instabilities and morphotropic phase transitions in perovskite ferroelectric systems.",
     interests: ["PDF Analysis", "Diffraction", "Materials Characterization", "Crystal Structure"],
@@ -59,7 +59,7 @@ const stages: Stage[] = [
     short: "Device Fabrication – EPFL",
     date: "Summer 2025",
     institute: "Photovoltaics Lab, EPFL",
-    location: "Neuchâtel",
+    location: "Neuchâtel, Switzerland",
     narrative:
       "Fabricated single-junction perovskite devices reaching 19% efficiency, Learned techniques like Atomic layer deposition and thermal evaporation — funded by the ThinkSwiss Research Scholarship.",
     interests: ["Device Fabrication", "ALD", "Thermal Evaporation", "Stability Testing"],
@@ -69,7 +69,7 @@ const stages: Stage[] = [
     short: "Management Intern – Next Lab, ASU",
     date: "Jan 2026 – Present",
     institute: "Next Lab / ASU",
-    location: "ASU",
+    location: "Tempe, AZ",
     narrative:
       "Leading partner-funded AI initiatives: building LangChain retrieval pipelines, benchmarking AI workloads on NVIDIA Jetson edge devices, and analyzing INT8/Q4 quantization trade-offs for robust deployment.",
     interests: ["RAG", "Edge AI", "LangChain", "Quantization", "Automation"],
@@ -191,132 +191,132 @@ export default function Timeline() {
                 />
               ))}
 
-            // Memoized TimelineItem for performance
-            const TimelineItem = memo(function TimelineItem({
-              stage: s,
-              idx,
-              isActive,
-              isExpanded,
-              setRef,
-              toggleExpanded,
-              shouldReduce,
-            }: {
-              stage: Stage;
-              idx: number;
-              isActive: boolean;
-              isExpanded: boolean;
-              setRef: (el: HTMLDivElement | null, idx: number) => void;
-              toggleExpanded: (id: string) => void;
-              shouldReduce: boolean;
-            }) {
-              return (
-                <div
-                  ref={el => setRef(el, idx)}
-                  data-idx={idx}
-                  role="listitem"
-                  aria-selected={isActive}
-                  tabIndex={0}
-                  className="relative pl-10"
-                  aria-labelledby={`stage-${s.id}`}
-                >
-                  <div
-                    className={`absolute left-4 top-1.5 w-3 h-3 -translate-x-1/2 rounded-full ring-2 ring-white dark:ring-slate-900 transition-all duration-300 ${
-                      isActive ? "bg-accent scale-125" : "bg-slate-400 dark:bg-slate-500 scale-100"
-                    }`}
-                  />
+// Memoized TimelineItem for performance
+const TimelineItem = memo(function TimelineItem({
+  stage: s,
+  idx,
+  isActive,
+  isExpanded,
+  setRef,
+  toggleExpanded,
+  shouldReduce,
+}: {
+  stage: Stage;
+  idx: number;
+  isActive: boolean;
+  isExpanded: boolean;
+  setRef: (el: HTMLDivElement | null, idx: number) => void;
+  toggleExpanded: (id: string) => void;
+  shouldReduce: boolean;
+}) {
+  return (
+    <div
+      ref={el => setRef(el, idx)}
+      data-idx={idx}
+      role="listitem"
+      aria-selected={isActive}
+      tabIndex={0}
+      className="relative pl-10"
+      aria-labelledby={`stage-${s.id}`}
+    >
+      <div
+        className={`absolute left-4 top-1.5 w-3 h-3 -translate-x-1/2 rounded-full ring-2 ring-white dark:ring-slate-900 transition-all duration-300 ${
+          isActive ? "bg-accent scale-125" : "bg-slate-400 dark:bg-slate-500 scale-100"
+        }`}
+      />
 
-                  <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
-                    {s.date}
-                  </div>
+      <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+        {s.date}
+      </div>
 
-                  {/* Clickable header row */}
-                  <button
-                    onClick={() => toggleExpanded(s.id)}
-                    aria-expanded={isExpanded}
-                    aria-controls={`details-${s.id}`}
-                    className="w-full text-left group flex items-start justify-between gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+      {/* Clickable header row */}
+      <button
+        onClick={() => toggleExpanded(s.id)}
+        aria-expanded={isExpanded}
+        aria-controls={`details-${s.id}`}
+        className="w-full text-left group flex items-start justify-between gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+      >
+        <h3
+          id={`stage-${s.id}`}
+          className="text-lg md:text-xl font-medium mb-1 group-hover:text-accent transition-colors duration-200"
+        >
+          {s.short}
+        </h3>
+
+        {/* Chevron indicator */}
+        <span
+          className={`mt-1 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
+            isExpanded ? "rotate-180" : "rotate-0"
+          }`}
+          aria-hidden="true"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </span>
+      </button>
+
+      {/* Institute & location shown when collapsed */}
+      {!isExpanded && s.institute && (
+        <p className="text-sm text-slate-400 dark:text-slate-500 mt-0.5">
+          {s.institute} · {s.location}
+        </p>
+      )}
+
+      {/* Expandable details */}
+      <AnimatePresence initial={false}>
+        {isExpanded && (
+          <motion.div
+            id={`details-${s.id}`}
+            key="content"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{
+              duration: shouldReduce ? 0 : 0.12,
+              ease: "easeOut",
+            }}
+            style={{ overflow: "hidden", willChange: "opacity, transform" }}
+          >
+            <div className="pt-2 pb-1">
+              {s.institute && (
+                <p className="text-sm text-slate-400 dark:text-slate-500 mb-3">
+                  {s.institute} · {s.location}
+                </p>
+              )}
+
+              <p className="text-sm md:text-[0.95rem] text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+                {s.narrative}
+              </p>
+
+              {/* Interest tags */}
+              <div className="flex flex-wrap gap-2 mt-4">
+                {s.interests.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs px-2 py-1 rounded-md border text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
                   >
-                    <h3
-                      id={`stage-${s.id}`}
-                      className="text-lg md:text-xl font-medium mb-1 group-hover:text-accent transition-colors duration-200"
-                    >
-                      {s.short}
-                    </h3>
-
-                    {/* Chevron indicator */}
-                    <span
-                      className={`mt-1 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
-                        isExpanded ? "rotate-180" : "rotate-0"
-                      }`}
-                      aria-hidden="true"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <polyline points="6 9 12 15 18 9" />
-                      </svg>
-                    </span>
-                  </button>
-
-                  {/* Institute & location shown when collapsed */}
-                  {!isExpanded && s.institute && (
-                    <p className="text-sm text-slate-400 dark:text-slate-500 mt-0.5">
-                      {s.institute} · {s.location}
-                    </p>
-                  )}
-
-                  {/* Expandable details */}
-                  <AnimatePresence initial={false}>
-                    {isExpanded && (
-                      <motion.div
-                        id={`details-${s.id}`}
-                        key="content"
-                        initial={{ opacity: 0, y: -6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -4 }}
-                        transition={{
-                          duration: shouldReduce ? 0 : 0.12,
-                          ease: "easeOut",
-                        }}
-                        style={{ overflow: "hidden", willChange: "opacity, transform" }}
-                      >
-                        <div className="pt-2 pb-1">
-                          {s.institute && (
-                            <p className="text-sm text-slate-400 dark:text-slate-500 mb-3">
-                              {s.institute} · {s.location}
-                            </p>
-                          )}
-
-                          <p className="text-sm md:text-[0.95rem] text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
-                            {s.narrative}
-                          </p>
-
-                          {/* Interest tags */}
-                          <div className="flex flex-wrap gap-2 mt-4">
-                            {s.interests.map((tag) => (
-                              <span
-                                key={tag}
-                                className="text-xs px-2 py-1 rounded-md border text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              );
-            });
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+});
             </div>
           </div>
         </div>
