@@ -1,11 +1,11 @@
 // src/components/Timeline.tsx
 
-// Import logos (update paths if needed)
-import asuLogo from "../../ASU12.jpg";
-import helmholtzLogo from "../../helmholtz_zentrum_berlin_logo.jpeg";
-import purdueLogo from "../../Purdue.jpeg";
-import nextLabLogo from "../../channels4_profile.jpg";
-import epflLogo from "../../Logo_EPFL.svg.png"; // EPFL official logo
+// Import logos from public assets
+import asuLogo from "/assets/logos/ASU12.jpg";
+import helmholtzLogo from "/assets/logos/helmholtz_zentrum_berlin_logo.jpeg";
+import purdueLogo from "/assets/logos/Purdue.jpeg";
+import nextLabLogo from "/assets/logos/channels4_profile.jpg";
+import epflLogo from "/assets/logos/Logo_EPFL.svg.png";
 
 const timelineData = [
   {
