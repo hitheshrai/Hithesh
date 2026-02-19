@@ -3,11 +3,11 @@
 import React from "react";
 
 // Import logos (update paths if needed)
-import asuLogo from "/workspaces/Hithesh/ASU12.jpg";
-import helmholtzLogo from "/workspaces/Hithesh/helmholtz_zentrum_berlin_logo.jpeg";
-import purdueLogo from "/workspaces/Hithesh/Purdue.jpeg";
-import nextLabLogo from "/workspaces/Hithesh/channels4_profile.jpg";
-import epflLogo from "/workspaces/Hithesh/EPFL.png"; // ensure this exists
+import asuLogo from "../../ASU12.jpg";
+import helmholtzLogo from "../../helmholtz_zentrum_berlin_logo.jpeg";
+import purdueLogo from "../../Purdue.jpeg";
+import nextLabLogo from "../../channels4_profile.jpg";
+import epflLogo from "../../ASU12.jpg"; // Fallback to ASU logo
 
 const timelineData = [
   {
