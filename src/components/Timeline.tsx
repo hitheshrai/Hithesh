@@ -1,132 +1,95 @@
 // src/components/Timeline.tsx
 
-// Import logos from public assets
-import asuLogo from "/assets/logos/ASU12.jpg";
-import helmholtzLogo from "/assets/logos/helmholtz_zentrum_berlin_logo.jpeg";
-import purdueLogo from "/assets/logos/Purdue.jpeg";
-import nextLabLogo from "/assets/logos/channels4_profile.jpg";
-import epflLogo from "/assets/logos/Logo_EPFL.svg.png";
+import React from "react";
 
 const timelineData = [
   {
-    title: "M.S. in Artificial Intelligence Engineering (Materials Science & Engineering)",
-    date: "Jan 2026 – May 2027",
-    logo: asuLogo,
+    title: "Autonomous AI Workflows for Edge Deployment",
+    date: "2026 – Present",
     description: [
-      "Arizona State University",
-      "Focus on AI-driven materials research and renewable energy systems",
+      "Designed retrieval-augmented systems for structured scientific workflows.",
+      "Benchmarked large language models under memory and power constraints.",
+      "Optimized inference pipelines for energy-efficient deployment.",
     ],
   },
   {
-    title: "Management Intern – AI & Edge Systems",
-    date: "Jan 2026 – Present",
-    logo: nextLabLogo,
+    title: "Blade-Coated Perovskite Thin Films for Energy Conversion",
+    date: "2022 – Present",
     description: [
-      "Next Lab, Arizona State University",
-      "Built and benchmarked AI workflows on NVIDIA Jetson devices",
-      "Developed RAG pipelines and evaluated latency, memory, and power trade-offs",
-      "Led Gen AI initiatives and coordinated technical workflows",
+      "Fabrication of perovskite thin films using spin and blade coating.",
+      "Device characterization via solar simulation and XRD.",
+      "Efficiency optimization and defect control for scalable processing.",
     ],
   },
   {
-    title: "Research Assistant – Renewable Energy Materials & Devices Lab",
-    date: "Sep 2022 – Present",
-    logo: asuLogo,
+    title: "Single-Junction Perovskite Device Fabrication",
+    date: "Summer 2025",
     description: [
-      "Mentor: Prof. Nick Rolston",
-      "Fabricated perovskite thin films (spin coating & blade coating)",
-      "Characterized devices using solar simulator, XRD, and profilometry",
-      "Focused on photovoltaic and alphavoltaic device optimization",
+      "Fabricated devices reaching ~19% efficiency.",
+      "Atomic layer deposition of transport layers.",
+      "Encapsulation and stability pathway analysis.",
     ],
   },
   {
-    title: "Undergraduate Research Assistant – EPFL Photovoltaics Lab",
-    date: "May 2025 – Aug 2025",
-    logo: epflLogo,
+    title: "Structural Instability in Ferroelectric Materials",
+    date: "Summer 2024",
     description: [
-      "Mentor: Dr. Christian Wolff",
-      "École Polytechnique Fédérale de Lausanne (EPFL)",
-      "Fabricated single-junction perovskite devices (up to 19% efficiency)",
-      "Performed ALD SnO₂ deposition and thermal evaporation processes",
-      "Conducted encapsulation and stability studies",
+      "Pair Distribution Function (PDF) analysis of local structure.",
+      "X-ray and neutron diffraction for phase transition studies.",
+      "Correlation of composition-driven structural instabilities.",
     ],
   },
   {
-    title: "International Summer Student – Helmholtz Zentrum Berlin",
-    date: "Jul 2024 – Aug 2024",
-    logo: helmholtzLogo,
+    title: "Perovskite Solar Cell Stability Modeling",
+    date: "Summer 2023",
     description: [
-      "Mentor: Dr. Kaustuv Datta",
-      "Quantum Materials Group",
-      "Used Pair Distribution Function (PDF) analysis to study structural instabilities",
-      "Analyzed phase transitions using X-ray and neutron diffraction",
+      "Comparative database of device architectures.",
+      "Literature synthesis on degradation mechanisms.",
+      "Trend analysis for material-performance optimization.",
     ],
   },
   {
-    title: "Summer Undergraduate Research Fellow – Purdue University",
-    date: "May 2023 – Aug 2023",
-    logo: purdueLogo,
+    title: "Battery Energy Storage System (BESS) Modeling",
+    date: "2025",
     description: [
-      "Mentor: Prof. Letian Dou",
-      "Stability studies of halide perovskite solar cells",
-      "Built comparative database of device structures and efficiencies using Python",
-      "Reviewed literature on additive engineering and degradation mechanisms",
-    ],
-  },
-  {
-    title: "Team Lead – EPICS (Engineering Projects in Community Service)",
-    date: "Jan 2022 – Jan 2024",
-    logo: asuLogo,
-    description: [
-      "Led 10+ students in robotics & Python curriculum development",
-      "Integrated Jetson-based systems for hands-on STEM education",
-      "Managed delivery across international education partners",
-    ],
-  },
-  {
-    title: "B.S.E. in Electrical & Electronic Engineering",
-    date: "Aug 2021 – Dec 2025",
-    logo: asuLogo,
-    description: [
-      "Arizona State University",
-      "Focus on photovoltaics, renewable energy, and power systems",
-      "Capstone: Modeling Battery Energy Storage Systems (BESS) for grid-scale integration"
+      "Grid-scale storage modeling and PV integration analysis.",
+      "System-level optimization and digital twin evaluation.",
     ],
   },
 ];
 
-const Timeline: React.FC = () => (
-  <div className="timeline">
-    <h2 className="timeline-title">Experience</h2>
-    <div className="timeline-line"></div>
+const Timeline: React.FC = () => {
+  return (
+    <section className="py-16">
+      <div className="max-w-3xl mx-auto px-6">
+        <h2 className="text-3xl font-serif font-semibold mb-12">
+          Selected Research & Systems Work
+        </h2>
 
-    {timelineData.map((item, index) => (
-      <div
-        key={index}
-        className={`timeline-item ${index % 2 === 0 ? "left" : "right"}`}
-      >
-        <img
-          src={item.logo}
-          alt={`${item.title} Logo`}
-          className="logo w-10 h-10 mb-2 object-contain"
-        />
+        <div className="relative border-l border-slate-300 dark:border-slate-700">
+          {timelineData.map((item, index) => (
+            <div key={index} className="mb-12 ml-6">
+              <div className="absolute -left-2.5 mt-2 w-4 h-4 bg-slate-600 dark:bg-slate-400 rounded-full"></div>
 
-        <div className="date text-primary dark:text-accent-dark mb-2">
-          {item.date}
-        </div>
+              <div className="text-sm text-slate-500 dark:text-slate-400 mb-1">
+                {item.date}
+              </div>
 
-        <div className="title text-lg font-bold mb-1">
-          {item.title}
-        </div>
+              <h3 className="text-lg font-medium mb-3">
+                {item.title}
+              </h3>
 
-        <ul className="description list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
-          {item.description.map((point, i) => (
-            <li key={i}>{point}</li>
+              <ul className="space-y-1 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                {item.description.map((point, i) => (
+                  <li key={i}>• {point}</li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
-    ))}
-  </div>
-);
+    </section>
+  );
+};
 
 export default Timeline;
