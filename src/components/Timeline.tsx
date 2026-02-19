@@ -18,76 +18,83 @@ const stages: Stage[] = [
     short: "Electrical Engineering → AI Engineering",
     date: "2021 – Present",
     institute: "ASU — B.S.E EEE / M.S. AI Engineering",
-    location: "India",
+    location: "ASU",
     narrative:
-      "B.S.E in Electrical and Electronic Engineering at ASU (Aug 2021 – Dec 2025), where I developed core training in circuits, signals, and embedded systems. I am now continuing at ASU with an M.S. in AI Engineering (Materials Science & Engineering) to connect AI methods with materials research.",
-    interests: [
-      "Optoelectronics",
-      "Semiconductors",
-      "Power Systems",
-      "Renewable Energy",
-    ],
+      "B.S.E in Electrical & Electronic Engineering (2021–2025), now pursuing an M.S. in AI Engineering (Materials Science) — applying ML to accelerate energy materials research.",
+    interests: ["Optoelectronics", "Semiconductors", "Power Systems", "Renewable Energy"],
   },
   {
     id: "tempe-start",
-    short: "Transition to Renewable Energy",
+    short: "Perovskite Research – ASU Renewable Energy Lab",
     date: "Sep 2022 – Present",
     institute: "Renewable Energy Materials & Devices Lab, ASU",
-    location: "Tempe, AZ",
+    location: "ASU",
     narrative:
-      "Research at ASU’s Renewable Energy Materials & Devices Lab focused on fabrication and characterization of perovskite thin films and devices, including alphavoltaic prototypes. My work centers on degradation mechanisms, processing adjustments, and improving stability and reproducibility.",
-    interests: ["Photovoltaics", "Materials", "Energy Systems"],
+      "Fabricated perovskite thin films via spin and blade coating; led an Intel-funded cesium wide-bandgap project that delivered an improved-stability prototype, presented at IEEE PVSC 2024.",
+    interests: ["Photovoltaics", "Thin-Film Fabrication", "Materials Characterization", "Energy Systems"],
   },
   {
     id: "purdue-data",
-    short: "Data & Analysis – Purdue",
+    short: "Data & Analysis – Purdue SURF",
     date: "Summer 2023",
-    institute: "Purdue (SURF)",
-    location: "West Lafayette, IN",
+    institute: "Letian Dou Group, Purdue University",
+    location: "Purdue",
     narrative:
-      "At Purdue (SURF), I compiled comparative device and processing datasets, conducted trend analysis, and used data-driven evaluation to inform experimental design and material selection.",
-    interests: ["Data Analysis", "Databases", "ML for Materials"],
+      "Built a comparative device-efficiency database in Python/Excel and used the Perovskite Database to identify material-performance trends guiding additive selection.",
+    interests: ["Data Analysis", "ML for Materials", "Perovskite Databases", "Stability Studies"],
   },
   {
     id: "structure-hzb",
     short: "Structure Analysis – HZB",
     date: "Summer 2024",
-    institute: "Helmholtz Zentrum Berlin",
-    location: "Berlin, Germany",
+    institute: "Helmholtz Zentrum Berlin – Quantum Materials Group",
+    location: "Berlin",
     narrative:
-      "Performed Pair Distribution Function (PDF) and X-ray diffraction analysis to study local structure and composition-driven instabilities in perovskite-related systems, linking structural behavior to potential failure pathways.",
-    interests: ["Diffraction", "PDF Analysis", "Materials Characterization"],
+      "Used PDF and X-ray/neutron diffraction to reveal structural instabilities and morphotropic phase transitions in perovskite ferroelectric systems.",
+    interests: ["PDF Analysis", "Diffraction", "Materials Characterization", "Crystal Structure"],
   },
   {
     id: "device-epfl",
-    short: "Device-Level Fabrication – EPFL",
+    short: "Device Fabrication – EPFL",
     date: "Summer 2025",
-    institute: "EPFL",
-    location: "Neuchâtel, Switzerland",
+    institute: "Photovoltaics Lab, EPFL",
+    location: "Neuchâtel",
     narrative:
-      "Worked on fabrication of single-junction perovskite devices, including ALD-based transport layers and thermal evaporation processes. The focus was on connecting materials processing decisions to device performance and stability outcomes.",
-    interests: ["Device Fabrication", "ALD", "Stability Testing"],
+      "Fabricated single-junction perovskite devices reaching 19% efficiency via ALD SnO₂ transport layers and thermal evaporation — funded by the ThinkSwiss Research Scholarship.",
+    interests: ["Device Fabrication", "ALD", "Thermal Evaporation", "Stability Testing"],
   },
   {
     id: "nextlab-ai",
-    short: "AI & Edge Systems – Next Lab",
-    date: "2026 – Present",
+    short: "Management Intern – Next Lab, ASU",
+    date: "Jan 2026 – Present",
     institute: "Next Lab / ASU",
-    location: "Tempe, AZ",
+    location: "ASU",
     narrative:
-      "At Next Lab, I apply AI to research workflows and edge systems – building retrieval-augmented pipelines, benchmarking inference on NVIDIA Jetson devices for latency and power, and automating documentation processes to improve lab efficiency.",
-    interests: ["RAG", "Edge AI", "Automation", "Self-driving Labs"],
+      "Leading partner-funded AI initiatives: building LangChain retrieval pipelines, benchmarking AI workloads on NVIDIA Jetson edge devices, and analyzing INT8/Q4 quantization trade-offs for robust deployment.",
+    interests: ["RAG", "Edge AI", "LangChain", "Quantization", "Automation"],
   },
 ];
 
-const FULL_PATH = stages.map((s) => s.location.split(",")[0]);
-const FINAL_DESTINATION = FULL_PATH[FULL_PATH.length - 1];
 
 export default function Timeline() {
   const [active, setActive] = useState(0);
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const refs = useRef<Array<HTMLDivElement | null>>([]);
   const shouldReduce = useReducedMotion();
   const keyboardNav = useRef(false);
+
+  // Toggle expanded state for a stage
+  const toggleExpanded = (id: string) => {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
 
   // Scroll-based stage detection
   useEffect(() => {
@@ -119,11 +126,14 @@ export default function Timeline() {
       } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
         keyboardNav.current = true;
         setActive((a) => Math.max(0, a - 1));
+      } else if (e.key === "Enter" || e.key === " ") {
+        // Toggle expand on Enter/Space for the active stage
+        toggleExpanded(stages[active].id);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [active]);
 
   // Scroll only when triggered by keyboard
   useEffect(() => {
@@ -136,10 +146,6 @@ export default function Timeline() {
       block: "center",
     });
   }, [active, shouldReduce]);
-
-  const progressPercent = Math.round(
-    (active / (stages.length - 1)) * 100
-  );
 
   const panelVariants = {
     enter: { opacity: 0, x: 10 },
@@ -169,6 +175,8 @@ export default function Timeline() {
             <div className="space-y-14">
               {stages.map((s, i) => {
                 const isActive = i === active;
+                const isExpanded = expanded.has(s.id);
+
                 return (
                   <div
                     key={s.id}
@@ -191,16 +199,91 @@ export default function Timeline() {
                       {s.date}
                     </div>
 
-                    <h3
-                      id={`stage-${s.id}`}
-                      className="text-lg md:text-xl font-medium mb-3"
+                    {/* Clickable header row */}
+                    <button
+                      onClick={() => toggleExpanded(s.id)}
+                      aria-expanded={isExpanded}
+                      aria-controls={`details-${s.id}`}
+                      className="w-full text-left group flex items-start justify-between gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
                     >
-                      {s.short}
-                    </h3>
+                      <h3
+                        id={`stage-${s.id}`}
+                        className="text-lg md:text-xl font-medium mb-1 group-hover:text-accent transition-colors duration-200"
+                      >
+                        {s.short}
+                      </h3>
 
-                    <p className="text-sm md:text-[0.95rem] text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
-                      {s.narrative}
-                    </p>
+                      {/* Chevron indicator */}
+                      <span
+                        className={`mt-1 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
+                          isExpanded ? "rotate-180" : "rotate-0"
+                        }`}
+                        aria-hidden="true"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                      </span>
+                    </button>
+
+                    {/* Institute & location shown when collapsed */}
+                    {!isExpanded && s.institute && (
+                      <p className="text-sm text-slate-400 dark:text-slate-500 mt-0.5">
+                        {s.institute} · {s.location}
+                      </p>
+                    )}
+
+                    {/* Expandable details */}
+                    <AnimatePresence initial={false}>
+                      {isExpanded && (
+                        <motion.div
+                          id={`details-${s.id}`}
+                          key="content"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{
+                            duration: shouldReduce ? 0 : 0.3,
+                            ease: "easeInOut",
+                          }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pt-2 pb-1">
+                            {s.institute && (
+                              <p className="text-sm text-slate-400 dark:text-slate-500 mb-3">
+                                {s.institute} · {s.location}
+                              </p>
+                            )}
+
+                            <p className="text-sm md:text-[0.95rem] text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+                              {s.narrative}
+                            </p>
+
+                            {/* Interest tags */}
+                            <div className="flex flex-wrap gap-2 mt-4">
+                              {s.interests.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="text-xs px-2 py-1 rounded-md border text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 );
               })}
@@ -264,36 +347,6 @@ export default function Timeline() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Path + progress */}
-            <div className="mt-6">
-              <div className="text-xs text-slate-400 mb-2">
-                Path
-              </div>
-
-              <div className="text-sm text-slate-700 dark:text-slate-200 font-medium mb-2">
-                {FULL_PATH.join(" → ")}
-              </div>
-
-              <div className="flex items-center text-sm">
-                <span className="mr-2 text-slate-700 dark:text-slate-200 font-medium">
-                  {FULL_PATH[0]}
-                </span>
-                <div className="flex-1 h-1 bg-slate-200 dark:bg-slate-800 mx-1 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-1 bg-accent rounded-full"
-                    animate={{ width: `${progressPercent}%` }}
-                    transition={{
-                      duration: shouldReduce ? 0 : 0.5,
-                      ease: "easeOut",
-                    }}
-                  />
-                </div>
-                <span className="ml-2 text-slate-700 dark:text-slate-200 font-medium">
-                  {FINAL_DESTINATION}
-                </span>
-              </div>
-            </div>
-
             <div className="mt-6">
               <a
                 href="#contact"
@@ -304,7 +357,7 @@ export default function Timeline() {
             </div>
 
             <div className="mt-4 text-xs text-slate-400">
-              Scroll to explore — or use arrow keys.
+              Click a stage to expand · Scroll or use arrow keys to navigate.
             </div>
           </div>
         </aside>
