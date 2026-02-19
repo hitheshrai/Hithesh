@@ -1,16 +1,6 @@
-// src/components/TimelineInterestJourney.tsx
+// src/components/Timeline.tsx
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-
-/**
- * TimelineInterestJourney — polished:
- * - Safe IntersectionObserver
- * - Keyboard navigation (arrows)
- * - prefers-reduced-motion support
- * - aria roles
- * - responsive spacing
- * - segmented path SVG with active node
- */
 
 type Stage = {
   id: string;
@@ -45,17 +35,17 @@ const stages: Stage[] = [
   },
   {
     id: "purdue-data",
-    short: "Data & Analysis – Purdue",
+    short: "Data & Analysis — Purdue",
     date: "Summer 2023",
     institute: "Purdue (SURF)",
     location: "West Lafayette, IN",
     narrative:
-      "At Purdue, I engaged deeply with data – curated device databases, ran trend analysis, and learned how data drives experimental decisions.",
+      "At Purdue, I engaged deeply with data — curated device databases, ran trend analysis, and learned how data drives experimental decisions.",
     interests: ["Data Analysis", "Databases", "ML for Materials"],
   },
   {
     id: "structure-hzb",
-    short: "Structure Analysis – HZB",
+    short: "Structure Analysis — HZB",
     date: "Summer 2024",
     institute: "Helmholtz Zentrum Berlin",
     location: "Berlin, Germany",
@@ -65,7 +55,7 @@ const stages: Stage[] = [
   },
   {
     id: "device-epfl",
-    short: "Device-Level Fabrication – EPFL",
+    short: "Device-Level Fabrication — EPFL",
     date: "Summer 2025",
     institute: "EPFL",
     location: "Neuchâtel, Switzerland",
@@ -75,7 +65,7 @@ const stages: Stage[] = [
   },
   {
     id: "nextlab-ai",
-    short: "AI & Edge Systems – Next Lab",
+    short: "AI & Edge Systems — Next Lab",
     date: "2026 – Present",
     institute: "Next Lab / ASU",
     location: "Tempe, AZ",
@@ -85,16 +75,18 @@ const stages: Stage[] = [
   },
 ];
 
-// derive path and final destination automatically
 const FULL_PATH = stages.map((s) => s.location.split(",")[0]);
 const FINAL_DESTINATION = FULL_PATH[FULL_PATH.length - 1];
 
-export default function TimelineInterestJourney() {
+export default function Timeline() {
   const [active, setActive] = useState(0);
   const refs = useRef<Array<HTMLDivElement | null>>([]);
   const shouldReduce = useReducedMotion();
 
-  // safe IntersectionObserver setup
+  // Track whether the last active change came from keyboard (not observer)
+  const keyboardNav = useRef(false);
+
+  // IntersectionObserver — updates active stage while scrolling
   useEffect(() => {
     const nodes = refs.current.filter(Boolean) as Element[];
     if (nodes.length === 0) return;
@@ -113,15 +105,16 @@ export default function TimelineInterestJourney() {
 
     nodes.forEach((n) => obs.observe(n));
     return () => nodes.forEach((n) => obs.unobserve(n));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // keyboard navigation + scrollIntoView
+  // Keyboard navigation
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+        keyboardNav.current = true;
         setActive((a) => Math.min(a + 1, stages.length - 1));
       } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        keyboardNav.current = true;
         setActive((a) => Math.max(0, a - 1));
       }
     };
@@ -129,8 +122,10 @@ export default function TimelineInterestJourney() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // when `active` changes programmatically (keyboard or observer), bring that item into view
+  // Only scroll into view when triggered by keyboard — NOT on initial load or observer
   useEffect(() => {
+    if (!keyboardNav.current) return;
+    keyboardNav.current = false;
     const node = refs.current[active];
     if (!node) return;
     node.scrollIntoView({ behavior: shouldReduce ? "auto" : "smooth", block: "center" });
@@ -144,57 +139,6 @@ export default function TimelineInterestJourney() {
     exit: { opacity: 0, x: -8 },
   };
 
-  // small helper to render segmented path SVG
-  const renderPathSVG = () => {
-    const nodes = FULL_PATH;
-    const width = 220;
-    const padding = 12;
-    const step = (width - padding * 2) / (nodes.length - 1);
-    return (
-      <svg width="100%" height="44" viewBox={`0 0 ${width} 44`} preserveAspectRatio="xMidYMid meet">
-        {/* line */}
-        <line
-          x1={padding}
-          y1={22}
-          x2={width - padding}
-          y2={22}
-          stroke="#e5e7eb"
-          strokeWidth={2}
-          strokeLinecap="round"
-        />
-        {/* nodes */}
-        {nodes.map((n, i) => {
-          const cx = padding + step * i;
-          const isActive = i === active;
-          return (
-            <g key={n}>
-              <circle
-                cx={cx}
-                cy={22}
-                r={isActive ? 6.2 : 4.5}
-                fill={isActive ? "var(--tw-color-accent, #1f6feb)" : "#94a3b8"}
-                stroke={isActive ? "#fff" : "none"}
-                strokeWidth={isActive ? 1.5 : 0}
-                style={{ transition: "all 240ms ease" }}
-              />
-              {/* small label (visible on wider layouts) */}
-              <text
-                x={cx}
-                y={38}
-                fontSize={8}
-                textAnchor="middle"
-                fill="#64748b"
-                style={{ fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto" }}
-              >
-                {n}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
-    );
-  };
-
   return (
     <section className="py-16">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
@@ -204,7 +148,7 @@ export default function TimelineInterestJourney() {
             Where the Research Has Taken Me
           </h2>
           <p className="text-base text-slate-500 dark:text-slate-400 mb-8 font-light tracking-wide">
-            From circuits to crystal structure.
+            From Circuits to Crystal Structure
           </p>
 
           <div className="relative" role="list" aria-label="Research stages">
@@ -221,13 +165,15 @@ export default function TimelineInterestJourney() {
                     data-idx={i}
                     role="listitem"
                     aria-current={isActive ? "true" : undefined}
-                    className="relative pl-8 sm:pl-10"
+                    className="relative pl-10"
                     aria-labelledby={`stage-${s.id}`}
                   >
                     {/* Dot */}
                     <div
                       className={`absolute left-4 top-1.5 w-3 h-3 -translate-x-1/2 rounded-full ring-2 ring-white dark:ring-slate-900 transition-all duration-300 ${
-                        isActive ? "bg-accent scale-125" : "bg-slate-400 dark:bg-slate-500 scale-100"
+                        isActive
+                          ? "bg-accent scale-125"
+                          : "bg-slate-400 dark:bg-slate-500 scale-100"
                       }`}
                       aria-hidden
                     />
@@ -236,7 +182,10 @@ export default function TimelineInterestJourney() {
                       {s.date}
                     </div>
 
-                    <h3 id={`stage-${s.id}`} className="text-lg md:text-xl font-medium mb-3">
+                    <h3
+                      id={`stage-${s.id}`}
+                      className="text-lg md:text-xl font-medium mb-3"
+                    >
                       {s.short}
                     </h3>
 
@@ -253,7 +202,9 @@ export default function TimelineInterestJourney() {
         {/* Right: sticky panel */}
         <aside className="sticky top-24 self-start">
           <div className="w-full max-w-md p-6 bg-white dark:bg-slate-900 rounded-xl shadow border border-slate-200 dark:border-slate-700">
-            <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">Research Trajectory</div>
+            <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">
+              Research Trajectory
+            </div>
 
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
@@ -294,18 +245,18 @@ export default function TimelineInterestJourney() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Path visualization + segmented nodes */}
+            {/* Path + progress bar */}
             <div className="mt-6">
               <div className="text-xs text-slate-400 mb-2">Path</div>
 
-              <div className="text-sm text-slate-700 dark:text-slate-200 font-medium mb-3">
+              <div className="text-sm text-slate-700 dark:text-slate-200 font-medium mb-2">
                 {FULL_PATH.join(" → ")}
               </div>
 
-              <div className="mb-3">{renderPathSVG()}</div>
-
               <div className="flex items-center text-sm">
-                <span className="mr-2 text-slate-700 dark:text-slate-200 font-medium">{FULL_PATH[0]}</span>
+                <span className="mr-2 text-slate-700 dark:text-slate-200 font-medium">
+                  {FULL_PATH[0]}
+                </span>
                 <div className="flex-1 h-1 bg-slate-200 dark:bg-slate-800 mx-1 rounded-full overflow-hidden">
                   <motion.div
                     className="h-1 bg-accent rounded-full"
@@ -313,7 +264,9 @@ export default function TimelineInterestJourney() {
                     transition={{ duration: shouldReduce ? 0 : 0.5, ease: "easeOut" }}
                   />
                 </div>
-                <span className="ml-2 text-slate-700 dark:text-slate-200 font-medium">{FINAL_DESTINATION}</span>
+                <span className="ml-2 text-slate-700 dark:text-slate-200 font-medium">
+                  {FINAL_DESTINATION}
+                </span>
               </div>
             </div>
 
@@ -327,7 +280,9 @@ export default function TimelineInterestJourney() {
               </a>
             </div>
 
-            <div className="mt-4 text-xs text-slate-400">Use arrow keys — or scroll — to explore.</div>
+            <div className="mt-4 text-xs text-slate-400">
+              Scroll to explore — or use arrow keys.
+            </div>
           </div>
         </aside>
       </div>
