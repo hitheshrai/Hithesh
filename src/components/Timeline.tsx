@@ -1,5 +1,5 @@
 // src/components/Timeline.tsx
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import BackgroundPerovskite from "./BackgroundPerovskite";
 
@@ -78,31 +78,33 @@ const stages: Stage[] = [
 
 
 export default function Timeline() {
+
   const [active, setActive] = useState(0);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
-  const refs = useRef<Array<HTMLDivElement | null>>([]);
+  const refs = useRef<(HTMLDivElement | null)[]>([]);
   const shouldReduce = useReducedMotion();
   const keyboardNav = useRef(false);
 
+  // Callback ref for timeline items
+  const setRef = useCallback((el: HTMLDivElement | null, idx: number) => {
+    refs.current[idx] = el;
+  }, []);
+
   // Toggle expanded state for a stage
-  const toggleExpanded = (id: string) => {
+  const toggleExpanded = useCallback((id: string) => {
     setExpanded((prev) => {
       const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
       return next;
     });
-  };
+  }, []);
 
   // Scroll-based stage detection
   useEffect(() => {
     const nodes = refs.current.filter(Boolean) as Element[];
     if (nodes.length === 0) return;
-
-    const obs = new IntersectionObserver(
+    const obs = new window.IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
@@ -113,9 +115,10 @@ export default function Timeline() {
       },
       { root: null, rootMargin: "-40% 0px -40% 0px", threshold: 0 }
     );
-
     nodes.forEach((n) => obs.observe(n));
-    return () => nodes.forEach((n) => obs.unobserve(n));
+    return () => {
+      obs.disconnect();
+    };
   }, []);
 
   // Keyboard navigation
@@ -182,10 +185,11 @@ export default function Timeline() {
                 return (
                   <div
                     key={s.id}
-                    ref={(el) => (refs.current[i] = el)}
+                    ref={el => setRef(el, i)}
                     data-idx={i}
                     role="listitem"
-                    aria-current={isActive ? "true" : undefined}
+                    aria-selected={isActive}
+                    tabIndex={0}
                     className="relative pl-10"
                     aria-labelledby={`stage-${s.id}`}
                   >
