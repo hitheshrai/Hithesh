@@ -5,7 +5,7 @@ import asuLogo from "../../ASU12.jpg";
 import helmholtzLogo from "../../helmholtz_zentrum_berlin_logo.jpeg";
 import purdueLogo from "../../Purdue.jpeg";
 import nextLabLogo from "../../channels4_profile.jpg";
-import epflLogo from "../../ASU12.jpg"; // Fallback to ASU logo
+import epflLogo from "../../Logo_EPFL.svg.png"; // EPFL official logo
 
 const timelineData = [
   {
