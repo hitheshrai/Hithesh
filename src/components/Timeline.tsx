@@ -47,6 +47,7 @@ const timelineData = [
     date: "May 2025 – Aug 2025",
     logo: epflLogo,
     description: [
+      "Mentor: Dr. Christian Wolff",
       "École Polytechnique Fédérale de Lausanne (EPFL)",
       "Fabricated single-junction perovskite devices (up to 19% efficiency)",
       "Performed ALD SnO₂ deposition and thermal evaporation processes",
