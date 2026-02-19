@@ -204,7 +204,7 @@ export default function TimelineInterestJourney() {
             Where the Research Has Taken Me
           </h2>
           <p className="text-base text-slate-500 dark:text-slate-400 mb-8 font-light tracking-wide">
-            From circuits to crystal structure — a short trajectory.
+            From circuits to crystal structure.
           </p>
 
           <div className="relative" role="list" aria-label="Research stages">
