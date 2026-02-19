@@ -192,6 +192,16 @@ export default function Timeline() {
               ))}
 
 // Memoized TimelineItem for performance
+interface TimelineItemProps {
+  stage: Stage;
+  idx: number;
+  isActive: boolean;
+  isExpanded: boolean;
+  setRef: (el: HTMLDivElement | null, idx: number) => void;
+  toggleExpanded: (id: string) => void;
+  shouldReduce: boolean;
+}
+
 const TimelineItem = memo(function TimelineItem({
   stage,
   idx,
@@ -200,15 +210,7 @@ const TimelineItem = memo(function TimelineItem({
   setRef,
   toggleExpanded,
   shouldReduce,
-}: {
-  stage: Stage;
-  idx: number;
-  isActive: boolean;
-  isExpanded: boolean;
-  setRef: (el: HTMLDivElement | null, idx: number) => void;
-  toggleExpanded: (id: string) => void;
-  shouldReduce: boolean;
-}) {
+}: TimelineItemProps) {
   return (
     <div
       ref={el => setRef(el, idx)}
