@@ -1,5 +1,5 @@
 // src/components/Timeline.tsx
-import { useEffect, useRef, useState, useCallback, memo } from "react";
+import { useEffect, useRef, useState, useCallback, memo, type KeyboardEvent } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import BackgroundPerovskite from "./BackgroundPerovskite";
 
@@ -243,21 +243,23 @@ export default function Timeline() {
     return () => obs.disconnect();
   }, []);
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
+  const onTimelineKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLElement>) => {
       if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+        e.preventDefault();
         keyboardNav.current = true;
         setActive((a) => Math.min(a + 1, stages.length - 1));
       } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        e.preventDefault();
         keyboardNav.current = true;
         setActive((a) => Math.max(0, a - 1));
       } else if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
         toggleExpanded(stages[active].id);
       }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [active, toggleExpanded]);
+    },
+    [active, toggleExpanded]
+  );
 
   useEffect(() => {
     if (!keyboardNav.current) return;
@@ -277,7 +279,12 @@ export default function Timeline() {
   };
 
   return (
-    <section className="relative py-16">
+    <section
+      className="relative py-16"
+      tabIndex={0}
+      onKeyDown={onTimelineKeyDown}
+      aria-label="Timeline section"
+    >
       <BackgroundPerovskite dpr={1.0} />
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
 

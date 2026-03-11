@@ -102,9 +102,9 @@ const Header = () => {
             window.open('https://hitheshrai.github.io/Hithesh/', '_blank', 'noopener');
           }
         }}
-        aria-label="View projects or contact Hithesh"
+        aria-label="Get in touch with Hithesh"
       >
-        View Projects
+        Get In Touch
       </button>
     </header>
   );
