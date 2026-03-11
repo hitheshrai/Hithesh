@@ -1,30 +1,33 @@
-# Hithesh Rai Purushothama
+# Hithesh
 
-**AI systems for energy materials discovery and autonomous device optimization.**
+Portfolio site for AI engineering and energy materials research.
 
----
+Live: https://hitheshrai.github.io/Hithesh/
 
-## Research Direction
+## Stack
 
-Building intelligent infrastructure that accelerates the energy transition through AI-driven materials characterization, device physics modeling, and autonomous synthesis workflows. Current focus: perovskite photovoltaics, efficiency prediction, and scalable fabrication pathways.
+React, TypeScript, Vite, Tailwind CSS.
 
----
+## Run
 
-## Active Work
+```bash
+npm install
+npm run dev
+```
 
-**Perovskite Device Engineering** — Fabrication, characterization, and computational analysis of halide perovskite films for photovoltaic and optoelectronic applications.
+## Build
 
-**AI on Edge Systems** — Low-power LLM inference, RAG pipelines, and deployment optimization on constrained hardware for real-time energy applications.
+```bash
+npm run build
+```
 
-**Materials-AI Integration** — Bridging experimental crystallography, phase analysis, and machine learning for predictive material design.
+## Deploy
 
----
-
-## [Explore Full Portfolio](https://hitheshrai.github.io/Hithesh/)
-
----
+```bash
+npm run deploy
+```
 
 ## Contact
 
-[Email](mailto:hraipuru@asu.edu) • [LinkedIn](https://www.linkedin.com/in/hithesh-rai-p/) • [GitHub](https://github.com/hitheshrai)
+Email: hraipuru@asu.edu
 

@@ -1,7 +1,8 @@
 // src/components/Timeline.tsx
-import { useEffect, useRef, useState, useCallback, memo, type KeyboardEvent } from "react";
+import { Suspense, lazy, useEffect, useRef, useState, useCallback, memo, type KeyboardEvent } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import BackgroundPerovskite from "./BackgroundPerovskite";
+
+const BackgroundPerovskite = lazy(() => import("./BackgroundPerovskite"));
 
 type Stage = {
   id: string;
@@ -285,7 +286,9 @@ export default function Timeline() {
       onKeyDown={onTimelineKeyDown}
       aria-label="Timeline section"
     >
-      <BackgroundPerovskite dpr={1.0} />
+      <Suspense fallback={null}>
+        <BackgroundPerovskite dpr={1.0} />
+      </Suspense>
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
 
         {/* Left: Timeline */}

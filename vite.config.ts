@@ -6,12 +6,16 @@ export default defineConfig({
   plugins: [react()],
   base: '/Hithesh/', // Replace with your repo name if deploying to GitHub Pages
   build: {
+    chunkSizeWarningLimit: 700,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'three': ['three'],
-          'react-three-fiber': ['@react-three/fiber']
-        }
+        manualChunks(id) {
+          if (id.includes('node_modules/three/examples')) return 'three-examples';
+          if (id.includes('node_modules/three')) return 'three-core';
+          if (id.includes('node_modules/@react-three/fiber')) return 'react-three-fiber';
+          if (id.includes('node_modules/@react-three/drei')) return 'react-three-drei';
+          return undefined;
+        },
       },
     },
   },
