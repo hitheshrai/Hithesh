@@ -1,5 +1,5 @@
 // src/components/Header.tsx
-import { Github, Mail, Linkedin, Twitter } from 'lucide-react';
+import { FileText, Github, Mail, Twitter } from 'lucide-react';
 
 const Header = () => {
   return (
@@ -19,13 +19,13 @@ const Header = () => {
 
       <div className="flex flex-wrap items-center gap-3">
         <a
-          href="https://www.linkedin.com/in/hithesh-rai-p/"
+          href="/Hithesh/assets/Rai_Purushothama_Hithesh_CV.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded bg-blue-700 text-white hover:bg-blue-800 transition-colors font-medium"
         >
-          <Linkedin size={15} />
-          CV / LinkedIn
+          <FileText size={15} />
+          View CV (PDF)
         </a>
 
         <a

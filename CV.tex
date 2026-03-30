@@ -1,0 +1,299 @@
+\documentclass[10pt, letterpaper]{article}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=black,
+  linkcolor=black
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\titleformat{\section}
+  {\normalfont\normalsize\bfseries}
+  {}{0em}{}
+  [\vspace{-4pt}\rule{\linewidth}{0.5pt}\vspace{-6pt}]
+
+\titlespacing{\section}{0pt}{10pt}{6pt}
+
+\setlist[itemize]{
+  leftmargin=1.5em,
+  itemsep=1pt,
+  parsep=0pt,
+  topsep=2pt
+}
+
+\newcommand{\role}[2]{%
+  \textit{#1} \hfill #2 \\[-2pt]%
+}
+
+\begin{document}
+
+% ── Header ────────────────────────────────────────────────────────────────────
+\begin{center}
+  {\Large \textbf{Hithesh Rai Purushothama}} \\[4pt]
+  \small
+  480-289-0708 \,\textbar\,
+  \href{mailto:hraipuru@asu.edu}{hraipuru@asu.edu} \,\textbar\,
+  \href{https://linkedin.com/in/hithesh-rai-p}{linkedin.com/in/hithesh-rai-p} \,\textbar\,
+  \href{https://github.com/hitheshrai}{github.com/hitheshrai} \,\textbar\,
+  \href{https://hitheshrai.github.io/Hithesh}{hitheshrai.github.io/Hithesh}
+\end{center}
+
+% ── Professional Summary ──────────────────────────────────────────────────────
+\section*{Professional Summary}
+
+Materials and AI engineering graduate student with hands-on research experience spanning
+photovoltaic materials, electrochemical impedance spectroscopy, and physics-informed machine
+learning across four international research institutions. Builds end-to-end systems across the
+full stack: from thin-film device fabrication and EIS characterization to GPR-based degradation
+prediction pipelines, edge AI deployment on constrained hardware, and autonomous robotic systems.
+Equally comfortable in a materials science lab, an HPC environment, or a robotics integration
+workflow. Interested in self-driving laboratory systems, transferable ML frameworks for energy
+materials, and deploying AI in low-connectivity or resource-constrained environments.
+
+% ── Education ─────────────────────────────────────────────────────────────────
+\section*{Education}
+
+\textbf{Arizona State University} \hfill Tempe, AZ \\
+\role{M.S.\ in Artificial Intelligence Engineering (Materials Science and Engineering)}{Jan 2026 -- May 2027}
+
+\vspace{4pt}
+\textbf{Arizona State University} \hfill Tempe, AZ \\
+\role{B.S.E.\ Electrical and Electronic Engineering}{Aug 2021 -- Dec 2025}
+
+% ── Research Experience ───────────────────────────────────────────────────────
+\section*{Research Experience}
+
+% --- Rolston Lab ---
+\textbf{Renewable Energy Materials and Devices Lab, Arizona State University} \hfill Tempe, AZ \\
+\role{Research Assistant}{Sep 2022 -- Present}
+\begin{itemize}
+  \item Developing an ML pipeline using Gaussian Process Regression (GPR) on electrochemical
+    impedance spectroscopy (EIS) features to predict battery capacity fade and interfacial
+    degradation, with application to state-of-health estimation across energy storage systems.
+  \item Reproduced and extended Zhang et al.\ (2020, \textit{Nature Communications}) battery
+    degradation model, achieving $R^2 = 0.81$ on unseen test cells; identified a 17.80\,Hz EIS
+    feature as a degradation-robust predictor across temperature regimes using ARD kernel
+    weighting.
+  \item Applying multitask and transfer learning to model interfacial degradation across batteries,
+    perovskite solar cells, and fuel-cell-relevant material systems from shared EIS descriptors.
+  \item Automated EIS data preprocessing, Distribution of Relaxation Times (DRT) peak extraction,
+    and GPR model training pipeline in Python (NumPy, GPyTorch, scikit-learn) on ASU's Sol HPC
+    cluster via VSCode remote integration.
+  \item Fabricated and optimized perovskite thin films using spin coating and blade coating on
+    rigid and flexible substrates, achieving uniform films with reduced defect density.
+  \item Conducted optical and electrical characterization with solar simulator, XRD, and
+    profilometry to analyze degradation and identify key failure mechanisms guiding material
+    improvements.
+  \item Presented work at IEEE PVSC 2024 (Seattle) and IPERO 2025 (Kyoto); submitted abstract to
+    AI4X -- Accelerate Conference 2026 (Singapore) with advisor N.\ Rolston.
+\end{itemize}
+
+\vspace{6pt}
+
+% --- EPFL ---
+\textbf{Photovoltaics Lab, \'Ecole Polytechnique F\'ed\'erale de Lausanne (EPFL)} \hfill Neuch\^atel, Switzerland \\
+\role{Undergraduate Research Assistant --- ThinkSwiss Scholar}{May 2025 -- Aug 2025}
+\begin{itemize}
+  \item Fabricated single-junction perovskite thin-film devices achieving efficiencies up to 19\%
+    using controlled spin-coating workflows with systematic process parameter variation.
+  \item Deposited SnO$_2$ electron transport layers via ALD and analyzed thickness and conformity;
+    used thermal evaporation for transport layers and metal contacts, improving device yield.
+  \item Assisted with encapsulation and stability testing, identifying key degradation pathways
+    and informing process-improvement actions.
+\end{itemize}
+
+\vspace{6pt}
+
+% --- HZB ---
+\textbf{Helmholtz Zentrum Berlin --- Quantum Materials Group} \hfill Berlin, Germany \\
+\role{International Summer Student}{Jul 2024 -- Aug 2024}
+\begin{itemize}
+  \item Investigated structural instabilities in perovskite-based ferroelectric and piezoelectric
+    systems using Pair Distribution Function (PDF) analysis of X-ray and neutron diffraction data.
+  \item Identified composition-driven morphotropic phase transitions and correlated atomic-scale
+    structural variations with compositional changes using Python analysis scripts.
+\end{itemize}
+
+\vspace{6pt}
+
+% --- Purdue ---
+\textbf{Letian Dou Group, Purdue University} \hfill West Lafayette, IN \\
+\role{Summer Undergraduate Research Fellow}{May 2023 -- Aug 2023}
+\begin{itemize}
+  \item Supported halide perovskite stability studies through device fabrication and testing;
+    reviewed and organized five years of literature on additive engineering and degradation
+    mechanisms.
+  \item Compiled a comparative Python database of device structures, processing conditions, and
+    efficiencies; used the Perovskite Database ML platform to identify material-performance trends
+    guiding additive selection.
+\end{itemize}
+
+% ── Engineering Experience ────────────────────────────────────────────────────
+\section*{Engineering Experience}
+
+\textbf{Capstone Project --- Power System Modeling for Grid-Scale Energy Storage} \hfill Tempe, AZ \\
+\role{Arizona State University}{Jan 2025 -- Present}
+\begin{itemize}
+  \item Modeled Battery Energy Storage Systems (BESS) for renewable energy integration using
+    PyPSA, Pandas, and NumPy, producing performance summaries that informed storage sizing and
+    operational trade-off decisions.
+  \item Deployed an LLM-powered digital twin dashboard to monitor and interpret real-time PV +
+    BESS telemetry, enabling early fault detection and interpretable system diagnostics.
+  \item Designed realistic grid-scale load profiles from utility and consumer datasets to evaluate
+    system-level PV and storage performance.
+\end{itemize}
+
+% ── Leadership \& Management ──────────────────────────────────────────────────
+\section*{Leadership \& Management}
+
+% --- Management Intern ---
+\textbf{Next Lab, Arizona State University} \hfill Tempe, AZ \\
+\role{Management Intern}{Mar 2026 -- Present}
+\begin{itemize}
+  \item Lead evaluation and selection of emerging AI technologies for lab adoption, assessing
+    technical maturity, integration feasibility, and deployment cost-benefit across candidate
+    systems --- serving as the lab's primary technology intelligence function.
+  \item Drive end-to-end AI project execution from scoping through implementation, coordinating
+    across research and operations staff to deliver production-ready systems on schedule.
+  \item Support core lab leadership on strategic initiatives, translating complex technical
+    findings into actionable recommendations for non-technical stakeholders.
+\end{itemize}
+
+\vspace{6pt}
+
+% --- Senior Studio Associate ---
+\textbf{Next Lab, Arizona State University} \hfill Tempe, AZ \\
+\role{Senior Studio Associate --- AI \& Edge Systems}{Sep 2023 -- Present}
+\begin{itemize}
+  \item Built end-to-end benchmarking pipelines in Python to evaluate AI inference systems across
+    latency, memory, accuracy, hallucination rate, and power consumption on NVIDIA Jetson devices,
+    informing deployment decisions for production edge environments.
+  \item Analyzed trade-offs between INT8/Q4 quantization strategies and model performance,
+    identifying failure modes and guiding optimization for robust real-world deployment at scale.
+  \item Designed and validated agent-based task execution and knowledge-retrieval pipelines using
+    LangChain, reducing manual workflow overhead and improving automation reliability.
+  \item Deployed a digital twin dashboard powered by an LLM to monitor and interpret PV + BESS
+    system telemetry in real time, enabling early fault detection across operational scenarios.
+\end{itemize}
+
+\vspace{6pt}
+
+% --- EPICS ---
+\textbf{Engineering Projects in Community Service (EPICS), Arizona State University} \hfill Tempe, AZ \\
+\role{Team Lead}{Jan 2022 -- Jan 2024}
+\begin{itemize}
+  \item Led a team of 10+ students to develop a Python and robotics curriculum for middle
+    schoolers across the US and South Africa, delivering hands-on embedded AI modules using
+    NVIDIA Jetson hardware with Jetson Infinity.
+  \item Applied NumPy and Matplotlib for simulation components; enhanced learning outcomes through
+    robotic arm hands-on activities.
+\end{itemize}
+
+% ── Selected Projects ─────────────────────────────────────────────────────────
+\section*{Selected Projects}
+
+\textbf{NEXUS --- Automated Research Intelligence System} \hfill Next Lab, ASU
+\begin{itemize}
+  \item Built an automated morning briefing pipeline delivering daily AI/energy research summaries
+    to WhatsApp using local LLMs on an NVIDIA DGX Spark, with a rolling context file system and
+    automated references pipeline for citation-grounded output.
+  \item Deployed and debugged NVIDIA NIM containers on DGX Spark, resolving permission, Docker
+    socket, and NGC authentication issues; implemented Tailscale for secure remote access.
+\end{itemize}
+
+\vspace{6pt}
+
+\textbf{Nex Bot --- Autonomous Voice Receptionist} \hfill Next Lab, ASU
+\begin{itemize}
+  \item Deployed Reachy Mini humanoid robot as an AI-powered voice receptionist with full
+    inference offloaded to a DGX Spark over Tailscale, enabling low-latency on-device interaction
+    without cloud dependency.
+  \item Integrated faster-whisper (STT), Silero VAD, Kokoro TTS, and a local LLM into a
+    real-time conversational pipeline using the \texttt{reachy-mini} PyPI stack.
+\end{itemize}
+
+\vspace{6pt}
+
+\textbf{Autonomous Social Robot System} \hfill Next Lab, ASU
+\begin{itemize}
+  \item Built a fully offline public-facing autonomous robot using Reachy Mini + DGX Spark,
+    integrating YOLOv8n for person detection, Silero VAD for voice activity detection, and a
+    complete STT $\to$ LLM $\to$ TTS pipeline running without internet connectivity.
+  \item Resolved Zenoh daemon connectivity and Docker stack configuration issues to achieve
+    stable real-time inference across all modalities.
+\end{itemize}
+
+\vspace{6pt}
+
+\textbf{EIS-GPR Battery Degradation Pipeline} \hfill Rolston Lab, ASU
+\begin{itemize}
+  \item Reproduced Zhang et al.\ (2020) in both scikit-learn and GPyTorch; extended to
+    multi-temperature training with ARD kernels, isolating SEI-layer feature at 17.80\,Hz as a
+    cross-temperature degradation predictor ($R^2 = 0.81$ on held-out test cells).
+  \item Documented full methodology in a CLAUDE.md session file; planning Fig.\ 1--2 reproduction
+    using 25$^\circ$C test cells and extension to DRT-derived features.
+\end{itemize}
+
+% ── Conferences ───────────────────────────────────────────────────────────────
+\section*{Conferences and Presentations}
+
+\begin{itemize}
+  \item AI4X -- Accelerate Conference 2026, Singapore (accepted) ---
+    ``Transferable Impedance-Grounded Learning for Interfacial Degradation Across Energy Systems''
+    (with N.\ Rolston).
+  \item IEEE Photovoltaic Specialists Conference, June 2024, Seattle, WA ---
+    ``Open-Air Processing of Cesium-Based Inorganic Perovskites for Radioisotopes.''
+  \item International Conference on Perovskite, Organic Photovoltaics and Optoelectronics,
+    Jan 2025, Kyoto, Japan ---
+    ``Blade-Coated Cesium Lead Halide Perovskite Thin Films for Alphavoltaic Applications.''
+  \item Stanford Research Conference, April 2024, San Jose, CA ---
+    ``Enhancing the Performance of Formamidinium Lead Halide Perovskite Solar Cells.''
+  \item Arizona Student Energy Conference (AzSEC), April 2023, Tempe, AZ ---
+    ``Unlocking the Potential of Halide Perovskites: The Art of Thin Film Fabrication.''
+\end{itemize}
+
+% ── Awards ────────────────────────────────────────────────────────────────────
+\section*{Awards}
+
+\begin{itemize}
+  \item \textbf{ThinkSwiss Research Scholarship}, Swiss National Science Foundation \hfill Feb 2025 \\
+    \small Awarded for summer research at EPFL on perovskite thin-film device fabrication and
+    stability studies. \hfill Washington, DC
+  \item \textbf{Fulton Undergraduate Research Initiative Grant (FURI)} \hfill Fall/Spring 2023--2025 \\
+    \small Arizona State University, Tempe, AZ
+  \item \textbf{Purdue Summer Undergraduate Research Fellowship} \hfill Summer 2023 \\
+    \small Purdue University, West Lafayette, IN
+\end{itemize}
+
+% ── Technical Skills ──────────────────────────────────────────────────────────
+\section*{Technical Skills}
+
+\begin{itemize}
+  \item \textbf{ML \& Data:} Gaussian Process Regression, Transfer/Multitask Learning,
+    Time-Series Forecasting, Bayesian Modeling, scikit-learn, GPyTorch, TensorFlow, NumPy, Pandas
+  \item \textbf{Energy Systems:} EIS, DRT Analysis, PAIOS, PyPSA, PVlib, GridLAB-D,
+    MATLAB/Simulink, BESS Modeling, Load Flow Analysis, SCADA/EMS Basics
+  \item \textbf{Fabrication:} Spin Coating, Blade Coating, ALD, Thermal Evaporation,
+    Encapsulation
+  \item \textbf{Characterization:} Solar Simulator, XRD, SEM, Profilometry, Optical Inspection,
+    Pair Distribution Function (PDF) Analysis
+  \item \textbf{Edge AI \& Inference:} ONNX Runtime, TensorRT, MLC, INT8/Q4 Quantization,
+    NVIDIA Jetson, NVIDIA DGX Spark, YOLOv8n
+  \item \textbf{Robotics \& Autonomy:} Reachy Mini (\texttt{reachy-mini}), faster-whisper,
+    Silero VAD, Kokoro TTS, Zenoh, LangChain
+  \item \textbf{Infrastructure:} Docker, GitHub, Tailscale, Embedded Linux (Jetson/Pi/DGX),
+    HPC (Sol/SLURM), VSCode Remote
+  \item \textbf{Programming:} Python, C++, MATLAB, Verilog
+  \item \textbf{EDA Tools:} ModelSim, Quartus
+\end{itemize}
+
+\end{document}
