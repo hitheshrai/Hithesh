@@ -13,7 +13,7 @@ const articles = [
     id: 'solarspell-offline-ai',
     title: 'ASU SolarSPELL & Next Lab Pioneer Offline AI',
     description:
-      'Feature on EDgeAI — an offline conversational AI system built using Meta's Llama model, optimized for Raspberry Pi devices powering SolarSPELL libraries for communities without internet.',
+      "Feature on EDgeAI — an offline conversational AI system built using Meta's Llama model, optimized for Raspberry Pi devices powering SolarSPELL libraries for communities without internet.",
     link: 'https://solarspell.org/asu-solarspell-next-lab-pioneer-offline-ai',
     type: 'Feature',
   },
