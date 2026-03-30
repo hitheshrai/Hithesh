@@ -4,9 +4,9 @@ const interests = [
   'Perovskite Photovoltaics',
   'Self-Driving Laboratories',
   'ML for Materials Discovery',
-  'Thin-Film Fabrication',
+  'Energy Materials',
   'Edge AI & LLMs',
-  'Autonomous Experimentation',
+  'Battery Degradation Modeling',
 ];
 
 const institutions = ['Arizona State University', 'Purdue University', 'HZB', 'EPFL'];
