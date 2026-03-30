@@ -1,75 +1,92 @@
 // src/components/Articles.tsx
 
-export default function Articles() {
-  const articles = [
-    {
-      id: "thinkswiss-video",
-      title: "Doing Research in Switzerland - ThinkSwiss Scholarship",
-      description:
-        "Short video about my research visit to EPFL supported by the ThinkSwiss scholarship — fabrication and testing of perovskite thin films.",
-      link: "https://www.youtube.com/watch?v=UHKrYFusstU",
-    },
-    {
-      id: "solarspell-offline-ai",
-      title: "ASU SolarSPELL & Next Lab Pioneer Offline AI",
-      description:
-        "Feature highlighting the development of EDgeAI - an offline conversational AI system built using Meta’s Llama model and optimized for Raspberry Pi devices powering SolarSPELL libraries. The project focuses on equitable AI access for the 4.5 billion people without reliable internet.",
-      link: "https://solarspell.org/asu-solarspell-next-lab-pioneer-offline-ai",
-    },
-    {
-      id: "journey-leadership",
-      title: "Hithesh Rai Purushothama: A Journey in Engineering and Leadership",
-      description: "A feature on Hithesh’s contributions to semiconductors, robotics, and materials science, showcasing his leadership in various student organizations and projects.",
-      link: "https://ecee.engineering.asu.edu/2023/03/hithesh-rai-purushothama/",
-    },
-    {
-      id: "sommer-berlin",
-      title: "Sommer in Berlin: Einblicke in das Leben eines Forschungspraktikanten",
-      description: "Hithesh’s summer internship experience at Helmholtz-Zentrum Berlin, diving into perovskite research, exploring Berlin’s vibrant culture, and embracing unforgettable moments.",
-      link: "https://science.hzbblog.de/sommer-in-berlin-einblicke-in-das-leben-eines-forschungspraktikanten",
-    },
-    {
-      id: "surf-purdue",
-      title: "SURF Students at Purdue: A Summer of Research",
-      description: "The SURF program at Purdue welcomes Hithesh, focusing on perovskite solar cell research and collaborating with the Letian Dou Group.",
-      link: "https://letiandougroup.com/2023/05/25/surf-students/",
-    },
-    {
-      id: "formamidinium-halide",
-      title: "Revolutionizing Formamidinium Lead Halide Perovskite Solar Cells",
-      description: "A FURI research project focusing on ionic additives for improving stability in perovskite solar cells, under the mentorship of Professor Nick Rolston.",
-      link: "https://forge.engineering.asu.edu/participant/rai-purushothama-hithesh/",
-    },
-    {
-      id: "mobile-ion-control",
-      title: "Measuring and Controlling Mobile Ion Concentration in Perovskite Thin Films",
-      description: "This FURI Spring 2023 project explores ion migration control to enhance the stability of perovskite solar cells using cutting-edge characterization tools.",
-      link: "https://forge.engineering.asu.edu/furiproject/measuring-and-controlling-mobile-ion-concentration-to-improve-operational-stability-in-perovskite-thin-films/",
-    }
-  ];
+const articles = [
+  {
+    id: 'thinkswiss-video',
+    title: 'Doing Research in Switzerland — ThinkSwiss Scholarship',
+    description:
+      'Short video about my research visit to EPFL supported by the ThinkSwiss scholarship — fabrication and testing of perovskite thin films.',
+    link: 'https://www.youtube.com/watch?v=UHKrYFusstU',
+    type: 'Video',
+  },
+  {
+    id: 'solarspell-offline-ai',
+    title: 'ASU SolarSPELL & Next Lab Pioneer Offline AI',
+    description:
+      'Feature on EDgeAI — an offline conversational AI system built using Meta's Llama model, optimized for Raspberry Pi devices powering SolarSPELL libraries for communities without internet.',
+    link: 'https://solarspell.org/asu-solarspell-next-lab-pioneer-offline-ai',
+    type: 'Feature',
+  },
+  {
+    id: 'sommer-berlin',
+    title: 'Sommer in Berlin: Einblicke in das Leben eines Forschungspraktikanten',
+    description:
+      'My summer internship experience at Helmholtz-Zentrum Berlin — perovskite research, PDF analysis, and exploring Berlin.',
+    link: 'https://science.hzbblog.de/sommer-in-berlin-einblicke-in-das-leben-eines-forschungspraktikanten',
+    type: 'Blog',
+  },
+  {
+    id: 'journey-leadership',
+    title: 'Hithesh Rai Purushothama: A Journey in Engineering and Leadership',
+    description:
+      'ASU feature on contributions to semiconductors, robotics, and materials science, and leadership in student organizations.',
+    link: 'https://ecee.engineering.asu.edu/2023/03/hithesh-rai-purushothama/',
+    type: 'Profile',
+  },
+  {
+    id: 'surf-purdue',
+    title: 'SURF Students at Purdue: A Summer of Research',
+    description:
+      'The SURF program at Purdue — focusing on perovskite solar cell research in collaboration with the Letian Dou Group.',
+    link: 'https://letiandougroup.com/2023/05/25/surf-students/',
+    type: 'Lab Post',
+  },
+  {
+    id: 'formamidinium-halide',
+    title: 'Revolutionizing Formamidinium Lead Halide Perovskite Solar Cells',
+    description:
+      'FURI research project on ionic additives for improving stability in perovskite solar cells under Professor Nick Rolston.',
+    link: 'https://forge.engineering.asu.edu/participant/rai-purushothama-hithesh/',
+    type: 'Research',
+  },
+  {
+    id: 'mobile-ion-control',
+    title: 'Measuring and Controlling Mobile Ion Concentration in Perovskite Thin Films',
+    description:
+      'FURI Spring 2023 project exploring ion migration control to enhance the operational stability of perovskite solar cells.',
+    link: 'https://forge.engineering.asu.edu/furiproject/measuring-and-controlling-mobile-ion-concentration-to-improve-operational-stability-in-perovskite-thin-films/',
+    type: 'Research',
+  },
+];
 
+export default function Articles() {
   return (
-    <section id="articles" className="py-16 bg-gradient-to-r from-blue-50 to-slate-50 dark:from-slate-900 dark:to-slate-800 text-black dark:text-textDark border-t border-b border-slate-200 dark:border-slate-700">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-primary dark:text-textDark">Articles</h2>
-          <div className="grid gap-8">
-            {articles.map((article) => (
-              <div key={article.id} className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-md transition-all hover:shadow-lg border-l-4 border-blue-500 hover:border-blue-600">
-                <h3 className="text-xl font-bold mb-2 text-primary dark:text-textDark">{article.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">{article.description}</p>
-                <a
-                  href={article.link}
-                  className="text-blue-600 dark:text-textDark hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Read More
-                </a>
-              </div>
-            ))}
+    <section id="articles" className="py-12 border-b border-slate-200 dark:border-slate-800">
+      <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6">
+        Articles & Media
+      </h2>
+
+      <div className="space-y-5">
+        {articles.map((a) => (
+          <div key={a.id} className="flex gap-4 group">
+            <span className="mt-0.5 flex-shrink-0 text-xs px-2 py-0.5 h-fit rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 font-medium whitespace-nowrap">
+              {a.type}
+            </span>
+            <div>
+              <a
+                href={a.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-slate-900 dark:text-slate-100 hover:text-blue-700 dark:hover:text-blue-400 transition-colors leading-snug"
+              >
+                {a.title}
+              </a>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+                {a.description}
+              </p>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </section>
   );

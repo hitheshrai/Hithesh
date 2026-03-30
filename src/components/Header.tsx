@@ -1,111 +1,63 @@
 // src/components/Header.tsx
-
-import { motion } from 'framer-motion';
 import { Github, Mail, Linkedin, Twitter } from 'lucide-react';
-import DarkModeToggle from './DarkModeToggle';
 
 const Header = () => {
-  const nameText = ['I', 'am', 'Hithesh', 'Rai', 'Purushothama'];
-
   return (
-    <header className="container mx-auto px-4 py-12 md:py-16 relative bg-gradient-to-br from-blue-50 to-slate-50 dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-800 text-black dark:text-textDark rounded-xl shadow-lg text-center border border-slate-200 dark:border-slate-700">
-      {/* Dark Mode Toggle */}
-      <div className="absolute top-4 right-4">
-        <DarkModeToggle />
-      </div>
+    <header className="pt-14 pb-12 border-b border-slate-200 dark:border-slate-800">
+      <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 dark:text-slate-50 mb-3 leading-tight">
+        Hithesh Rai Purushothama
+      </h1>
 
-      {/* Typing Effect Header Text */}
-      <motion.h1
-        className="text-3xl md:text-5xl lg:text-6xl font-bold text-primary dark:text-textDark mb-6"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 1 },
-          visible: {
-            opacity: 1,
-            transition: {
-              staggerChildren: 0.4,
-            },
-          },
-        }}
-      >
-        {nameText.map((word, index) => (
-          <motion.span
-            key={index}
-            className="inline-block mr-2"
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.6 }}
-          >
-            {word}
-          </motion.span>
-        ))}
-      </motion.h1>
-
-      {/* Description */}
-      <p className="text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-400 mb-8 px-2">
-        Graduate student AI Engineering & Materials Science (AIE MSE) | Researcher, Rolston Lab | Management Intern, Next Lab | AI for energy and sustainable systems
+      <p className="text-lg md:text-xl text-blue-700 dark:text-blue-400 font-medium mb-3 max-w-2xl leading-snug">
+        Building AI-accelerated platforms for autonomous materials discovery in photovoltaics
       </p>
 
-      {/* Social Links */}
-      <div className="flex justify-center gap-4 mb-8 text-primary dark:text-textDark">
-        <a
-          href="https://github.com/hitheshrai"
-          aria-label="GitHub"
-          className="p-1 md:p-2 transition-transform transform duration-300 hover:scale-110 hover:text-blue-500 dark:hover:text-white"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Github size={24} />
-        </a>
+      <p className="text-sm text-slate-500 dark:text-slate-400 mb-7">
+        M.S. AI Engineering (Materials Science) · Arizona State University &nbsp;·&nbsp;
+        Researcher, Rolston Lab &nbsp;·&nbsp; Management Intern, Next Lab
+      </p>
 
+      <div className="flex flex-wrap items-center gap-3">
         <a
           href="https://www.linkedin.com/in/hithesh-rai-p/"
-          aria-label="LinkedIn"
-          className="p-1 md:p-2 transition-transform transform duration-300 hover:scale-110 hover:text-blue-500 dark:hover:text-white"
           target="_blank"
           rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded bg-blue-700 text-white hover:bg-blue-800 transition-colors font-medium"
         >
-          <Linkedin size={24} />
+          <Linkedin size={15} />
+          CV / LinkedIn
         </a>
 
         <a
-          href="mailto:hraipuru@asu.edu"
-          aria-label="Email"
-          className="p-1 md:p-2 transition-transform transform duration-300 hover:scale-110 hover:text-blue-500 dark:hover:text-white"
+          href="#contact"
+          className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:border-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-colors"
         >
-          <Mail size={24} />
+          <Mail size={15} />
+          Get in touch
+        </a>
+
+        <span className="hidden sm:block w-px h-5 bg-slate-200 dark:bg-slate-700 mx-1" />
+
+        <a
+          href="https://github.com/hitheshrai"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          className="text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+        >
+          <Github size={20} />
         </a>
 
         <a
           href="https://x.com/hitheshrai"
-          aria-label="X"
-          className="p-1 md:p-2 transition-transform transform duration-300 hover:scale-110 hover:text-blue-500 dark:hover:text-white"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="X / Twitter"
+          className="text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
         >
-          <Twitter size={24} />
+          <Twitter size={20} />
         </a>
       </div>
-
-      {/* Call to Action Button */}
-      <button
-        className="px-4 md:px-6 py-2 md:py-3 text-sm md:text-lg font-semibold bg-primary text-white dark:bg-textDark dark:text-backgroundDark rounded-full shadow-lg transition-all duration-500 transform hover:scale-105 hover:bg-blue-600 dark:hover:bg-gray-700"
-        onClick={() => {
-          const el = document.getElementById('contact');
-          if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
-          } else {
-            // fallback: open portfolio if contact section not present
-            window.open('https://hitheshrai.github.io/Hithesh/', '_blank', 'noopener');
-          }
-        }}
-        aria-label="Get in touch with Hithesh"
-      >
-        Get In Touch
-      </button>
     </header>
   );
 };
