@@ -49,7 +49,7 @@ export default function Articles() {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-r from-blue-50 to-slate-50 dark:bg-gradient-to-r dark:from-slate-900 dark:to-slate-800 text-black dark:text-textDark border-t border-b border-slate-200 dark:border-slate-700">
+    <section id="articles" className="py-16 bg-gradient-to-r from-blue-50 to-slate-50 dark:from-slate-900 dark:to-slate-800 text-black dark:text-textDark border-t border-b border-slate-200 dark:border-slate-700">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-primary dark:text-textDark">Articles</h2>

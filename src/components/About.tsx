@@ -2,7 +2,7 @@ import Tilt from 'react-parallax-tilt';
 
 export default function About() {
   return (
-    <section className="py-8 md:py-12 bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 text-black dark:text-textDark">
+    <section id="about" className="py-8 md:py-12 bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 text-black dark:text-textDark">
       <div className="container mx-auto px-4">
         <Tilt
           tiltMaxAngleX={8}

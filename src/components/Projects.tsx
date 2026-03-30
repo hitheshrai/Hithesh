@@ -18,8 +18,7 @@ export default function Projects() {
       id: "edge-ai-device",
       title: "Solar-Based Edge Device (EDge AI)",
       description: "Led a team in developing a low-power, solar-powered edge device for AI applications. Built to run multilingual LLMs like LLaMA on Raspberry Pi using SolarSPELL resources for offline, privacy-focused use in underserved communities. Featured in ASU’s 'The AI Journey Continues' publication.",
-      link: "https://nextlab.asu.edu/sol-a-i/",
-      press: "https://issuu.com/asu_uto/docs/the_ai_journey_continues/s/73726965"
+      link: "https://nextlab.asu.edu/edge-ai/",
     },
     {
       id: "2unify-education",
@@ -36,7 +35,7 @@ export default function Projects() {
   ];
 
   return (
-    <section className="py-16 bg-white dark:bg-backgroundDark text-black dark:text-textDark border-t border-b border-slate-200 dark:border-slate-700">
+    <section id="projects" className="py-16 bg-white dark:bg-backgroundDark text-black dark:text-textDark border-t border-b border-slate-200 dark:border-slate-700">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-primary dark:text-textDark">Featured Projects</h2>

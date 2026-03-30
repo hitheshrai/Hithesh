@@ -292,7 +292,7 @@ export default function Timeline() {
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
 
         {/* Left: Timeline */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 lg:order-first">
           <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-2">
             Where the Research Has Taken Me
           </h2>
@@ -319,8 +319,8 @@ export default function Timeline() {
           </div>
         </div>
 
-        {/* Right: Sticky Panel */}
-        <aside className="sticky top-24 self-start">
+        {/* Right: Sticky Panel — renders first on mobile so it's visible at the top */}
+        <aside className="lg:order-last lg:sticky lg:top-24 lg:self-start">
           <div className="w-full max-w-md p-6 bg-white dark:bg-slate-900 rounded-xl shadow border border-slate-200 dark:border-slate-700">
             <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">
               Research Trajectory
