@@ -5,6 +5,7 @@ import DarkModeToggle from './DarkModeToggle';
 const links = [
   { label: 'About',        href: '#about' },
   { label: 'Research',     href: '#research' },
+  { label: 'Conference',   href: '#conference' },
   { label: 'Publications', href: '#publications' },
   { label: 'Projects',     href: '#projects' },
   { label: 'Articles',     href: '#articles' },

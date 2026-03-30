@@ -1,8 +1,8 @@
-// src/components/Publications.tsx
+type PubType = "Conference Paper" | "Journal Article" | "Preprint";
 
 type Pub = {
   id: string;
-  type: 'Conference Paper' | 'Journal Article' | 'Preprint';
+  type: PubType;
   title: string;
   authors: string;
   venue: string;
@@ -13,57 +13,90 @@ type Pub = {
 
 const publications: Pub[] = [
   {
-    id: 'pvsc-2024',
-    type: 'Conference Paper',
+    id: "pvsc-2024",
+    type: "Conference Paper",
     title:
-      'Blade-Coated Cesium Wide-Bandgap Perovskite Films for Improved Operational Stability in Alphavoltaic Applications',
-    authors: 'H. R. Purushothama, N. Rolston et al.',
-    venue: 'IEEE 51st Photovoltaic Specialists Conference (PVSC)',
-    year: '2024',
-    note: 'Funded by Intel',
-    link: 'https://forge.engineering.asu.edu/participant/rai-purushothama-hithesh/',
+      "Quantifying Mobile Ions in Formamidinium Lead Iodide Perovskite to Study Ion Migration for Enhanced Stability and Performance",
+    authors: "H. R. Purushothama, N. Rolston et al.",
+    venue: "IEEE 51st Photovoltaic Specialists Conference (PVSC)",
+    year: "2024",
+    note: "Funded by Intel",
+    link: "https://ieeexplore.ieee.org/abstract/document/10749044/",
+  },
+  {
+    id: "iperop-2025",
+    type: "Conference Paper",
+    title:
+      "Blade-Coated Cesium Lead Halide Perovskite Thin Films for Alphavoltaic and Optoelectronic Applications",
+    authors: "H. R. Purushothama, N. Rolston et al.",
+    venue:
+      "Asia-Pacific International Conference on Perovskite, Organic Photovoltaics and Optoelectronics (IPEROP)",
+    year: "2025",
+    note: "Poster · Kyoto, Japan",
+    link: "https://www.nanoge.org/proceedings/IPEROP25/674e7264d74a090160ef6a3d",
+  },
+  {
+    id: "ai4x-2026",
+    type: "Preprint",
+    title:
+      "Transferable Impedance-Grounded Learning for Interfacial Degradation Across Energy Systems",
+    authors: "H. R. Purushothama, N. Rolston",
+    venue: "AI4X-AC 2026",
+    year: "2026",
+    note: "Accepted Poster · Physics-informed ML for energy systems",
+    link: "https://openreview.net/forum?id=qJkiTa9Z0q&referrer=%5Bthe%20profile%20of%20Hithesh%20Rai%20Purushothama%5D(%2Fprofile%3Fid%3D~Hithesh_Rai_Purushothama1)",
   },
 ];
 
+function PublicationItem({ pub }: { pub: Pub }) {
+  return (
+    <article className="flex gap-4">
+      <span className="mt-0.5 inline-flex h-5 w-32 flex-shrink-0 items-center justify-center rounded border border-blue-100 bg-blue-50 px-2 text-xs font-medium text-blue-700 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-300">
+        {pub.type}
+      </span>
+
+      <div className="min-w-0">
+        <h3 className="mb-1 text-sm font-semibold leading-snug text-slate-900 dark:text-slate-100">
+          {pub.title}
+        </h3>
+
+        <p className="mb-0.5 text-sm text-slate-500 dark:text-slate-400">{pub.authors}</p>
+
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          <span className="italic">{pub.venue}</span>, {pub.year}
+          {pub.note ? (
+            <span className="ml-2 text-xs text-slate-400 dark:text-slate-500">· {pub.note}</span>
+          ) : null}
+        </p>
+
+        {pub.link ? (
+          <a
+            href={pub.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1 inline-block text-xs text-blue-700 hover:underline dark:text-blue-400"
+          >
+            View publication →
+          </a>
+        ) : null}
+      </div>
+    </article>
+  );
+}
+
 export default function Publications() {
   return (
-    <section id="publications" className="py-12 border-b border-slate-200 dark:border-slate-800">
-      <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6">
+    <section
+      id="publications"
+      className="border-b border-slate-200 py-12 dark:border-slate-800"
+    >
+      <h2 className="mb-6 text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">
         Publications
       </h2>
 
-      <div className="space-y-6">
-        {publications.map((p) => (
-          <div key={p.id} className="flex gap-4">
-            <span className="mt-0.5 flex-shrink-0 text-xs px-2 py-0.5 h-fit rounded bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900 font-medium whitespace-nowrap">
-              {p.type}
-            </span>
-
-            <div>
-              <p className="text-sm font-semibold text-slate-900 dark:text-slate-100 leading-snug mb-1">
-                {p.title}
-              </p>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mb-0.5">{p.authors}</p>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                <span className="italic">{p.venue}</span>, {p.year}
-                {p.note && (
-                  <span className="ml-2 text-xs text-slate-400 dark:text-slate-500">
-                    · {p.note}
-                  </span>
-                )}
-              </p>
-              {p.link && (
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-blue-700 dark:text-blue-400 hover:underline mt-1 inline-block"
-                >
-                  View project page →
-                </a>
-              )}
-            </div>
-          </div>
+      <div id="conference" className="space-y-6 scroll-mt-20">
+        {publications.map((pub) => (
+          <PublicationItem key={pub.id} pub={pub} />
         ))}
       </div>
     </section>

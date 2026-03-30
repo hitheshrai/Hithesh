@@ -9,6 +9,8 @@ const interests = [
   'Autonomous Experimentation',
 ];
 
+const institutions = ['Arizona State University', 'Purdue University', 'HZB', 'EPFL'];
+
 export default function About() {
   return (
     <section id="about" className="py-12 border-b border-slate-200 dark:border-slate-800">
@@ -18,22 +20,29 @@ export default function About() {
 
       <div className="max-w-2xl space-y-4">
         <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
-          I work at the intersection of materials science, machine learning, and automation —
-          building closed-loop systems that connect experiment and computation to accelerate
-          energy materials discovery.
+          I am an M.S. AI Engineering (Materials Science) researcher at Arizona State University
+          in the Rolston Lab, focused on building AI-accelerated and experiment-grounded
+          workflows for next-generation photovoltaics.
         </p>
 
         <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
-          My fabrication work spans four institutions (ASU, Purdue, HZB, EPFL), where I've
-          achieved{' '}
+          My work combines perovskite thin-film fabrication, materials characterization, and
+          machine learning for autonomous experimentation. Across ASU, Purdue, HZB, and EPFL, I
+          have achieved{' '}
           <span className="font-semibold text-slate-900 dark:text-slate-100">
             19% single-junction device efficiency
           </span>
-          , characterized structural phase transitions via PDF and neutron diffraction, and
-          presented at{' '}
+          , studied phase transitions with PDF and neutron diffraction, and presented at{' '}
           <span className="font-semibold text-slate-900 dark:text-slate-100">IEEE PVSC 2024</span>.
-          On the AI side, I build LangChain RAG pipelines, benchmark LLM inference on NVIDIA
-          Jetson edge hardware, and study INT8/Q4 quantization trade-offs for real-world deployment.
+          On the AI side, I build LLM-enabled research pipelines and edge-deployable inference
+          workflows for real-world lab use.
+        </p>
+
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          Institutional experience:{' '}
+          <span className="font-medium text-slate-700 dark:text-slate-300">
+            {institutions.join(' · ')}
+          </span>
         </p>
 
         <div className="flex flex-wrap gap-2 pt-1">
