@@ -47,7 +47,7 @@ const projects: Project[] = [
     id: 'ecee-student-feature',
     title: 'ASU ECEE Student Feature',
     description:
-      'Recognized by ASU's School of Electrical, Computer and Energy Engineering for leadership in research, student outreach, and academic excellence.',
+      "Recognized by ASU's School of Electrical, Computer and Energy Engineering for leadership in research, student outreach, and academic excellence.",
     tags: ['ASU', 'ECEE', 'Student Leadership'],
     press: 'https://ecee.engineering.asu.edu/2023/06/16/hithesh-rai-purushothama/',
   },
