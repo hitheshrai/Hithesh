@@ -18,9 +18,8 @@ const publications: Pub[] = [
     title:
       "Quantifying Mobile Ions in Formamidinium Lead Iodide Perovskite to Study Ion Migration for Enhanced Stability and Performance",
     authors: "H. R. Purushothama, N. Rolston et al.",
-    venue: "IEEE 51st Photovoltaic Specialists Conference (PVSC)",
+    venue: "IEEE 52nd Photovoltaic Specialists Conference (PVSC)",
     year: "2024",
-    note: "Funded by Intel",
     link: "https://ieeexplore.ieee.org/abstract/document/10749044/",
   },
   {
@@ -94,7 +93,7 @@ export default function Publications() {
         Publications
       </h2>
 
-      <div id="conference" className="space-y-6 scroll-mt-20">
+      <div className="space-y-6">
         {publications.map((pub) => (
           <PublicationItem key={pub.id} pub={pub} />
         ))}

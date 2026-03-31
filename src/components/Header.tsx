@@ -25,7 +25,7 @@ const Header = () => {
           className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded bg-blue-700 text-white hover:bg-blue-800 transition-colors font-medium"
         >
           <FileText size={15} />
-          View CV (PDF)
+          CV
         </a>
 
         <a

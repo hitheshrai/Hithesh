@@ -5,7 +5,6 @@ import DarkModeToggle from './DarkModeToggle';
 const links = [
   { label: 'About',        href: '#about' },
   { label: 'Research',     href: '#research' },
-  { label: 'Conference',   href: '#conference' },
   { label: 'Publications', href: '#publications' },
   { label: 'Projects',     href: '#projects' },
   { label: 'Articles',     href: '#articles' },
@@ -46,15 +45,6 @@ export default function Nav() {
               </a>
             ))}
           </div>
-
-          <a
-            href="https://www.linkedin.com/in/hithesh-rai-p/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm px-3 py-1 rounded border border-blue-700 dark:border-blue-500 text-blue-700 dark:text-blue-400 hover:bg-blue-700 hover:text-white dark:hover:bg-blue-500 dark:hover:text-white transition-all font-medium"
-          >
-            CV
-          </a>
 
           <DarkModeToggle />
         </div>
