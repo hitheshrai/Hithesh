@@ -9,8 +9,6 @@ const interests = [
   'Battery Degradation Modeling',
 ];
 
-const institutions = ['Arizona State University', 'Purdue University', 'HZB', 'EPFL'];
-
 export default function About() {
   return (
     <section id="about" className="py-12 border-b border-slate-200 dark:border-slate-800">
@@ -30,13 +28,6 @@ export default function About() {
           characterization, and machine learning for autonomous experimentation. As a Management
           Intern at Next Lab, I help evaluate emerging AI tools, support small pilot projects,
           and assist with implementation for practical lab use.
-        </p>
-
-        <p className="text-sm text-slate-500 dark:text-slate-400">
-          Institutional experience:{' '}
-          <span className="font-medium text-slate-700 dark:text-slate-300">
-            {institutions.join(' · ')}
-          </span>
         </p>
 
         <div className="flex flex-wrap gap-2 pt-1">
