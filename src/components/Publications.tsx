@@ -1,8 +1,5 @@
-type PubType = "Conference Paper" | "Journal Article" | "Preprint";
-
 type Pub = {
   id: string;
-  type: PubType;
   title: string;
   authors: string;
   venue: string;
@@ -14,17 +11,16 @@ type Pub = {
 const publications: Pub[] = [
   {
     id: "pvsc-2024",
-    type: "Conference Paper",
     title:
       "Quantifying Mobile Ions in Formamidinium Lead Iodide Perovskite to Study Ion Migration for Enhanced Stability and Performance",
     authors: "H. R. Purushothama, N. Rolston et al.",
     venue: "IEEE 52nd Photovoltaic Specialists Conference (PVSC)",
     year: "2024",
+    note: "Seattle, USA",
     link: "https://ieeexplore.ieee.org/abstract/document/10749044/",
   },
   {
     id: "iperop-2025",
-    type: "Conference Paper",
     title:
       "Blade-Coated Cesium Lead Halide Perovskite Thin Films for Alphavoltaic and Optoelectronic Applications",
     authors: "H. R. Purushothama, N. Rolston et al.",
@@ -36,13 +32,12 @@ const publications: Pub[] = [
   },
   {
     id: "ai4x-2026",
-    type: "Preprint",
     title:
       "Transferable Impedance-Grounded Learning for Interfacial Degradation Across Energy Systems",
     authors: "H. R. Purushothama, N. Rolston",
     venue: "AI4X-AC 2026",
     year: "2026",
-    note: "Accepted Poster · Physics-informed ML for energy systems",
+    note: "Accepted Poster · Singapore · Physics-informed ML for energy systems",
     link: "https://openreview.net/forum?id=qJkiTa9Z0q&referrer=%5Bthe%20profile%20of%20Hithesh%20Rai%20Purushothama%5D(%2Fprofile%3Fid%3D~Hithesh_Rai_Purushothama1)",
   },
 ];
@@ -50,10 +45,6 @@ const publications: Pub[] = [
 function PublicationItem({ pub }: { pub: Pub }) {
   return (
     <article className="flex gap-4">
-      <span className="mt-0.5 inline-flex h-5 w-32 flex-shrink-0 items-center justify-center rounded border border-blue-100 bg-blue-50 px-2 text-xs font-medium text-blue-700 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-300">
-        {pub.type}
-      </span>
-
       <div className="min-w-0">
         <h3 className="mb-1 text-sm font-semibold leading-snug text-slate-900 dark:text-slate-100">
           {pub.title}
@@ -90,7 +81,7 @@ export default function Publications() {
       className="border-b border-slate-200 py-12 dark:border-slate-800"
     >
       <h2 className="mb-6 text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">
-        Publications
+        Conference Proceedings
       </h2>
 
       <div className="space-y-6">
