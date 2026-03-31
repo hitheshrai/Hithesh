@@ -20,28 +20,16 @@ export default function About() {
 
       <div className="max-w-2xl space-y-4">
         <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
-          I am an M.S. AI Engineering (Materials Science) researcher at Arizona State University
-          in the Rolston Lab, focused on building AI-accelerated and experiment-grounded
-          workflows for next-generation photovoltaics. My current research direction centers on
-          transferable, impedance-grounded machine learning for interfacial degradation across
-          batteries, perovskite photovoltaics, and related energy systems.
+          I am an early-career M.S. AI Engineering (Materials Science) student at Arizona State
+          University in the Rolston Lab. My current work focuses on learning how to build
+          experiment-grounded AI workflows for photovoltaics and related energy systems.
         </p>
 
         <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
-          My work combines perovskite thin-film fabrication, materials characterization, and
-          machine learning for autonomous experimentation. Across ASU, Purdue, HZB, and EPFL, I
-          have achieved{' '}
-          <span className="font-semibold text-slate-900 dark:text-slate-100">
-            19% single-junction device efficiency
-          </span>
-          , studied phase transitions with PDF and neutron diffraction, and presented at{' '}
-          <span className="font-semibold text-slate-900 dark:text-slate-100">IEEE PVSC 2024</span>.
-          As a Management Intern at Next Lab, I lead evaluation and selection of emerging AI
-          technologies for lab adoption, assess technical maturity and deployment fit, and drive
-          end-to-end AI project execution from scoping through implementation. I also support lab
-          leadership by translating technical findings into actionable decisions. On the AI side,
-          I build LLM-enabled research pipelines and edge-deployable inference workflows for
-          real-world lab use.
+          I am developing skills across perovskite thin-film fabrication, materials
+          characterization, and machine learning for autonomous experimentation. As a Management
+          Intern at Next Lab, I help evaluate emerging AI tools, support small pilot projects,
+          and assist with implementation for practical lab use.
         </p>
 
         <p className="text-sm text-slate-500 dark:text-slate-400">
