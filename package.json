@@ -17,7 +17,7 @@
         "lucide-react": "^0.344.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "react-parallax-tilt": "^1.7.250",
+        "react-parallax-tilt": "^1.7.322",
         "three": "^0.169.0"
     },
     "devDependencies": {
