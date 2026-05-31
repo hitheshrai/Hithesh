@@ -1,23 +1,55 @@
 // src/components/Header.tsx
 import { FileText, Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const item = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0 },
+};
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.11, ease: 'easeOut' } },
+};
 
 const Header = () => {
   return (
-    <header className="pt-14 pb-12 border-b border-slate-200 dark:border-slate-800">
-      <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 dark:text-slate-50 mb-3 leading-tight">
+    <motion.header
+      className="pt-14 pb-12 border-b border-slate-200 dark:border-slate-800"
+      variants={container}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.h1
+        variants={item}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="text-4xl md:text-5xl font-serif font-bold text-slate-900 dark:text-slate-50 mb-3 leading-tight"
+      >
         Hithesh Rai Purushothama
-      </h1>
+      </motion.h1>
 
-      <p className="text-lg md:text-xl text-blue-700 dark:text-blue-400 font-medium mb-3 max-w-2xl leading-snug">
+      <motion.p
+        variants={item}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
+        className="text-lg md:text-xl text-blue-700 dark:text-blue-400 font-medium mb-3 max-w-2xl leading-snug"
+      >
         Building AI-accelerated platforms for autonomous materials discovery in energy materials
-      </p>
+      </motion.p>
 
-      <p className="text-sm text-slate-500 dark:text-slate-400 mb-7">
+      <motion.p
+        variants={item}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
+        className="text-sm text-slate-500 dark:text-slate-400 mb-7"
+      >
         M.S. AI Engineering (Materials Science) · Arizona State University &nbsp;·&nbsp;
         Graduate Research Intern, NIMS &nbsp;·&nbsp; Researcher, Rolston Lab &nbsp;·&nbsp; Management Intern, Next Lab
-      </p>
+      </motion.p>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <motion.div
+        variants={item}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
+        className="flex flex-wrap items-center gap-3"
+      >
         <a
           href="/Hithesh/assets/Rai_Purushothama_Hithesh_CV.pdf"
           target="_blank"
@@ -67,8 +99,8 @@ const Header = () => {
         >
           <Twitter size={20} />
         </a>
-      </div>
-    </header>
+      </motion.div>
+    </motion.header>
   );
 };
 

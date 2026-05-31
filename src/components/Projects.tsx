@@ -1,4 +1,6 @@
 // src/components/Projects.tsx
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 type Project = {
   id: string;
@@ -53,18 +55,43 @@ const projects: Project[] = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+};
+
 export default function Projects() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-10% 0px' });
+
   return (
-    <section id="projects" className="py-12 border-b border-slate-200 dark:border-slate-800">
-      <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6">
+    <motion.section
+      id="projects"
+      ref={ref}
+      className="py-12 border-b border-slate-200 dark:border-slate-800"
+      variants={containerVariants}
+      initial="hidden"
+      animate={inView ? 'show' : 'hidden'}
+    >
+      <motion.h2
+        variants={itemVariants}
+        className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6"
+      >
         Projects
-      </h2>
+      </motion.h2>
 
       <div className="space-y-4">
         {projects.map((p) => (
-          <div
+          <motion.div
             key={p.id}
-            className="p-5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700 transition-colors"
+            variants={itemVariants}
+            whileHover={{ y: -2, transition: { duration: 0.15 } }}
+            className="p-5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-sm transition-all duration-200"
           >
             <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2 leading-snug">
               {p.title}
@@ -116,9 +143,9 @@ export default function Projects() {
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -1,19 +1,47 @@
 // src/components/Contact.tsx
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+
+const containerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+};
 
 export default function Contact() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-10% 0px' });
+
   return (
-    <section id="contact" className="py-12">
-      <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6">
+    <motion.section
+      id="contact"
+      ref={ref}
+      className="py-12"
+      variants={containerVariants}
+      initial="hidden"
+      animate={inView ? 'show' : 'hidden'}
+    >
+      <motion.h2
+        variants={itemVariants}
+        className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6"
+      >
         Contact
-      </h2>
+      </motion.h2>
 
       <div className="max-w-xl">
-        <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
+        <motion.p
+          variants={itemVariants}
+          className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-6"
+        >
           I'm open to research collaborations, PhD program discussions, and interesting projects at
           the intersection of AI and energy materials. Feel free to reach out.
-        </p>
+        </motion.p>
 
-        <div className="flex flex-wrap gap-3">
+        <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
           <a
             href="mailto:hraipuru@asu.edu"
             className="inline-block text-sm px-5 py-2.5 rounded bg-blue-700 text-white hover:bg-blue-800 transition-colors font-medium"
@@ -28,8 +56,8 @@ export default function Contact() {
           >
             LinkedIn
           </a>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

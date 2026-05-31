@@ -276,6 +276,8 @@ export default function Timeline() {
       >
         {stages.map((s, i) => {
           const a = accent[s.region];
+          const seenFlags = stages.slice(0, i).map((x) => x.flag);
+          const showFlag = !seenFlags.includes(s.flag);
           return (
             <Fragment key={s.id}>
               <button
@@ -291,7 +293,9 @@ export default function Timeline() {
                       : `${a.dot} w-2 h-2 hover:scale-125`
                   }`}
                 />
-                <span className="text-sm leading-none">{s.flag}</span>
+                <span className="text-sm leading-none" aria-hidden={!showFlag}>
+                  {showFlag ? s.flag : <span className="opacity-0 select-none">·</span>}
+                </span>
               </button>
               {i < stages.length - 1 && (
                 <div className="h-px flex-1 min-w-3 bg-slate-200 dark:bg-slate-800 mx-1" />

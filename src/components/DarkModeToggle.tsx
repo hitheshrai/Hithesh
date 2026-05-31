@@ -1,7 +1,7 @@
 // src/components/DarkModeToggle.tsx
-
 import { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const DarkModeToggle = () => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -13,7 +13,6 @@ const DarkModeToggle = () => {
 
   useEffect(() => {
     const root = document.documentElement;
-
     if (darkMode) {
       root.classList.remove('light-mode');
       root.classList.add('dark');
@@ -25,19 +24,38 @@ const DarkModeToggle = () => {
     }
   }, [darkMode]);
 
-  const toggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode);
-  };
-
   return (
     <button
       type="button"
-      onClick={toggleDarkMode}
+      onClick={() => setDarkMode((v) => !v)}
       aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-      title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition duration-300"
+      className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors overflow-hidden"
     >
-      {darkMode ? <Sun size={24} /> : <Moon size={24} />}
+      <AnimatePresence mode="wait" initial={false}>
+        {darkMode ? (
+          <motion.span
+            key="sun"
+            initial={{ opacity: 0, rotate: -45, scale: 0.7 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={{ opacity: 0, rotate: 45, scale: 0.7 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="flex items-center justify-center"
+          >
+            <Sun size={16} />
+          </motion.span>
+        ) : (
+          <motion.span
+            key="moon"
+            initial={{ opacity: 0, rotate: 45, scale: 0.7 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={{ opacity: 0, rotate: -45, scale: 0.7 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="flex items-center justify-center"
+          >
+            <Moon size={16} />
+          </motion.span>
+        )}
+      </AnimatePresence>
     </button>
   );
 };

@@ -1,4 +1,6 @@
 // src/components/Articles.tsx
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 const articles = [
   {
@@ -59,16 +61,39 @@ const articles = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.38, ease: 'easeOut' } },
+};
+
 export default function Articles() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-10% 0px' });
+
   return (
-    <section id="articles" className="py-12 border-b border-slate-200 dark:border-slate-800">
-      <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6">
+    <motion.section
+      id="articles"
+      ref={ref}
+      className="py-12 border-b border-slate-200 dark:border-slate-800"
+      variants={containerVariants}
+      initial="hidden"
+      animate={inView ? 'show' : 'hidden'}
+    >
+      <motion.h2
+        variants={itemVariants}
+        className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6"
+      >
         Articles & Media
-      </h2>
+      </motion.h2>
 
       <div className="space-y-5">
         {articles.map((a) => (
-          <div key={a.id} className="flex gap-4 group">
+          <motion.div key={a.id} variants={itemVariants} className="flex gap-4 group">
             <span className="mt-0.5 flex-shrink-0 text-xs px-2 py-0.5 h-fit rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 font-medium whitespace-nowrap">
               {a.type}
             </span>
@@ -85,9 +110,9 @@ export default function Articles() {
                 {a.description}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }
