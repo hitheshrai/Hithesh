@@ -52,9 +52,9 @@ const stages: Stage[] = [
   },
   {
     id: 'structure-hzb',
-    short: 'Structure Analysis – HZB',
+    short: 'Structure Analysis – Helmholtz-Zentrum Berlin',
     date: 'Summer 2024',
-    institute: 'Helmholtz Zentrum Berlin – Quantum Materials Group',
+    institute: 'Institute Quantum Phenomena in Novel Materials, Helmholtz-Zentrum Berlin (HZB)',
     location: 'Berlin, Germany',
     narrative:
       'Used PDF and X-ray/neutron diffraction to reveal structural instabilities and morphotropic phase transitions in perovskite ferroelectric systems.',
