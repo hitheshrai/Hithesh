@@ -8,7 +8,7 @@ const interests = [
   'ML for Materials Discovery',
   'Energy Materials',
   'Edge AI & LLMs',
-  'Battery Degradation Modeling',
+  'Electrochemical Data Analysis',
 ];
 
 const containerVariants = {
@@ -47,7 +47,7 @@ export default function About() {
           className="text-base text-slate-700 dark:text-slate-300 leading-relaxed"
         >
           I am an early-career M.S. AI Engineering (Materials Science) student at Arizona State
-          University in the Rolston Lab. My current work focuses on learning how to build
+          University in the Rolston Lab. My current work focuses on building
           experiment-grounded AI workflows for photovoltaics and related energy systems.
         </motion.p>
 
@@ -55,10 +55,10 @@ export default function About() {
           variants={itemVariants}
           className="text-base text-slate-700 dark:text-slate-300 leading-relaxed"
         >
-          I am developing skills across perovskite thin-film fabrication, materials
-          characterization, and machine learning for autonomous experimentation. Currently a
-          Graduate Research Intern at NIMS (Tsukuba, Japan) working on battery materials, and a
-          Management Intern at Next Lab supporting AI initiatives for education and social good.
+          My work spans perovskite thin-film fabrication, materials characterization, and
+          machine learning for autonomous experimentation. Currently a Graduate Research Intern
+          at NIMS (Tsukuba, Japan) working on battery materials, and a Management Intern at
+          Next Lab supporting AI initiatives for education and social good.
         </motion.p>
 
         <motion.div

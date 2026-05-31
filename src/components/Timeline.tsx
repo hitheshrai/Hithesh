@@ -80,7 +80,7 @@ const stages: Stage[] = [
     flag: '🇨🇭',
     region: 'europe',
     narrative:
-      'Fabricated single-junction perovskite devices reaching 19% efficiency, learned atomic layer deposition and thermal evaporation — funded by the ThinkSwiss Research Scholarship.',
+      'Fabricated single-junction perovskite devices reaching 19% efficiency, applied atomic layer deposition and thermal evaporation techniques — funded by the ThinkSwiss Research Scholarship.',
     interests: ['Device Fabrication', 'ALD', 'Thermal Evaporation', 'Stability Testing'],
   },
   {

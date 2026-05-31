@@ -25,7 +25,7 @@ const projects: Project[] = [
     id: 'ferroelectric-instability',
     title: 'Structural Instability in Perovskite-Based Ferroelectric Materials',
     description:
-      'Probed morphotropic phase transitions in ferroelectric perovskites using pair distribution function (PDF) analysis, X-ray and neutron diffraction at Helmholtz Zentrum Berlin – Quantum Materials Group.',
+      'Probed morphotropic phase transitions in ferroelectric perovskites using pair distribution function (PDF) analysis, X-ray and neutron diffraction at the Institute Quantum Phenomena in Novel Materials, Helmholtz-Zentrum Berlin (HZB).',
     tags: ['PDF Analysis', 'Neutron Diffraction', 'Ferroelectrics', 'HZB'],
     github: 'https://www.helmholtz-berlin.de/forschung/oe/qm/quantenphaenomene/index_en.html',
   },

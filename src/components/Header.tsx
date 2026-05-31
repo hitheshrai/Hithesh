@@ -1,6 +1,7 @@
 // src/components/Header.tsx
 import { FileText, Github, Linkedin, Mail, Twitter } from 'lucide-react';
 import { motion } from 'framer-motion';
+import BackgroundPerovskite from './BackgroundPerovskite';
 
 const item = {
   hidden: { opacity: 0, y: 18 },
@@ -15,11 +16,13 @@ const container = {
 const Header = () => {
   return (
     <motion.header
-      className="pt-14 pb-12 border-b border-slate-200 dark:border-slate-800"
+      className="relative pt-14 pb-12 border-b border-slate-200 dark:border-slate-800"
       variants={container}
       initial="hidden"
       animate="show"
     >
+      <BackgroundPerovskite dpr={[1, 1.5]} />
+
       <motion.h1
         variants={item}
         transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -33,7 +36,7 @@ const Header = () => {
         transition={{ duration: 0.45, ease: 'easeOut' }}
         className="text-lg md:text-xl text-blue-700 dark:text-blue-400 font-medium mb-3 max-w-2xl leading-snug"
       >
-        Building AI-accelerated platforms for autonomous materials discovery in energy materials
+        Building AI-accelerated workflows for autonomous discovery in energy materials
       </motion.p>
 
       <motion.p
