@@ -120,14 +120,18 @@ function RotatingUnit({ speed = 0.02 }: { speed?: number }) {
 
 export default function BackgroundPerovskite({
   dpr = 1.0,
+  className = 'pointer-events-none absolute inset-0 -z-10 overflow-hidden',
+  opacity = 0.32,
 }: {
   dpr?: number | [number, number];
+  className?: string;
+  opacity?: number;
 }) {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-      style={{ opacity: 0.32 }}
+      className={className}
+      style={{ opacity }}
     >
       <Canvas
         gl={{ antialias: true, alpha: true }}

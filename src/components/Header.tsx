@@ -21,8 +21,13 @@ const Header = () => {
       initial="hidden"
       animate="show"
     >
-      <BackgroundPerovskite dpr={[1, 1.5]} />
+      <BackgroundPerovskite
+        dpr={[1, 1.5]}
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+        opacity={0.18}
+      />
 
+      <div className="relative z-10">
       <motion.h1
         variants={item}
         transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -103,6 +108,7 @@ const Header = () => {
           <Twitter size={20} />
         </a>
       </motion.div>
+      </div>
     </motion.header>
   );
 };
