@@ -82,13 +82,13 @@ const stages: Stage[] = [
   },
   {
     id: 'nims-grad',
-    short: 'Graduate Research Intern – NIMS',
+    short: 'Graduate Research Intern – NIMS Electrochemical Smart Lab',
     date: 'May – Aug 2026',
-    institute: 'National Institute for Materials Science (NIMS)',
+    institute: 'Automated Electrochemical Experiments Team (GREEN), NIMS',
     location: 'Tsukuba, Japan',
     narrative:
-      'Graduate research internship at NIMS working on battery materials — applying ML and characterization techniques to understand degradation mechanisms and accelerate materials discovery.',
-    interests: ['Battery Materials', 'ML for Materials', 'Degradation Modeling', 'Characterization'],
+      'Interning with the Electrochemical Smart Lab Team at NIMS GREEN — working on battery materials using robotic high-throughput electrochemical experiments and ML-driven materials discovery.',
+    interests: ['Battery Materials', 'Automated Experiments', 'ML for Materials', 'Electrochemistry'],
   },
 ];
 
