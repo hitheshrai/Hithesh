@@ -1,20 +1,18 @@
 // src/components/Timeline.tsx
-import {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-  memo,
-  type KeyboardEvent,
-} from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { useRef, useState, Fragment } from 'react';
+import { motion, useInView, AnimatePresence, useReducedMotion } from 'framer-motion';
+
+type Region = 'us' | 'europe' | 'japan';
 
 type Stage = {
   id: string;
   short: string;
   date: string;
+  yearLabel: string;
   institute?: string;
   location: string;
+  flag: string;
+  region: Region;
   narrative: string;
   interests: string[];
 };
@@ -24,8 +22,11 @@ const stages: Stage[] = [
     id: 'ee-start',
     short: 'Electrical Engineering → AI Engineering',
     date: '2021 – Present',
+    yearLabel: '2021',
     institute: 'ASU — B.S.E EEE / M.S. AI Engineering',
     location: 'Tempe, AZ',
+    flag: '🇺🇸',
+    region: 'us',
     narrative:
       'B.S.E in Electrical & Electronic Engineering (2021–2025), now pursuing an M.S. in AI Engineering (Materials Science) — applying ML to accelerate energy materials research.',
     interests: ['Optoelectronics', 'Semiconductors', 'Power Systems', 'Renewable Energy'],
@@ -34,8 +35,11 @@ const stages: Stage[] = [
     id: 'tempe-start',
     short: 'Perovskite Research – ASU Renewable Energy Lab',
     date: 'Sep 2022 – Present',
+    yearLabel: '2022',
     institute: 'Renewable Energy Materials & Devices Lab, ASU',
     location: 'Tempe, AZ',
+    flag: '🇺🇸',
+    region: 'us',
     narrative:
       'Fabricated perovskite thin films via spin and blade coating; led an Intel-funded cesium wide-bandgap project that delivered an improved-stability prototype, presented at IEEE PVSC 2024.',
     interests: ['Photovoltaics', 'Thin-Film Fabrication', 'Materials Characterization', 'Energy Systems'],
@@ -44,8 +48,11 @@ const stages: Stage[] = [
     id: 'purdue-data',
     short: 'Data & Analysis – Purdue SURF',
     date: 'Summer 2023',
+    yearLabel: '2023',
     institute: 'Letian Dou Group, Purdue University',
     location: 'West Lafayette, IN',
+    flag: '🇺🇸',
+    region: 'us',
     narrative:
       'Built a comparative device-efficiency database in Python/Excel and used the Perovskite Database to identify material-performance trends guiding additive selection.',
     interests: ['Data Analysis', 'ML for Materials', 'Perovskite Databases', 'Stability Studies'],
@@ -54,8 +61,11 @@ const stages: Stage[] = [
     id: 'structure-hzb',
     short: 'Structure Analysis – Helmholtz-Zentrum Berlin',
     date: 'Summer 2024',
+    yearLabel: '2024',
     institute: 'Institute Quantum Phenomena in Novel Materials, Helmholtz-Zentrum Berlin (HZB)',
     location: 'Berlin, Germany',
+    flag: '🇩🇪',
+    region: 'europe',
     narrative:
       'Used PDF and X-ray/neutron diffraction to reveal structural instabilities and morphotropic phase transitions in perovskite ferroelectric systems.',
     interests: ['PDF Analysis', 'Diffraction', 'Materials Characterization', 'Crystal Structure'],
@@ -64,8 +74,11 @@ const stages: Stage[] = [
     id: 'device-epfl',
     short: 'Device Fabrication – EPFL',
     date: 'Summer 2025',
+    yearLabel: '2025',
     institute: 'Photovoltaics Lab, École Polytechnique Fédérale de Lausanne (EPFL)',
     location: 'Neuchâtel, Switzerland',
+    flag: '🇨🇭',
+    region: 'europe',
     narrative:
       'Fabricated single-junction perovskite devices reaching 19% efficiency, learned atomic layer deposition and thermal evaporation — funded by the ThinkSwiss Research Scholarship.',
     interests: ['Device Fabrication', 'ALD', 'Thermal Evaporation', 'Stability Testing'],
@@ -74,8 +87,11 @@ const stages: Stage[] = [
     id: 'nextlab-ai',
     short: 'Management Intern – Next Lab, ASU',
     date: 'Jan 2026 – Present',
+    yearLabel: '2026',
     institute: 'Next Lab / ASU',
     location: 'Tempe, AZ',
+    flag: '🇺🇸',
+    region: 'us',
     narrative:
       'Leading partner-funded AI initiatives: building LangChain retrieval pipelines, benchmarking AI workloads on NVIDIA Jetson edge devices, and analyzing INT8/Q4 quantization trade-offs for robust deployment.',
     interests: ['RAG', 'Edge AI', 'LangChain', 'Quantization', 'Automation'],
@@ -84,303 +100,237 @@ const stages: Stage[] = [
     id: 'nims-grad',
     short: 'Graduate Research Intern – NIMS Electrochemical Smart Lab',
     date: 'May – Aug 2026',
+    yearLabel: '2026',
     institute: 'Automated Electrochemical Experiments Team (GREEN), National Institute for Materials Science (NIMS)',
     location: 'Tsukuba, Japan',
+    flag: '🇯🇵',
+    region: 'japan',
     narrative:
       'Interning with the Electrochemical Smart Lab Team at NIMS GREEN — analyzing EIS data to improve NIMO, the NIMS autonomous materials discovery platform, for battery research.',
     interests: ['EIS Analysis', 'NIMO', 'Battery Materials', 'ML for Materials'],
   },
 ];
 
-// --- Memoized TimelineItem ---
+const accent: Record<Region, {
+  border: string;
+  dot: string;
+  dotActive: string;
+  year: string;
+  tagBg: string;
+  tagText: string;
+}> = {
+  us: {
+    border: 'border-l-blue-500',
+    dot: 'bg-slate-300 dark:bg-slate-600',
+    dotActive: 'bg-blue-500 dark:bg-blue-400',
+    year: 'text-blue-50 dark:text-blue-950',
+    tagBg: 'bg-blue-50 dark:bg-blue-950/50',
+    tagText: 'text-blue-700 dark:text-blue-300',
+  },
+  europe: {
+    border: 'border-l-violet-500',
+    dot: 'bg-slate-300 dark:bg-slate-600',
+    dotActive: 'bg-violet-500 dark:bg-violet-400',
+    year: 'text-violet-50 dark:text-violet-950',
+    tagBg: 'bg-violet-50 dark:bg-violet-950/50',
+    tagText: 'text-violet-700 dark:text-violet-300',
+  },
+  japan: {
+    border: 'border-l-rose-500',
+    dot: 'bg-slate-300 dark:bg-slate-600',
+    dotActive: 'bg-rose-500 dark:bg-rose-400',
+    year: 'text-rose-50 dark:text-rose-950',
+    tagBg: 'bg-rose-50 dark:bg-rose-950/50',
+    tagText: 'text-rose-700 dark:text-rose-300',
+  },
+};
 
-interface TimelineItemProps {
-  stage: Stage;
-  idx: number;
-  isActive: boolean;
-  isExpanded: boolean;
-  setRef: (el: HTMLDivElement | null, idx: number) => void;
-  toggleExpanded: (id: string) => void;
-  shouldReduce: boolean | null;
-}
-
-const TimelineItem = memo(function TimelineItem({
+function StageCard({
   stage,
-  idx,
   isActive,
-  isExpanded,
-  setRef,
-  toggleExpanded,
+  onActivate,
   shouldReduce,
-}: TimelineItemProps) {
-  return (
-    <div
-      ref={(el) => setRef(el, idx)}
-      data-idx={idx}
-      role="listitem"
-      aria-selected={isActive}
-      tabIndex={0}
-      className="relative pl-10"
-      aria-labelledby={`stage-${stage.id}`}
-    >
-      {/* Timeline dot */}
-      <div
-        className={`absolute left-4 top-1.5 w-2.5 h-2.5 -translate-x-1/2 rounded-full ring-2 ring-white dark:ring-slate-950 transition-all duration-300 ${
-          isActive
-            ? 'bg-blue-700 dark:bg-blue-400 scale-125'
-            : 'bg-slate-300 dark:bg-slate-600 scale-100'
-        }`}
-      />
+}: {
+  stage: Stage;
+  isActive: boolean;
+  onActivate: () => void;
+  shouldReduce: boolean | null;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-15% 0px -15% 0px' });
+  const [expanded, setExpanded] = useState(false);
+  const a = accent[stage.region];
 
-      <div className="text-xs uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5">
-        {stage.date}
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: -20 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: shouldReduce ? 0 : 0.4, ease: 'easeOut' }}
+      onClick={() => {
+        onActivate();
+        setExpanded((e) => !e);
+      }}
+      className={`relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 border-l-4 ${a.border}
+        bg-white dark:bg-slate-900 cursor-pointer select-none
+        transition-shadow duration-200
+        ${isActive ? 'shadow-md' : 'hover:shadow-sm'}`}
+    >
+      {/* Year watermark */}
+      <div
+        aria-hidden
+        className={`absolute right-3 top-1/2 -translate-y-1/2 text-8xl font-black leading-none pointer-events-none select-none ${a.year}`}
+      >
+        {stage.yearLabel}
       </div>
 
-      <button
-        onClick={() => toggleExpanded(stage.id)}
-        aria-expanded={isExpanded}
-        aria-controls={`details-${stage.id}`}
-        className="w-full text-left group flex items-start justify-between gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 rounded"
-      >
-        <h3
-          id={`stage-${stage.id}`}
-          className={`text-base md:text-lg font-medium mb-1 transition-colors duration-150 ${
-            isActive
-              ? 'text-blue-700 dark:text-blue-400'
-              : 'text-slate-800 dark:text-slate-200 group-hover:text-blue-700 dark:group-hover:text-blue-400'
-          }`}
-        >
+      <div className="relative p-5 pr-20">
+        {/* Location row */}
+        <div className="flex items-center gap-2 mb-2 flex-wrap">
+          <span className="text-base leading-none" role="img" aria-label={stage.location}>
+            {stage.flag}
+          </span>
+          <span className="text-xs text-slate-400 dark:text-slate-500">{stage.location}</span>
+          <span className="text-slate-200 dark:text-slate-700" aria-hidden>·</span>
+          <span className="text-xs text-slate-400 dark:text-slate-500">{stage.date}</span>
+        </div>
+
+        {/* Title */}
+        <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 leading-snug mb-1">
           {stage.short}
         </h3>
 
-        <span
-          className={`mt-1 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
-            isExpanded ? 'rotate-180' : 'rotate-0'
-          }`}
-          aria-hidden="true"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </span>
-      </button>
-
-      {!isExpanded && stage.institute && (
-        <p className="text-sm text-slate-400 dark:text-slate-500 mt-0.5">
-          {stage.institute} · {stage.location}
-        </p>
-      )}
-
-      <AnimatePresence initial={false}>
-        {isExpanded && (
-          <motion.div
-            id={`details-${stage.id}`}
-            key="content"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: shouldReduce ? 0 : 0.18, ease: 'easeOut' }}
-            style={{ overflow: 'hidden' }}
-          >
-            <div className="pt-2 pb-1">
-              {stage.institute && (
-                <p className="text-sm text-slate-400 dark:text-slate-500 mb-2">
-                  {stage.institute} · {stage.location}
-                </p>
-              )}
-              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl">
-                {stage.narrative}
-              </p>
-              <div className="flex flex-wrap gap-1.5 mt-3">
-                {stage.interests.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+        {/* Institute */}
+        {stage.institute && (
+          <p className="text-xs text-slate-400 dark:text-slate-500 mb-3 leading-relaxed">
+            {stage.institute}
+          </p>
         )}
-      </AnimatePresence>
-    </div>
-  );
-});
 
-// --- Main Timeline ---
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5">
+          {stage.interests.map((tag) => (
+            <span
+              key={tag}
+              className={`text-xs px-2 py-0.5 rounded-full font-medium ${a.tagBg} ${a.tagText}`}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Expandable narrative */}
+        <AnimatePresence initial={false}>
+          {expanded && (
+            <motion.p
+              key="narrative"
+              initial={{ opacity: 0, height: 0, marginTop: 0 }}
+              animate={{ opacity: 1, height: 'auto', marginTop: 12 }}
+              exit={{ opacity: 0, height: 0, marginTop: 0 }}
+              transition={{ duration: shouldReduce ? 0 : 0.22, ease: 'easeOut' }}
+              className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed overflow-hidden"
+            >
+              {stage.narrative}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Expand chevron */}
+      <div className="absolute bottom-4 right-4 text-slate-300 dark:text-slate-600">
+        <motion.svg
+          animate={{ rotate: expanded ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </motion.svg>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Timeline() {
   const [active, setActive] = useState(0);
-  const [expanded, setExpanded] = useState<Set<string>>(new Set());
-  const refs = useRef<(HTMLDivElement | null)[]>([]);
   const shouldReduce = useReducedMotion();
-  const keyboardNav = useRef(false);
-
-  const setRef = useCallback((el: HTMLDivElement | null, idx: number) => {
-    refs.current[idx] = el;
-  }, []);
-
-  const toggleExpanded = useCallback((id: string) => {
-    setExpanded((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  }, []);
-
-  useEffect(() => {
-    const nodes = refs.current.filter(Boolean) as Element[];
-    if (nodes.length === 0) return;
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            const idx = Number(e.target.getAttribute('data-idx'));
-            if (!Number.isNaN(idx)) setActive(idx);
-          }
-        });
-      },
-      { root: null, rootMargin: '-40% 0px -40% 0px', threshold: 0 }
-    );
-    nodes.forEach((n) => obs.observe(n));
-    return () => obs.disconnect();
-  }, []);
-
-  const onKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLElement>) => {
-      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-        e.preventDefault();
-        keyboardNav.current = true;
-        setActive((a) => Math.min(a + 1, stages.length - 1));
-      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-        e.preventDefault();
-        keyboardNav.current = true;
-        setActive((a) => Math.max(0, a - 1));
-      } else if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleExpanded(stages[active].id);
-      }
-    },
-    [active, toggleExpanded]
-  );
-
-  useEffect(() => {
-    if (!keyboardNav.current) return;
-    keyboardNav.current = false;
-    refs.current[active]?.scrollIntoView({
-      behavior: shouldReduce ? 'auto' : 'smooth',
-      block: 'center',
-    });
-  }, [active, shouldReduce]);
-
-  const panelVariants = {
-    enter: { opacity: 0, y: 6 },
-    center: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -4 },
-  };
 
   return (
-    <section
-      className="py-12 border-b border-slate-200 dark:border-slate-800"
-      tabIndex={0}
-      onKeyDown={onKeyDown}
-      aria-label="Research timeline"
-    >
+    <section className="py-12 border-b border-slate-200 dark:border-slate-800">
       <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6">
         Research Journey
       </h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-        {/* Timeline list */}
-        <div className="lg:col-span-2">
-          <div className="relative" role="list" aria-label="Research stages">
-            <div className="absolute left-4 top-0 bottom-0 w-px bg-slate-200 dark:bg-slate-800" />
-            <div className="space-y-10">
-              {stages.map((s, i) => (
-                <TimelineItem
-                  key={s.id}
-                  stage={s}
-                  idx={i}
-                  isActive={i === active}
-                  isExpanded={expanded.has(s.id)}
-                  setRef={setRef}
-                  toggleExpanded={toggleExpanded}
-                  shouldReduce={shouldReduce}
+      {/* Journey strip */}
+      <div
+        className="flex items-center mb-3 overflow-x-auto pb-1"
+        role="navigation"
+        aria-label="Timeline stages"
+      >
+        {stages.map((s, i) => {
+          const a = accent[s.region];
+          return (
+            <Fragment key={s.id}>
+              <button
+                onClick={() => setActive(i)}
+                title={`${s.short} — ${s.location}`}
+                aria-pressed={i === active}
+                className="flex flex-col items-center gap-1 flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+              >
+                <div
+                  className={`rounded-full transition-all duration-200 ${
+                    i === active
+                      ? `${a.dotActive} w-3 h-3`
+                      : `${a.dot} w-2 h-2 hover:scale-125`
+                  }`}
                 />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Sticky summary panel */}
-        <aside className="lg:sticky lg:top-20 lg:self-start">
-          <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">
-              Current Stage
-            </p>
-
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={stages[active].id}
-                variants={panelVariants}
-                initial={shouldReduce ? 'center' : 'enter'}
-                animate="center"
-                exit={shouldReduce ? 'center' : 'exit'}
-                transition={{ duration: shouldReduce ? 0 : 0.25, ease: 'easeOut' }}
-              >
-                <p className="text-xs text-slate-400 dark:text-slate-500 mb-0.5">
-                  {stages[active].date}
-                </p>
-                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-1 leading-snug">
-                  {stages[active].short}
-                </p>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
-                  {stages[active].institute} · {stages[active].location}
-                </p>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                  {stages[active].narrative}
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {stages[active].interests.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-2 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            <div className="mt-5 pt-4 border-t border-slate-200 dark:border-slate-800">
-              <a
-                href="#contact"
-                className="text-sm text-blue-700 dark:text-blue-400 hover:underline"
-              >
-                Collaborate / Contact →
-              </a>
-            </div>
-
-            <p className="mt-3 text-xs text-slate-400 dark:text-slate-600">
-              Click to expand · arrow keys to navigate
-            </p>
-          </div>
-        </aside>
+                <span className="text-sm leading-none">{s.flag}</span>
+              </button>
+              {i < stages.length - 1 && (
+                <div className="h-px flex-1 min-w-3 bg-slate-200 dark:bg-slate-800 mx-1" />
+              )}
+            </Fragment>
+          );
+        })}
       </div>
+
+      {/* Region legend */}
+      <div className="flex gap-4 mb-8">
+        {([
+          { label: 'Americas', color: 'bg-blue-500' },
+          { label: 'Europe', color: 'bg-violet-500' },
+          { label: 'Japan', color: 'bg-rose-500' },
+        ] as const).map(({ label, color }) => (
+          <span key={label} className="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500">
+            <span className={`w-2 h-2 rounded-full ${color} inline-block`} />
+            {label}
+          </span>
+        ))}
+      </div>
+
+      {/* Cards */}
+      <div className="space-y-3">
+        {stages.map((s, i) => (
+          <StageCard
+            key={s.id}
+            stage={s}
+            isActive={i === active}
+            onActivate={() => setActive(i)}
+            shouldReduce={shouldReduce}
+          />
+        ))}
+      </div>
+
+      <p className="mt-4 text-xs text-slate-400 dark:text-slate-600">
+        Click a card to read more · dots to highlight
+      </p>
     </section>
   );
 }
