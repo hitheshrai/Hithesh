@@ -64,7 +64,7 @@ const stages: Stage[] = [
     id: 'device-epfl',
     short: 'Device Fabrication – EPFL',
     date: 'Summer 2025',
-    institute: 'Photovoltaics Lab, EPFL',
+    institute: 'Photovoltaics Lab, École Polytechnique Fédérale de Lausanne (EPFL)',
     location: 'Neuchâtel, Switzerland',
     narrative:
       'Fabricated single-junction perovskite devices reaching 19% efficiency, learned atomic layer deposition and thermal evaporation — funded by the ThinkSwiss Research Scholarship.',
@@ -84,7 +84,7 @@ const stages: Stage[] = [
     id: 'nims-grad',
     short: 'Graduate Research Intern – NIMS Electrochemical Smart Lab',
     date: 'May – Aug 2026',
-    institute: 'Automated Electrochemical Experiments Team (GREEN), NIMS',
+    institute: 'Automated Electrochemical Experiments Team (GREEN), National Institute for Materials Science (NIMS)',
     location: 'Tsukuba, Japan',
     narrative:
       'Interning with the Electrochemical Smart Lab Team at NIMS GREEN — analyzing EIS data to improve NIMO, the NIMS autonomous materials discovery platform, for battery research.',
