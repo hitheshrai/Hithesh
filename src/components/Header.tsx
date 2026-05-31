@@ -9,12 +9,12 @@ const Header = () => {
       </h1>
 
       <p className="text-lg md:text-xl text-blue-700 dark:text-blue-400 font-medium mb-3 max-w-2xl leading-snug">
-        Building AI-accelerated platforms for autonomous materials discovery in photovoltaics
+        Building AI-accelerated platforms for autonomous materials discovery in energy materials
       </p>
 
       <p className="text-sm text-slate-500 dark:text-slate-400 mb-7">
         M.S. AI Engineering (Materials Science) · Arizona State University &nbsp;·&nbsp;
-        Researcher, Rolston Lab &nbsp;·&nbsp; Management Intern, Next Lab
+        Graduate Research Intern, NIMS &nbsp;·&nbsp; Researcher, Rolston Lab &nbsp;·&nbsp; Management Intern, Next Lab
       </p>
 
       <div className="flex flex-wrap items-center gap-3">
