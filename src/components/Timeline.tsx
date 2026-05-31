@@ -1,6 +1,7 @@
 // src/components/Timeline.tsx
 import { useRef, useState, Fragment } from 'react';
 import { motion, useInView, AnimatePresence, useReducedMotion } from 'framer-motion';
+import Flag from './Flag';
 
 type Region = 'us' | 'europe' | 'japan';
 
@@ -25,7 +26,7 @@ const stages: Stage[] = [
     yearLabel: '2021',
     institute: 'ASU — B.S.E EEE / M.S. AI Engineering',
     location: 'Tempe, AZ',
-    flag: '🇺🇸',
+    flag: 'us',
     region: 'us',
     narrative:
       'B.S.E in Electrical & Electronic Engineering (2021–2025), now pursuing an M.S. in AI Engineering (Materials Science) — applying ML to accelerate energy materials research.',
@@ -38,7 +39,7 @@ const stages: Stage[] = [
     yearLabel: '2022',
     institute: 'Renewable Energy Materials & Devices Lab, ASU',
     location: 'Tempe, AZ',
-    flag: '🇺🇸',
+    flag: 'us',
     region: 'us',
     narrative:
       'Fabricated perovskite thin films via spin and blade coating; led an Intel-funded cesium wide-bandgap project that delivered an improved-stability prototype, presented at IEEE PVSC 2024.',
@@ -51,7 +52,7 @@ const stages: Stage[] = [
     yearLabel: '2023',
     institute: 'Letian Dou Group, Purdue University',
     location: 'West Lafayette, IN',
-    flag: '🇺🇸',
+    flag: 'us',
     region: 'us',
     narrative:
       'Built a comparative device-efficiency database in Python/Excel and used the Perovskite Database to identify material-performance trends guiding additive selection.',
@@ -64,7 +65,7 @@ const stages: Stage[] = [
     yearLabel: '2024',
     institute: 'Institute Quantum Phenomena in Novel Materials, Helmholtz-Zentrum Berlin (HZB)',
     location: 'Berlin, Germany',
-    flag: '🇩🇪',
+    flag: 'de',
     region: 'europe',
     narrative:
       'Used PDF and X-ray/neutron diffraction to reveal structural instabilities and morphotropic phase transitions in perovskite ferroelectric systems.',
@@ -77,7 +78,7 @@ const stages: Stage[] = [
     yearLabel: '2025',
     institute: 'Photovoltaics Lab, École Polytechnique Fédérale de Lausanne (EPFL)',
     location: 'Neuchâtel, Switzerland',
-    flag: '🇨🇭',
+    flag: 'ch',
     region: 'europe',
     narrative:
       'Fabricated single-junction perovskite devices reaching 19% efficiency, applied atomic layer deposition and thermal evaporation techniques — funded by the ThinkSwiss Research Scholarship.',
@@ -90,7 +91,7 @@ const stages: Stage[] = [
     yearLabel: '2026',
     institute: 'Next Lab / ASU',
     location: 'Tempe, AZ',
-    flag: '🇺🇸',
+    flag: 'us',
     region: 'us',
     narrative:
       'Leading partner-funded AI initiatives: building LangChain retrieval pipelines, benchmarking AI workloads on NVIDIA Jetson edge devices, and analyzing INT8/Q4 quantization trade-offs for robust deployment.',
@@ -103,7 +104,7 @@ const stages: Stage[] = [
     yearLabel: '2026',
     institute: 'Automated Electrochemical Experiments Team (GREEN), National Institute for Materials Science (NIMS)',
     location: 'Tsukuba, Japan',
-    flag: '🇯🇵',
+    flag: 'jp',
     region: 'japan',
     narrative:
       'Interning with the Electrochemical Smart Lab Team at NIMS GREEN — analyzing EIS data to improve NIMO, the NIMS autonomous materials discovery platform, for battery research.',
@@ -187,9 +188,7 @@ function StageCard({
       <div className="relative p-5 pr-20">
         {/* Location row */}
         <div className="flex items-center gap-2 mb-2 flex-wrap">
-          <span className="text-base leading-none" role="img" aria-label={stage.location}>
-            {stage.flag}
-          </span>
+          <Flag code={stage.flag} />
           <span className="text-xs text-slate-400 dark:text-slate-500">{stage.location}</span>
           <span className="text-slate-200 dark:text-slate-700" aria-hidden>·</span>
           <span className="text-xs text-slate-400 dark:text-slate-500">{stage.date}</span>
@@ -293,9 +292,11 @@ export default function Timeline() {
                       : `${a.dot} w-2 h-2 hover:scale-125`
                   }`}
                 />
-                <span className="text-sm leading-none" aria-hidden={!showFlag}>
-                  {showFlag ? s.flag : <span className="opacity-0 select-none">·</span>}
-                </span>
+                {showFlag ? (
+                  <Flag code={s.flag} />
+                ) : (
+                  <span className="w-5 inline-block" aria-hidden="true" />
+                )}
               </button>
               {i < stages.length - 1 && (
                 <div className="h-px flex-1 min-w-3 bg-slate-200 dark:bg-slate-800 mx-1" />
