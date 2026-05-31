@@ -25,9 +25,9 @@ export default function About() {
 
         <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
           I am developing skills across perovskite thin-film fabrication, materials
-          characterization, and machine learning for autonomous experimentation. As a Management
-          Intern at Next Lab, I help evaluate emerging AI tools, support small pilot projects,
-          and assist with implementation for practical lab use.
+          characterization, and machine learning for autonomous experimentation. Currently a
+          Graduate Research Intern at NIMS (Tsukuba, Japan) working on battery materials, and a
+          Management Intern at Next Lab supporting AI initiatives for education and social good.
         </p>
 
         <div className="flex flex-wrap gap-2 pt-1">

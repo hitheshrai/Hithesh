@@ -80,6 +80,16 @@ const stages: Stage[] = [
       'Leading partner-funded AI initiatives: building LangChain retrieval pipelines, benchmarking AI workloads on NVIDIA Jetson edge devices, and analyzing INT8/Q4 quantization trade-offs for robust deployment.',
     interests: ['RAG', 'Edge AI', 'LangChain', 'Quantization', 'Automation'],
   },
+  {
+    id: 'nims-grad',
+    short: 'Graduate Research Intern – NIMS',
+    date: 'May – Aug 2026',
+    institute: 'National Institute for Materials Science (NIMS)',
+    location: 'Tsukuba, Japan',
+    narrative:
+      'Graduate research internship at NIMS working on battery materials — applying ML and characterization techniques to understand degradation mechanisms and accelerate materials discovery.',
+    interests: ['Battery Materials', 'ML for Materials', 'Degradation Modeling', 'Characterization'],
+  },
 ];
 
 // --- Memoized TimelineItem ---
