@@ -87,8 +87,8 @@ const stages: Stage[] = [
     institute: 'Automated Electrochemical Experiments Team (GREEN), NIMS',
     location: 'Tsukuba, Japan',
     narrative:
-      'Interning with the Electrochemical Smart Lab Team at NIMS GREEN — working on battery materials using robotic high-throughput electrochemical experiments and ML-driven materials discovery.',
-    interests: ['Battery Materials', 'Automated Experiments', 'ML for Materials', 'Electrochemistry'],
+      'Interning with the Electrochemical Smart Lab Team at NIMS GREEN — analyzing EIS data to improve NIMO, the NIMS autonomous materials discovery platform, for battery research.',
+    interests: ['EIS Analysis', 'NIMO', 'Battery Materials', 'ML for Materials'],
   },
 ];
 
