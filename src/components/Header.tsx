@@ -27,87 +27,103 @@ const Header = () => {
         opacity={0.18}
       />
 
-      <div className="relative z-10">
-      <motion.h1
-        variants={item}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-        className="text-4xl md:text-5xl font-serif font-bold text-slate-900 dark:text-slate-50 mb-3 leading-tight"
-      >
-        Hithesh Rai Purushothama
-      </motion.h1>
+      <div className="relative z-10 flex items-start justify-between gap-8">
+        {/* Text content */}
+        <div className="flex-1 min-w-0">
+          <motion.h1
+            variants={item}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="text-4xl md:text-5xl font-serif font-bold text-slate-900 dark:text-slate-50 mb-3 leading-tight"
+          >
+            Hithesh Rai Purushothama
+          </motion.h1>
 
-      <motion.p
-        variants={item}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="text-lg md:text-xl text-blue-700 dark:text-blue-400 font-medium mb-3 max-w-2xl leading-snug"
-      >
-        Building AI-accelerated workflows for autonomous discovery in energy materials
-      </motion.p>
+          <motion.p
+            variants={item}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            className="text-lg md:text-xl text-blue-700 dark:text-blue-400 font-medium mb-3 max-w-xl leading-snug"
+          >
+            Building AI-accelerated workflows for autonomous discovery in energy materials
+          </motion.p>
 
-      <motion.p
-        variants={item}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-        className="text-sm text-slate-500 dark:text-slate-400 mb-7"
-      >
-        M.S. AI Engineering (Materials Science) · Arizona State University &nbsp;·&nbsp;
-        Graduate Research Intern, NIMS &nbsp;·&nbsp; Researcher, Rolston Lab &nbsp;·&nbsp; Management Intern, Next Lab
-      </motion.p>
+          <motion.p
+            variants={item}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="text-sm text-slate-500 dark:text-slate-400 mb-7"
+          >
+            M.S. AI Engineering (Materials Science) · Arizona State University &nbsp;·&nbsp;
+            Graduate Research Intern, NIMS &nbsp;·&nbsp; Researcher, Rolston Lab &nbsp;·&nbsp; Management Intern, Next Lab
+          </motion.p>
 
-      <motion.div
-        variants={item}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-        className="flex flex-wrap items-center gap-3"
-      >
-        <a
-          href="/Hithesh/assets/Rai_Purushothama_Hithesh_CV.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded bg-blue-700 text-white hover:bg-blue-800 transition-colors font-medium"
+          <motion.div
+            variants={item}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="flex flex-wrap items-center gap-3"
+          >
+            <a
+              href="/Hithesh/assets/Rai_Purushothama_Hithesh_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded bg-blue-700 text-white hover:bg-blue-800 transition-colors font-medium"
+            >
+              <FileText size={15} />
+              CV
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/hithesh-rai-p/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:border-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-colors"
+            >
+              <Linkedin size={15} />
+              LinkedIn
+            </a>
+
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:border-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-colors"
+            >
+              <Mail size={15} />
+              Get in touch
+            </a>
+
+            <span className="hidden sm:block w-px h-5 bg-slate-200 dark:bg-slate-700 mx-1" />
+
+            <a
+              href="https://github.com/hitheshrai"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+            >
+              <Github size={20} />
+            </a>
+
+            <a
+              href="https://x.com/hitheshrai"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X / Twitter"
+              className="text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+            >
+              <Twitter size={20} />
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Headshot */}
+        <motion.div
+          variants={item}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="hidden md:block flex-shrink-0"
         >
-          <FileText size={15} />
-          CV
-        </a>
-
-        <a
-          href="https://www.linkedin.com/in/hithesh-rai-p/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:border-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-colors"
-        >
-          <Linkedin size={15} />
-          LinkedIn
-        </a>
-
-        <a
-          href="#contact"
-          className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:border-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-colors"
-        >
-          <Mail size={15} />
-          Get in touch
-        </a>
-
-        <span className="hidden sm:block w-px h-5 bg-slate-200 dark:bg-slate-700 mx-1" />
-
-        <a
-          href="https://github.com/hitheshrai"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub"
-          className="text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
-        >
-          <Github size={20} />
-        </a>
-
-        <a
-          href="https://x.com/hitheshrai"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="X / Twitter"
-          className="text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
-        >
-          <Twitter size={20} />
-        </a>
-      </motion.div>
+          <img
+            src="/Hithesh/assets/images/headshot.jpg"
+            alt="Hithesh Rai Purushothama"
+            className="w-36 h-36 rounded-full object-cover object-top ring-2 ring-slate-200 dark:ring-slate-700 shadow-md"
+          />
+        </motion.div>
       </div>
     </motion.header>
   );
