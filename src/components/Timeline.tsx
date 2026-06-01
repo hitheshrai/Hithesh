@@ -1,5 +1,5 @@
 // src/components/Timeline.tsx
-import { useRef, useState, Fragment } from 'react';
+import { useRef, useState, Fragment, useCallback } from 'react';
 import { motion, useInView, AnimatePresence, useReducedMotion } from 'framer-motion';
 import Flag from './Flag';
 
@@ -136,17 +136,20 @@ const accent: Record<Region, {
 function StageCard({
   stage,
   isActive,
+  isExpanded,
   onActivate,
+  onToggle,
   shouldReduce,
 }: {
   stage: Stage;
   isActive: boolean;
+  isExpanded: boolean;
   onActivate: () => void;
+  onToggle: () => void;
   shouldReduce: boolean | null;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-15% 0px -15% 0px' });
-  const [expanded, setExpanded] = useState(false);
   const a = accent[stage.region];
 
   return (
@@ -157,7 +160,7 @@ function StageCard({
       transition={{ duration: shouldReduce ? 0 : 0.4, ease: 'easeOut' }}
       onClick={() => {
         onActivate();
-        setExpanded((e) => !e);
+        onToggle();
       }}
       className={`relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 border-l-4 ${a.border}
         bg-white dark:bg-slate-900 cursor-pointer select-none
@@ -207,7 +210,7 @@ function StageCard({
 
         {/* Expandable narrative */}
         <AnimatePresence initial={false}>
-          {expanded && (
+          {isExpanded && (
             <motion.p
               key="narrative"
               initial={{ opacity: 0, height: 0, marginTop: 0 }}
@@ -225,7 +228,7 @@ function StageCard({
       {/* Expand chevron */}
       <div className="absolute bottom-4 right-4 text-slate-300 dark:text-slate-600">
         <motion.svg
-          animate={{ rotate: expanded ? 180 : 0 }}
+          animate={{ rotate: isExpanded ? 180 : 0 }}
           transition={{ duration: 0.2 }}
           xmlns="http://www.w3.org/2000/svg"
           width="14"
@@ -246,7 +249,12 @@ function StageCard({
 
 export default function Timeline() {
   const [active, setActive] = useState(0);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const shouldReduce = useReducedMotion();
+
+  const toggle = useCallback((i: number) => {
+    setExpandedIndex((prev) => (prev === i ? null : i));
+  }, []);
 
   return (
     <section className="py-12 border-b border-slate-200 dark:border-slate-800">
@@ -267,7 +275,7 @@ export default function Timeline() {
           return (
             <Fragment key={s.id}>
               <button
-                onClick={() => setActive(i)}
+                onClick={() => { setActive(i); toggle(i); }}
                 title={`${s.short} — ${s.location}`}
                 aria-pressed={i === active}
                 className="flex flex-col items-center gap-1 flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
@@ -314,7 +322,9 @@ export default function Timeline() {
             key={s.id}
             stage={s}
             isActive={i === active}
+            isExpanded={expandedIndex === i}
             onActivate={() => setActive(i)}
+            onToggle={() => toggle(i)}
             shouldReduce={shouldReduce}
           />
         ))}

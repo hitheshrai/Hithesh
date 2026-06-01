@@ -1,6 +1,6 @@
 // src/components/BackgroundPerovskite.tsx
-import { useRef, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef, useMemo, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useReducedMotion } from "framer-motion";
 
@@ -49,6 +49,10 @@ function BgUnitCell({ a = 4.0 }: { a?: number }) {
     box.dispose();
     return eg;
   }, [a]);
+
+  useEffect(() => {
+    return () => { edgeGeo.dispose(); };
+  }, [edgeGeo]);
 
   return (
     <group>
@@ -103,12 +107,29 @@ function BgUnitCell({ a = 4.0 }: { a?: number }) {
 function RotatingUnit({ speed = 0.02 }: { speed?: number }) {
   const ref = useRef<THREE.Group>(null);
   const shouldReduce = useReducedMotion();
+  const { invalidate, gl } = useThree();
+  const isVisible = useRef(true);
+
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const obs = new IntersectionObserver(([e]) => {
+      isVisible.current = e.isIntersecting;
+      if (e.isIntersecting && !shouldReduce) invalidate();
+    });
+    obs.observe(canvas);
+    return () => obs.disconnect();
+  }, [gl, invalidate, shouldReduce]);
+
+  useEffect(() => {
+    invalidate();
+  }, [invalidate]);
 
   useFrame((_state, delta) => {
-    if (!ref.current) return;
+    if (!ref.current || !isVisible.current) return;
     const s = shouldReduce ? 0 : speed;
     ref.current.rotation.y += delta * s;
     ref.current.rotation.x += delta * s * 0.3;
+    if (!shouldReduce) invalidate();
   });
 
   return (
@@ -137,7 +158,7 @@ export default function BackgroundPerovskite({
         gl={{ antialias: true, alpha: true }}
         camera={{ position: [6, 6, 6], fov: 35 }}
         dpr={dpr}
-        frameloop="always"
+        frameloop="demand"
       >
         <ambientLight intensity={0.9} color={"#ffffff"} />
         <directionalLight

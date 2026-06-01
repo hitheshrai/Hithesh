@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const DarkModeToggle = () => {
   const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === 'undefined') return false;
     const stored = localStorage.getItem('theme');
     if (stored === 'dark') return true;
     if (stored === 'light') return false;

@@ -27,7 +27,10 @@ export default function Nav() {
     const obs = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
-          if (e.isIntersecting) setActive('#' + e.target.id);
+          if (e.isIntersecting) {
+            setActive('#' + e.target.id);
+            break;
+          }
         }
       },
       { rootMargin: '-20% 0px -70% 0px', threshold: 0 }
