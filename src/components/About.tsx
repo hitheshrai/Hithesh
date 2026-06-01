@@ -42,6 +42,21 @@ export default function About() {
       </motion.h2>
 
       <div className="max-w-2xl space-y-4">
+        <motion.div
+          variants={itemVariants}
+          className="text-sm leading-relaxed"
+        >
+          <span className="font-semibold text-slate-800 dark:text-slate-200">
+            B.S.E Electrical &amp; Electronic Engineering
+          </span>
+          <span className="text-slate-400 dark:text-slate-600"> · </span>
+          <span className="font-semibold text-slate-800 dark:text-slate-200">
+            M.S. AI Engineering (Materials Science)
+          </span>
+          <br />
+          <span className="text-slate-500 dark:text-slate-400">Arizona State University · 2021 – Present</span>
+        </motion.div>
+
         <motion.p
           variants={itemVariants}
           className="text-base text-slate-700 dark:text-slate-300 leading-relaxed"
