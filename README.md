@@ -28,29 +28,26 @@ builds from `main` on every push.
 
 ## The route
 
-**Tempe** · Arizona State, Rolston Lab
-Wide-bandgap perovskite films, blade-coated in open air. Most labs work in a
-glovebox; ambient is what manufacturing actually needs, and it's harder.
+- **Tempe** · *Arizona State, Rolston Lab.* Wide-bandgap perovskite films,
+  blade-coated in open air. Most labs work in a glovebox; ambient is what
+  manufacturing actually needs, and it's harder.
 
-**West Lafayette** · Purdue, one summer
-Went looking through the perovskite literature for what actually improves a
-device, instead of guessing at the bench.
+- **West Lafayette** · *Purdue, one summer.* Went looking through the perovskite
+  literature for what actually improves a device, instead of guessing at the
+  bench.
 
-**Berlin** · Helmholtz-Zentrum
-Local structure in ferroelectrics, by X-ray and neutron scattering. The average
-lattice looks fine. The disorder that matters shows up close in.
+- **Berlin** · *Helmholtz-Zentrum.* Local structure in ferroelectrics, by X-ray
+  and neutron scattering. The average lattice looks fine. The disorder that
+  matters shows up close in.
 
-**Neuchâtel** · EPFL
-Single-junction cells at 19%, built in a lab that makes most of its own
-equipment.
+- **Neuchâtel** · *EPFL.* Single-junction cells at 19%, built in a lab that makes
+  most of its own equipment.
 
-**Tempe again** · ASU Next Lab
-Language models small enough to run on hardware you can carry somewhere with no
-internet.
+- **Tempe again** · *ASU Next Lab.* Language models small enough to run on
+  hardware you can carry somewhere with no internet.
 
-**Tsukuba** · NIMS
-Impedance data an autonomous lab can act on without a person reading the plot
-first.
+- **Tsukuba** · *NIMS.* Impedance data an autonomous lab can act on without a
+  person reading the plot first.
 
 ## Contact
 
