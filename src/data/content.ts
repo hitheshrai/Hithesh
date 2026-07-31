@@ -244,7 +244,7 @@ export const publications: Publication[] = [
     authors: 'H. R. Purushothama, N. Rolston et al.',
     venue: 'IEEE 52nd Photovoltaic Specialists Conference',
     year: '2024',
-    note: 'Seattle, USA',
+    note: 'Poster · Seattle, USA',
     href: 'https://ieeexplore.ieee.org/abstract/document/10749044/',
   },
 ];
