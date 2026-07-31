@@ -26,7 +26,7 @@ npm run dev
 `npm run build` writes the static site to `dist/`. Hosting is Vercel, which
 builds from `main` on every push.
 
-## Notes to my future self
+## A few things worth knowing
 
 **Every word on the site is in `src/data/content.ts`.** Text, projects, papers,
 coordinates, the lot. Edit that file, not the components.
@@ -42,9 +42,9 @@ system asks for reduced motion, get the same six stops as still plates. A phone
 can't hold a full record in a pinned viewport without cutting it off.
 
 **Analytics needs `VITE_PUBLIC_POSTHOG_KEY` set in Vercel.** It gets baked in at
-build time, so changing it does nothing at all until you redeploy. Learned that
-one the slow way. Use the project key that starts with `phc_`, never a personal
-one.
+build time, so changing the value does nothing until a new deploy runs. Use the
+project key beginning `phc_`, never a personal one — the personal keys are
+secrets and this one ends up in public JavaScript.
 
 Type is Newsreader, Public Sans and IBM Plex Mono.
 
