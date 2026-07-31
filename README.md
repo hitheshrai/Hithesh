@@ -26,27 +26,31 @@ npm run dev
 `npm run build` writes the static site to `dist/`. Hosting is Vercel, which
 builds from `main` on every push.
 
-## A few things worth knowing
+## The route
 
-**Every word on the site is in `src/data/content.ts`.** Text, projects, papers,
-coordinates, the lot. Edit that file, not the components.
+**Tempe** · Arizona State, Rolston Lab
+Wide-bandgap perovskite films, blade-coated in open air. Most labs work in a
+glovebox; ambient is what manufacturing actually needs, and it's harder.
 
-**The map is real geography.** Coastlines come from Natural Earth's 110m
-dataset, thinned to about 17 KB so the whole thing ships with the page and
-doesn't call out to anything. Longitudes are unwrapped, which is why Tempe to
-Tsukuba crosses the Pacific westward instead of drawing a silly line back across
-Europe.
+**West Lafayette** · Purdue, one summer
+Went looking through the perovskite literature for what actually improves a
+device, instead of guessing at the bench.
 
-**On phones it doesn't hijack the scroll.** Narrow screens, and anyone whose
-system asks for reduced motion, get the same six stops as still plates. A phone
-can't hold a full record in a pinned viewport without cutting it off.
+**Berlin** · Helmholtz-Zentrum
+Local structure in ferroelectrics, by X-ray and neutron scattering. The average
+lattice looks fine. The disorder that matters shows up close in.
 
-**Analytics needs `VITE_PUBLIC_POSTHOG_KEY` set in Vercel.** It gets baked in at
-build time, so changing the value does nothing until a new deploy runs. Use the
-project key beginning `phc_`, never a personal one — the personal keys are
-secrets and this one ends up in public JavaScript.
+**Neuchâtel** · EPFL
+Single-junction cells at 19%, built in a lab that makes most of its own
+equipment.
 
-Type is Newsreader, Public Sans and IBM Plex Mono.
+**Tempe again** · ASU Next Lab
+Language models small enough to run on hardware you can carry somewhere with no
+internet.
+
+**Tsukuba** · NIMS
+Impedance data an autonomous lab can act on without a person reading the plot
+first.
 
 ## Contact
 
