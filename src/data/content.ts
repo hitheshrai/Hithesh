@@ -224,7 +224,7 @@ export const publications: Publication[] = [
     authors: 'H. R. Purushothama, N. Rolston',
     venue: 'AI4X-AC',
     year: '2026',
-    note: 'Accepted poster · Singapore',
+    note: 'Poster · Singapore',
     href: 'https://openreview.net/forum?id=qJkiTa9Z0q',
   },
   {
@@ -244,7 +244,7 @@ export const publications: Publication[] = [
     authors: 'H. R. Purushothama, N. Rolston et al.',
     venue: 'IEEE 52nd Photovoltaic Specialists Conference',
     year: '2024',
-    note: 'Seattle, USA',
+    note: 'Poster · Seattle, USA',
     href: 'https://ieeexplore.ieee.org/abstract/document/10749044/',
   },
 ];
