@@ -219,9 +219,10 @@ function AtlasStack() {
     <section id="atlas" className="relative z-10">
       <div className="px-[var(--gutter)] pb-16 pt-32">
         <p className="label mb-5">{profile.discipline}</p>
-        <h1 className="max-w-[14ch] font-display text-[clamp(2.5rem,10vw,4.5rem)] font-light leading-[0.98] tracking-[-0.015em]">
+        {/* Presentational: the document's h1 lives in App so it survives scrolling. */}
+        <p className="max-w-[14ch] font-display text-[clamp(2.5rem,10vw,4.5rem)] font-light leading-[0.98] tracking-[-0.015em]">
           {profile.name}
-        </h1>
+        </p>
         <p className="mt-7 max-w-measure text-[1.0625rem] leading-relaxed text-graphite-soft">
           {profile.statement}
         </p>
@@ -432,9 +433,9 @@ function AtlasTraverse() {
             {activeStation === null ? (
               <div>
                 <p className="label mb-6">{profile.discipline}</p>
-                <h1 className="max-w-[15ch] font-display text-[clamp(2.5rem,7.5vw,5.25rem)] font-light leading-[0.95] tracking-[-0.015em]">
+                <p className="max-w-[15ch] font-display text-[clamp(2.5rem,7.5vw,5.25rem)] font-light leading-[0.95] tracking-[-0.015em]">
                   {profile.name}
-                </h1>
+                </p>
                 <p className="mt-7 max-w-measure text-lg leading-relaxed text-graphite-soft">
                   {profile.statement}
                 </p>
