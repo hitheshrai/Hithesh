@@ -25,6 +25,12 @@ if (posthogKey) {
     // them from consuming the person-profile quota.
     person_profiles: 'identified_only',
     capture_exceptions: true,
+    // These three pull down 93 KB of extra script between them — more than half
+    // the weight of the site itself — and none of it earns its place on a
+    // six-section portfolio. Exception capture stays; it is 5 KB and useful.
+    disable_session_recording: true,
+    disable_surveys: true,
+    capture_dead_clicks: false,
   });
 } else {
   // Deliberately not DEV-only. A missing key in production is exactly the case
