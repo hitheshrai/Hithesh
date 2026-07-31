@@ -1,5 +1,6 @@
 // src/components/Atlas.tsx
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import posthog from 'posthog-js';
 import { stations, profile } from '../data/content';
 import {
   MAP_W,
@@ -453,7 +454,10 @@ function AtlasTraverse() {
             return (
               <button
                 key={i}
-                onClick={() => jumpTo(i)}
+                onClick={() => {
+                  posthog.capture('atlas_stop_navigated', { stop_index: i, place: i === 0 ? 'Start' : stations[i - 1].place });
+                  jumpTo(i);
+                }}
                 className="group flex items-center gap-3 focus:outline-none focus-visible:outline-none"
                 aria-current={isActive ? 'true' : undefined}
                 aria-label={i === 0 ? 'Start' : stations[i - 1].place}

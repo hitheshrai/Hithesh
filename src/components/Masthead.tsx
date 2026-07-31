@@ -1,5 +1,6 @@
 // src/components/Masthead.tsx
 import { useEffect, useState } from 'react';
+import posthog from 'posthog-js';
 import { profile } from '../data/content';
 
 const links = [
@@ -45,6 +46,7 @@ export default function Masthead() {
             target="_blank"
             rel="noopener noreferrer"
             className="label link-draw link-draw-oxide text-oxide"
+            onClick={() => posthog.capture('cv_opened', { source: 'masthead' })}
           >
             <span className="hidden sm:inline">Curriculum Vitae</span>
             <span className="sm:hidden">CV</span>
