@@ -3,7 +3,7 @@
 
 export type Station = {
   id: string;
-  /** Place name, used as the display heading for the stop. */
+  /** Place name. Supporting metadata — the work is the heading, not the city. */
   place: string;
   country: string;
   /** [longitude, latitude] — drives the atlas camera and marker position. */
@@ -11,6 +11,7 @@ export type Station = {
   institution: string;
   role: string;
   period: string;
+  /** What the work was. This is the display heading for the stop. */
   headline: string;
   body: string;
   methods: string[];
@@ -29,8 +30,8 @@ export const stations: Station[] = [
     institution: 'Arizona State University · Rolston Lab',
     role: 'Researcher, Renewable Energy Materials & Devices',
     period: 'Sep 2022 — Present',
-    headline: 'Making perovskite films that survive the air they were made in.',
-    body: 'Fabricated perovskite thin films by spin and blade coating, and led an Intel-funded cesium wide-bandgap effort that produced an improved-stability prototype — the work behind my first IEEE PVSC paper. Ambient processing is the constraint that makes this hard and the reason it matters for manufacturing.',
+    headline: 'Wide-bandgap perovskite films, blade-coated in open air',
+    body: 'I make perovskite thin films by spin and blade coating and test how long they last. On an Intel-funded project I worked on cesium wide-bandgap compositions and got to a prototype with better stability, which became my first IEEE PVSC paper. Most lab perovskites are made in a glovebox. Ambient processing is what manufacturing actually needs, and it is harder.',
     methods: ['Blade coating', 'Spin coating', 'Thin-film stability', 'Device characterisation'],
   },
   {
@@ -41,8 +42,8 @@ export const stations: Station[] = [
     institution: 'Purdue University · Letian Dou Group',
     role: 'Research Fellow (SURF)',
     period: 'Summer 2023',
-    headline: 'The first time the data set was the experiment.',
-    body: 'Built a comparative device-efficiency database in Python and mined the Perovskite Database for material–performance trends that then guided additive selection. This is where the work turned from making samples to asking what the whole literature already knew.',
+    headline: 'Mining the perovskite literature for what actually improves devices',
+    body: 'I built a device-efficiency database in Python and pulled trends out of the Perovskite Database to decide which additives were worth trying in the lab. It was the first time I worked on the data side rather than at the bench, and it changed how I choose experiments.',
     methods: ['Python', 'Perovskite Database', 'Trend analysis', 'Additive screening'],
   },
   {
@@ -53,8 +54,8 @@ export const stations: Station[] = [
     institution: 'Helmholtz-Zentrum Berlin · Quantum Phenomena in Novel Materials',
     role: 'Visiting Researcher',
     period: 'Summer 2024',
-    headline: 'Reading disorder directly out of the scattering.',
-    body: 'Used pair distribution function analysis with X-ray and neutron diffraction to resolve structural instabilities and morphotropic phase transitions in ferroelectric perovskites. Local structure, not the average lattice, is where the interesting failure modes live.',
+    headline: 'Local structure in ferroelectric perovskites, by X-ray and neutron scattering',
+    body: 'I used pair distribution function analysis with X-ray and neutron diffraction to study structural instability and morphotropic phase transitions. The average lattice in these materials looks fine. The disorder that actually matters shows up locally, and PDF is how you see it.',
     methods: ['PDF analysis', 'Neutron diffraction', 'X-ray diffraction', 'Local structure'],
   },
   {
@@ -65,8 +66,8 @@ export const stations: Station[] = [
     institution: 'EPFL · Photovoltaics and Thin-Film Electronics Laboratory',
     role: 'Visiting Researcher — ThinkSwiss Scholarship',
     period: 'Summer 2025',
-    headline: 'Single-junction devices at 19%.',
-    body: 'Fabricated single-junction perovskite devices reaching 19% efficiency using atomic layer deposition and thermal evaporation. Funded by the ThinkSwiss Research Scholarship. Working in a lab that builds its own tooling changed how I think about reproducibility.',
+    headline: 'Single-junction perovskite cells at 19% efficiency',
+    body: 'I fabricated single-junction devices using atomic layer deposition and thermal evaporation, funded by a ThinkSwiss Research Scholarship. PV-Lab builds a lot of its own tooling, and seeing that up close changed how seriously I take reproducibility.',
     methods: ['ALD', 'Thermal evaporation', 'Device fabrication', 'Stability testing'],
   },
   {
@@ -77,8 +78,8 @@ export const stations: Station[] = [
     institution: 'ASU Next Lab',
     role: 'Management Intern',
     period: 'Jan 2026 — Present',
-    headline: 'Back where it started, working on the other half of the problem.',
-    body: 'Leading partner-funded AI initiatives: LangChain retrieval pipelines, benchmarking workloads on NVIDIA Jetson edge hardware, and quantifying the INT8 and Q4 quantisation trade-offs that decide whether a model can run where there is no connectivity.',
+    headline: 'Running language models on hardware that fits in a backpack',
+    body: 'I lead partner-funded AI work: LangChain retrieval pipelines, benchmarking on NVIDIA Jetson boards, and measuring what INT8 and Q4 quantisation actually cost you in accuracy. The constraint is deployment somewhere with no connectivity and no datacenter, which rules out most of the usual answers.',
     methods: ['RAG', 'LangChain', 'Jetson benchmarking', 'Quantisation', 'Edge deployment'],
   },
   {
@@ -89,8 +90,8 @@ export const stations: Station[] = [
     institution: 'NIMS · Electrochemical Smart Lab, GREEN',
     role: 'Graduate Research Intern',
     period: 'May — Aug 2026',
-    headline: 'Teaching an autonomous lab to read impedance.',
-    body: 'Analysing electrochemical impedance spectroscopy data to extend NIMO, the NIMS autonomous materials discovery platform, toward battery research. The goal is a measurement the machine can act on without a human interpreting the Nyquist plot first.',
+    headline: 'Impedance data an autonomous lab can act on',
+    body: 'I analyse electrochemical impedance spectroscopy data to extend NIMO, the NIMS autonomous materials discovery platform, toward battery research. A self-driving lab needs a measurement it can interpret on its own, without a human reading the Nyquist plot first.',
     methods: ['EIS', 'NIMO', 'Battery materials', 'Autonomous experimentation'],
   },
 ];
@@ -107,7 +108,7 @@ export const capabilities: Capability[] = [
     id: 'materials',
     title: 'Materials & Devices',
     summary:
-      'Hands-on fabrication and characterisation across the full perovskite stack, in ambient and glovebox conditions.',
+      'I fabricate and characterise the full perovskite stack, in ambient air and in the glovebox.',
     items: [
       'Blade coating · spin coating · ambient processing',
       'Atomic layer deposition · thermal evaporation',
@@ -119,7 +120,7 @@ export const capabilities: Capability[] = [
     id: 'ml',
     title: 'Machine Learning & Data',
     summary:
-      'Models built against real measurements, evaluated on whether they transfer — not on whether they fit.',
+      'I build models on measurements I took, and judge them on whether they transfer to a new system rather than how well they fit the training set.',
     items: [
       'Physics-informed and impedance-grounded models',
       'Experimental data pipelines · Python · NumPy · scikit-learn',
@@ -131,7 +132,7 @@ export const capabilities: Capability[] = [
     id: 'systems',
     title: 'Systems & Deployment',
     summary:
-      'Getting the result off the bench: autonomous loops, edge hardware, and work that runs without supervision.',
+      'Getting results off the bench and into something that runs unattended — autonomous experiment loops and edge hardware.',
     items: [
       'Autonomous experimentation · NIMO platform',
       'NVIDIA Jetson · Raspberry Pi · offline LLM deployment',
@@ -305,7 +306,16 @@ export const profile = {
   name: 'Hithesh Rai Purushothama',
   discipline: 'Materials science · Machine learning',
   statement:
-    'I build experiment-grounded AI for energy materials — models trained on measurements I took myself, on films I made myself.',
+    'I work on solar cells and batteries: I make the materials, run the measurements, and build models on the data that comes out. Right now that means perovskite thin films at ASU and impedance analysis for an autonomous lab at NIMS.',
+  /** Stated plainly up front — this is what a lab or a recruiter is scanning for. */
+  focus: [
+    'Perovskite photovoltaics',
+    'Ion migration & device stability',
+    'Ambient-processed thin films',
+    'Impedance spectroscopy & degradation',
+    'Autonomous experimentation',
+    'ML for materials discovery',
+  ],
   degrees: [
     { label: 'M.S. AI Engineering (Materials Science)', org: 'Arizona State University' },
     { label: 'B.S.E Electrical & Electronic Engineering', org: 'Arizona State University' },

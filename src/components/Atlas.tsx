@@ -225,13 +225,20 @@ function AtlasStack() {
         <p className="mt-7 max-w-measure text-[1.0625rem] leading-relaxed text-graphite-soft">
           {profile.statement}
         </p>
+        <ul className="mt-7 flex max-w-measure flex-wrap gap-x-4 gap-y-1.5">
+          {profile.focus.map((topic) => (
+            <li key={topic} className="label">
+              {topic}
+            </li>
+          ))}
+        </ul>
       </div>
 
       <div className="px-[var(--gutter)] pb-4">
         {/* Capped: a plate stretched to a desktop viewport turns the markers into blobs. */}
         <div className="max-w-[46rem]">
           <Plate index={null} />
-          <p className="label mt-3">Six stops · three continents</p>
+          <p className="label mt-3">Six projects · 2022 — 2026</p>
         </div>
       </div>
 
@@ -431,7 +438,14 @@ function AtlasTraverse() {
                 <p className="mt-7 max-w-measure text-lg leading-relaxed text-graphite-soft">
                   {profile.statement}
                 </p>
-                <p className="label mt-10">Scroll — six stops, three continents</p>
+                <ul className="mt-7 flex max-w-measure flex-wrap gap-x-4 gap-y-1.5">
+                  {profile.focus.map((topic) => (
+                    <li key={topic} className="label">
+                      {topic}
+                    </li>
+                  ))}
+                </ul>
+                <p className="label mt-9">Scroll — six projects, six years</p>
               </div>
             ) : (
               <StationRecord

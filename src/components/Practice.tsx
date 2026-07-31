@@ -12,12 +12,12 @@ export default function Practice() {
           <div>
             <p className="label mb-5">Practice</p>
             <h2 className="max-w-[18ch] font-display text-[clamp(2rem,5vw,3.5rem)] font-light leading-[1.02] tracking-[-0.01em]">
-              Two disciplines, one loop.
+              Materials, measurements, models.
             </h2>
           </div>
           <p className="max-w-[38ch] text-[0.95rem] leading-relaxed text-graphite-soft">
-            I make the material, measure it, and train the model on that measurement. Each side
-            keeps the other honest.
+            I do all three, which is the point. Making the sample tells you what the measurement is
+            worth, and the measurement tells you what the model is worth.
           </p>
         </div>
 
