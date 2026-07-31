@@ -224,7 +224,7 @@ export const publications: Publication[] = [
     authors: 'H. R. Purushothama, N. Rolston',
     venue: 'AI4X-AC',
     year: '2026',
-    note: 'Accepted poster · Singapore',
+    note: 'Poster presented · Singapore',
     href: 'https://openreview.net/forum?id=qJkiTa9Z0q',
   },
   {
