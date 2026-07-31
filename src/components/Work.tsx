@@ -1,4 +1,5 @@
 // src/components/Work.tsx
+import posthog from 'posthog-js';
 import { work } from '../data/content';
 import { useReveal } from '../lib/hooks';
 
@@ -48,6 +49,7 @@ export default function Work() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="link-draw link-draw-oxide text-[0.85rem] text-oxide"
+                    onClick={() => posthog.capture('project_link_clicked', { project_id: project.id, project_title: project.title, link_label: link.label })}
                   >
                     {link.label} ↗
                   </a>

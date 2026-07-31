@@ -32,3 +32,4 @@ dist-ssr
 *.fdb_latexmk
 *.synctex.gz
 *.xdv
+.env

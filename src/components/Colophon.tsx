@@ -1,4 +1,5 @@
 // src/components/Colophon.tsx
+import posthog from 'posthog-js';
 import { profile, stations } from '../data/content';
 import { useReveal } from '../lib/hooks';
 
@@ -14,6 +15,7 @@ export default function Colophon() {
         <a
           href={`mailto:${profile.email}`}
           className="reveal link-draw inline-block font-display text-[clamp(2rem,6.5vw,4.75rem)] font-light leading-[1.05] tracking-[-0.02em]"
+          onClick={() => posthog.capture('contact_email_clicked')}
         >
           {profile.email}
         </a>
@@ -29,6 +31,7 @@ export default function Colophon() {
             target="_blank"
             rel="noopener noreferrer"
             className="link-draw link-draw-oxide label text-oxide"
+            onClick={() => posthog.capture('cv_opened', { source: 'colophon' })}
           >
             Curriculum Vitae ↗
           </a>
@@ -39,6 +42,7 @@ export default function Colophon() {
               target="_blank"
               rel="noopener noreferrer"
               className="link-draw label"
+              onClick={() => posthog.capture('social_link_clicked', { platform: link.label })}
             >
               {link.label} ↗
             </a>

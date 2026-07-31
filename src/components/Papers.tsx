@@ -1,4 +1,5 @@
 // src/components/Papers.tsx
+import posthog from 'posthog-js';
 import { publications, writing } from '../data/content';
 import { useReveal } from '../lib/hooks';
 
@@ -30,6 +31,7 @@ export default function Papers() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="link-draw font-display text-[1.2rem] font-normal leading-snug md:text-[1.35rem]"
+                    onClick={() => posthog.capture('publication_opened', { publication_id: pub.id, venue: pub.venue, year: pub.year })}
                   >
                     {pub.title}
                   </a>
@@ -57,6 +59,7 @@ export default function Papers() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex flex-col gap-1.5 py-5"
+                    onClick={() => posthog.capture('writing_piece_opened', { piece_id: piece.id, kind: piece.kind, outlet: piece.outlet })}
                   >
                     <span className="flex items-baseline justify-between gap-4">
                       <span className="label">{piece.kind}</span>
