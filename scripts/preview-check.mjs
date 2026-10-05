@@ -1,7 +1,8 @@
 import { chromium } from 'playwright';
 import { mkdir } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 
-const output = 'C:/Users/hithe/Downloads/website-preview';
+const output = fileURLToPath(new URL('../artifacts/website-preview/', import.meta.url));
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 

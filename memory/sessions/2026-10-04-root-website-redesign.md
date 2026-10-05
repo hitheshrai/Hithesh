@@ -54,3 +54,20 @@ Axe previously found no tagged WCAG/best-practice violations; its color
 contrast check was incomplete. The local preview is available on port 4173
 during this session. Screenshots are in
 `C:/Users/hithe/Downloads/website-redesign-review/`, outside Git.
+
+
+## Release
+
+The redesign was committed as `ed50022`, opened as
+<https://github.com/hitheshrai/Hithesh/pull/27>, and merged to `main` as
+`750a790bb4a0b9be066e3b17f5a95b0a7c8d1a74`. GitHub and Vercel reported a
+successful production deployment. `https://www.hitheshrai.com` returned HTTP
+200 and served the new hero, interactive research vision, and Next Lab copy.
+
+The final external review found one public README issue: the preview-output
+documentation exposed an absolute local path. The script and README now use
+the repository-relative ignored directory `artifacts/website-preview/`.
+Next Lab programme-work copy was also made more concrete by naming offline
+Jetson trade-offs, the Agentic AI presentation, FOLC Fest, LlamaCon, and
+testable research and voice-assistant prototypes. The collaborative voice and
+the 3D future-direction story remain intentional user decisions.

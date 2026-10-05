@@ -35,7 +35,7 @@ node scripts/preview-check.mjs
 ```
 
 The Playwright script writes desktop and mobile review images to
-`C:/Users/hithe/Downloads/website-preview/`.
+`artifacts/website-preview/` inside the project.
 
 ## Project structure
 
