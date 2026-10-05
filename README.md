@@ -30,6 +30,7 @@ Open <http://127.0.0.1:4173/>.
 ```bash
 npm run build
 npm run lint
+npm run design:audit
 npx tsc --noEmit
 node scripts/preview-check.mjs
 ```

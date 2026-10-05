@@ -21,6 +21,10 @@ async function capture(name, viewport) {
   await page.locator('#research [data-reveal]').evaluateAll(items => items.forEach(item => item.classList.add('is-visible')));
   await page.waitForTimeout(1200);
   await page.locator('#research').screenshot({ path: `${output}/${name}-research.png` });
+  await page.locator('#experience').scrollIntoViewIfNeeded();
+  await page.locator('#experience [data-reveal]').evaluateAll(items => items.forEach(item => item.classList.add('is-visible')));
+  await page.waitForTimeout(900);
+  await page.locator('#experience').screenshot({ path: `${output}/${name}-experience.png` });
   await page.locator('#engineering').scrollIntoViewIfNeeded();
   await page.locator('#engineering [data-reveal]').evaluateAll(items => items.forEach(item => item.classList.add('is-visible')));
   await page.waitForTimeout(900);

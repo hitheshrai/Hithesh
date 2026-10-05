@@ -1,7 +1,7 @@
 export default function Engineering() {
   return <section className="section wrap" id="engineering" aria-labelledby="engineering-title">
     <div className="section-heading" data-reveal>
-      <div><p className="eyebrow">04 / Projects & leadership</p><h2 id="engineering-title">Helping technical teams move.</h2></div>
+      <div><p className="eyebrow">Projects & leadership</p><h2 id="engineering-title">Helping technical teams move.</h2></div>
       <a className="text-link" href="https://github.com/hitheshrai" target="_blank" rel="noreferrer">More on GitHub <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
     </div>
 
@@ -18,9 +18,9 @@ export default function Engineering() {
 
     <p className="rail-hint" aria-hidden="true">Swipe through project photographs →</p>
     <div className="work-photo-rail" role="region" aria-label="Selected projects and leadership photographs" tabIndex={0} data-reveal>
-      <figure><img src="/assets/nextlab-showcase.jpg" width="768" height="1024" alt="Hithesh presenting a low-latency music collaboration project with Zoom at the ASU Enterprise Technology Town Hall." loading="lazy"/><figcaption>Low-latency music collaboration with Zoom · Enterprise Technology Town Hall</figcaption></figure>
-      <figure><img src="/assets/aee-chapter.jpg" width="800" height="600" alt="Members of the Association of Energy Engineers student chapter at ASU." loading="lazy"/><figcaption>AEE at ASU</figcaption></figure>
-      <figure><img src="/assets/first-solar-visit.jpg" width="800" height="600" alt="Students in safety gear during a visit to First Solar's photovoltaic reliability site." loading="lazy"/><figcaption>First Solar reliability site visit</figcaption></figure>
+      <figure className="photo-card" tabIndex={0}><img src="/assets/nextlab-showcase.jpg" width="768" height="1024" alt="Hithesh presenting a low-latency music collaboration project with Zoom at the ASU Enterprise Technology Town Hall." loading="lazy"/><figcaption><strong>ASU Enterprise Technology Town Hall</strong><span>Next Lab · Studio Associate</span><span>Low-latency music collaboration with Zoom</span></figcaption></figure>
+      <figure className="photo-card" tabIndex={0}><img src="/assets/aee-chapter.jpg" width="800" height="600" alt="Members of the Association of Energy Engineers student chapter at ASU." loading="lazy"/><figcaption><strong>AEE at ASU · 2026</strong><span>Student Chapter President</span><span>Energy, storage, manufacturing, and compute</span></figcaption></figure>
+      <figure className="photo-card" tabIndex={0}><img src="/assets/first-solar-visit.jpg" width="800" height="600" alt="Students in safety gear during a visit to First Solar's photovoltaic reliability site." loading="lazy"/><figcaption><strong>First Solar · Arizona</strong><span>Photovoltaic reliability site visit</span><span>Manufacturing, testing, and field reliability</span></figcaption></figure>
     </div>
   </section>;
 }

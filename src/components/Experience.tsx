@@ -18,7 +18,7 @@ export default function Experience() {
       <div className="section wrap">
         <div className="section-heading" data-reveal>
           <div>
-            <p className="eyebrow">02 / Research experience</p>
+            <p className="eyebrow">Research experience</p>
             <h2 id="experience-title">Research beyond ASU.</h2>
           </div>
           <p>Solar cells, local structure, thin-film processing, and battery diagnostics.</p>
@@ -60,19 +60,19 @@ export default function Experience() {
 
           <p className="rail-hint" aria-hidden="true">Swipe through the labs →</p>
           <div className="placement-gallery" role="region" aria-label="Photographs from four research labs" tabIndex={0}>
-            <figure className="placement-photo" tabIndex={0}>
+            <figure className="photo-card placement-photo" tabIndex={0}>
               <img src="/assets/purdue-surf.jpg" width="800" height="600" alt="Hithesh standing beside his perovskite stability poster at Purdue University." loading="lazy" />
               <figcaption><strong>Purdue · Dou Group · 2023</strong><span>SURF Research Fellow</span><span>Solar-cell fabrication and device database</span></figcaption>
             </figure>
-            <figure className="placement-photo" tabIndex={0}>
+            <figure className="photo-card placement-photo" tabIndex={0}>
               <img src="/assets/hzb-presentation.jpg" width="800" height="600" alt="Hithesh discussing his pair-distribution-function research poster at Helmholtz-Zentrum Berlin." loading="lazy" />
               <figcaption><strong>HZB · Berlin · 2024</strong><span>International Summer Student</span><span>X-ray and neutron PDF analysis</span></figcaption>
             </figure>
-            <figure className="placement-photo" tabIndex={0}>
+            <figure className="photo-card placement-photo" tabIndex={0}>
               <img src="/assets/thinkswiss-certificate.jpg" width="800" height="533" alt="Hithesh receiving a ThinkSwiss certificate after his EPFL summer research." loading="lazy" />
               <figcaption><strong>EPFL · PV-Lab · 2025</strong><span>Undergraduate Research Assistant · ThinkSwiss Scholar</span><span>SnO₂ layers, device fabrication, and stability testing</span></figcaption>
             </figure>
-            <figure className="placement-photo" tabIndex={0}>
+            <figure className="photo-card placement-photo" tabIndex={0}>
               <img src="/assets/nims-team.jpg" width="1024" height="768" alt="Hithesh with colleagues during his research internship at the National Institute for Materials Science." loading="lazy" />
               <figcaption><strong>NIMS · Tsukuba · 2026</strong><span>Graduate Research Intern</span><span>Impedance analysis and autonomous experiments</span></figcaption>
             </figure>

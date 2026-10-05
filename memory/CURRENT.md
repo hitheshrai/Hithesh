@@ -41,6 +41,14 @@
 - Every gallery card uses the same information order: lab and year, role or
   program, then the work performed. Funding/program labels no longer replace
   research context on only one card.
+- The first Impeccable standardization pass removed numbered section markers,
+  raised functional metadata to a readable 12px scale, changed long metadata
+  labels to sentence case, unified border tokens, and extended the shared
+  photo-card interaction to the projects gallery. The intentional warm palette
+  remains. The visual contract is recorded in `docs/design-system.md`.
+- Impeccable 4.1.0 is pinned as a local development dependency. Run
+  `npm run design:audit` for the repeatable source scan; rendered URL audits
+  additionally require a local Chromium browser.
 - Visitor-facing language calls this section `Experience` and `Research beyond
   ASU`. It uses factual research topics and contributions rather than framing
   the ongoing work as a completed journey or story.
