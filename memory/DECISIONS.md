@@ -22,6 +22,9 @@ The public list omits the separate 2024 Open-Air cesium presentation at the
 user's request; IPEROP represents that research thread. The linked 2024 PVSC
 entry is only the formamidinium proceedings paper. The 2026 AI4X presented-
 poster author list is distinguished from its earlier public abstract.
+The IPEROP poster uses the user-confirmed presented-poster author list:
+H. R. Purushothama, H. Nguyen, K. Bakshi, and N. Rolston. The linked nanoGe
+record currently omits Nguyen and Bakshi.
 
 ## 2026-10-04 — CV withheld
 
