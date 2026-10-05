@@ -38,10 +38,12 @@ poster. Sources are recorded in `docs/content-sources.md`.
 ## 2026-10-04 — Interactive future-research vision
 
 The hero uses a contained, lazily loaded Three.js scene with four user-selected
-stages: crystal chemistry, solar, storage, and energy system. It branches
-halide perovskites toward solar and Li-rich antiperovskites toward candidate
-solid electrolytes, then joins solar and storage at system scale. It is labeled
-as a future direction, not completed module or BESS work.
+stages: materials, solar, batteries, and systems. The materials stage uses a
+VESTA-style ideal cubic CsPbI₃ supercell validated against Materials Project.
+The battery stage points to completed impedance and degradation work. Solar
+and storage meet only at the future system scale. Antiperovskites were removed
+from the central visual because they are an interest rather than completed
+research; module and BESS scenes remain explicitly prospective.
 
 ## 2026-10-04 — Human story and evidence boundary
 

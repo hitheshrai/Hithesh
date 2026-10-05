@@ -101,7 +101,12 @@ h3 { font-size: 1.8rem; line-height: 1.12; letter-spacing: -.02em; }
 .energy-scene-labels { position: absolute; inset: 12px 12px auto; display: flex; justify-content: center; gap: 14px; pointer-events: none; opacity: 0; transition: opacity .3s ease; }
 .energy-canvas-shell.is-ready .energy-scene-labels { opacity: 1; }
 .energy-scene-labels span { padding: 6px 8px; background: rgba(245,242,235,.82); color: #52564e; font: 600 12px/1.2 'IBM Plex Mono', monospace; letter-spacing: .02em; }
-.energy-scene-labels.stage-0 { justify-content: space-between; }
+.energy-scene-labels.stage-0 { justify-content: center; }
+.energy-scene-labels.stage-0 span { display: inline-flex; align-items: center; gap: 6px; }
+.energy-scene-labels.stage-0 span::before { content: ''; width: 8px; height: 8px; flex: 0 0 8px; border-radius: 50%; background: var(--species-color); box-shadow: 0 0 0 1px rgba(41,44,40,.2); }
+.energy-scene-labels .species-cs { --species-color: #d1a24c; }
+.energy-scene-labels .species-pb { --species-color: #364344; }
+.energy-scene-labels .species-i { --species-color: #9d4e35; }
 .energy-controls { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-top: 0; }
 .energy-controls button { min-height: 48px; padding: 9px 10px; border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--secondary); font: 600 12px/1.15 'IBM Plex Mono', monospace; letter-spacing: .025em; cursor: pointer; }
 .energy-controls button:last-child { border-right: 0; }

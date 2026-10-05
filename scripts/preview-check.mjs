@@ -14,7 +14,7 @@ async function capture(name, viewport) {
   await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
   await page.locator('.energy-canvas-shell.is-ready').waitFor({ timeout: 15000 });
   await page.screenshot({ path: `${output}/${name}-top.png`, fullPage: false });
-  await page.getByRole('button', { name: /04 System/ }).click();
+  await page.getByRole('button', { name: /Systems/ }).click();
   await page.waitForTimeout(600);
   await page.locator('.vision-figure').screenshot({ path: `${output}/${name}-system.png` });
   await page.locator('#research').scrollIntoViewIfNeeded();

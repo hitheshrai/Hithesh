@@ -15,9 +15,9 @@
 - IPEROP represents the cesium-perovskite thread. The separate Open-Air PVSC
   presentation is intentionally omitted; the linked formamidinium PVSC
   proceedings paper remains.
-- The Three.js hero shows a future direction from crystal chemistry to solar,
-  storage, and a combined energy system. Li-rich antiperovskites are described
-  as candidate solid electrolytes, not as completed research.
+- The Three.js hero moves from an ideal cubic CsPbI₃ structure to solar,
+  completed battery diagnostics, and a combined energy-system vision.
+  Antiperovskites are no longer part of the central public narrative.
 - ASU Rolston Lab is the research home. The narrative moves from narrow- to
   wide-bandgap solar perovskites during the B.S.E. to batteries, degradation,
   and impedance during the M.S.
@@ -49,6 +49,11 @@
 - Impeccable 4.1.0 is pinned as a local development dependency. Run
   `npm run design:audit` for the repeatable source scan; rendered URL audits
   additionally require a local Chromium browser.
+- The hero crystal stage now uses a VESTA-style 2×2×2 ideal cubic CsPbI₃
+  supercell with shared PbI₆ octahedra, labeled Cs/Pb/I sites, and a unit-cell
+  boundary. Decorative flooring and automatic rotation were removed. The four
+  stages are Materials, Solar, Batteries, and Systems; antiperovskites no longer
+  appear as if they were completed research.
 - Visitor-facing language calls this section `Experience` and `Research beyond
   ASU`. It uses factual research topics and contributions rather than framing
   the ongoing work as a completed journey or story.

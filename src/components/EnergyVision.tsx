@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import type { Group, Material, Object3D, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 
 const stages = [
-  { short: 'Crystal', kicker: '01 · Crystal chemistry', title: 'One structure, two questions', text: 'Perovskite research opened the solar question. Antiperovskites open another path toward candidate solid-state battery electrolytes.' },
-  { short: 'Solar', kicker: '02 · Generation', title: 'A good film is only the start', text: 'The next question is what gets lost between a promising perovskite film and a solar module that lasts.' },
-  { short: 'Storage', kicker: '03 · Storage', title: 'The same gap exists in batteries', text: 'A promising ion-conducting material still has to work inside a cell, a module, and the conditions they create.' },
-  { short: 'System', kicker: '04 · Scale', title: 'The questions meet at the grid', text: 'Solar makes energy. Storage makes it available when it is needed. The research vision connects the path between them.' },
+  { short: 'Materials', kicker: 'Fundamentals', title: 'Structure sets the starting point', text: 'Halide perovskites anchor the solar work. Composition, processing, and interfaces decide how the material behaves.' },
+  { short: 'Solar', kicker: 'Generation', title: 'A good film is only the start', text: 'The next question is what gets lost between a promising perovskite film and a solar module that lasts.' },
+  { short: 'Batteries', kicker: 'Diagnostics', title: 'Follow what changes inside the cell', text: 'Graduate work uses impedance and physical checks to study interfaces, degradation, and which signals can be trusted.' },
+  { short: 'Systems', kicker: 'Scale', title: 'The questions meet at the grid', text: 'Solar makes energy. Storage makes it available when it is needed. Better systems depend on understanding both.' },
 ] as const;
 
 type StageIndex = 0 | 1 | 2 | 3;
@@ -65,8 +65,8 @@ export default function EnergyVision() {
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       controls = new controlsModule.OrbitControls(camera, canvas);
       controls.enableDamping = !reduceMotion;
-      controls.autoRotate = !reduceMotion;
-      controls.autoRotateSpeed = 0.42;
+      controls.autoRotate = false;
+      controls.autoRotateSpeed = 0;
       controls.enablePan = false;
       controls.minDistance = 7;
       controls.maxDistance = 14;
@@ -83,21 +83,41 @@ export default function EnergyVision() {
         const mesh = new THREE.Mesh(new THREE.BoxGeometry(...size), new THREE.MeshStandardMaterial({ color, roughness: 0.55, metalness }));
         mesh.castShadow = true; mesh.receiveShadow = true; return mesh;
       };
-      const bond = (from: InstanceType<typeof THREE.Vector3>, to: InstanceType<typeof THREE.Vector3>, color: number) => {
-        const direction = new THREE.Vector3().subVectors(to, from);
-        const mesh = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, direction.length(), 10), new THREE.MeshStandardMaterial({ color, transparent: true, opacity: 0.55 }));
-        mesh.position.copy(from).add(to).multiplyScalar(0.5);
-        mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.clone().normalize());
-        return mesh;
-      };
-      const makeCell = (inverse: boolean) => {
+      const makePerovskiteNetwork = () => {
         const group = new THREE.Group();
-        const corners = [-1, 1].flatMap(x => [-1, 1].flatMap(y => [-1, 1].map(z => new THREE.Vector3(x, y, z))));
-        const faces = [new THREE.Vector3(1, 0, 0), new THREE.Vector3(-1, 0, 0), new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, -1, 0), new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, -1)];
-        corners.forEach(point => { const atom = sphere(inverse ? 0.18 : 0.24, inverse ? rust : gold); atom.position.copy(point); group.add(atom); });
-        group.add(sphere(inverse ? 0.25 : 0.16, inverse ? gold : graphite));
-        faces.forEach(point => { const atom = sphere(inverse ? 0.15 : 0.18, inverse ? graphite : rust); atom.position.copy(point); group.add(atom, bond(new THREE.Vector3(), point, inverse ? graphite : rust)); });
-        group.add(new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(2, 2, 2)), new THREE.LineBasicMaterial({ color: 0x8b8175, transparent: true, opacity: 0.35 })));
+        const lattice = 1.55;
+        const half = lattice / 2;
+        const offsets = [
+          new THREE.Vector3(half, 0, 0), new THREE.Vector3(-half, 0, 0),
+          new THREE.Vector3(0, half, 0), new THREE.Vector3(0, -half, 0),
+          new THREE.Vector3(0, 0, half), new THREE.Vector3(0, 0, -half),
+        ];
+        const faces = [0, 2, 4, 2, 1, 4, 1, 3, 4, 3, 0, 4, 2, 0, 5, 1, 2, 5, 3, 1, 5, 0, 3, 5];
+        const iodideSites = new Map<string, InstanceType<typeof THREE.Vector3>>();
+        const polyhedronMaterial = new THREE.MeshPhysicalMaterial({ color: rust, transparent: true, opacity: 0.36, roughness: 0.5, side: THREE.DoubleSide, depthWrite: false });
+        const edgeMaterial = new THREE.LineBasicMaterial({ color: 0x7f3826, transparent: true, opacity: 0.76 });
+
+        for (let ix = 0; ix < 2; ix += 1) for (let iy = 0; iy < 2; iy += 1) for (let iz = 0; iz < 2; iz += 1) {
+          const center = new THREE.Vector3((ix - 0.5) * lattice, (iy - 0.5) * lattice, (iz - 0.5) * lattice);
+          const lead = sphere(0.105, graphite); lead.position.copy(center); group.add(lead);
+          const vertices = offsets.map(offset => center.clone().add(offset));
+          const geometry = new THREE.BufferGeometry();
+          geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices.flatMap(vertex => vertex.toArray()), 3));
+          geometry.setIndex(faces);
+          geometry.computeVertexNormals();
+          group.add(new THREE.Mesh(geometry, polyhedronMaterial));
+          group.add(new THREE.LineSegments(new THREE.EdgesGeometry(geometry), edgeMaterial));
+          vertices.forEach(site => {
+            iodideSites.set(site.toArray().map(value => value.toFixed(3)).join(':'), site);
+          });
+        }
+
+        iodideSites.forEach(site => { const iodine = sphere(0.12, rust); iodine.position.copy(site); group.add(iodine); });
+        [-lattice, 0, lattice].forEach(x => [-lattice, 0, lattice].forEach(y => [-lattice, 0, lattice].forEach(z => {
+          const cesium = sphere(0.145, gold); cesium.position.set(x, y, z); group.add(cesium);
+        })));
+        group.add(new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(lattice * 2, lattice * 2, lattice * 2)), new THREE.LineBasicMaterial({ color: 0x756f66, transparent: true, opacity: 0.5 })));
+        group.scale.setScalar(0.88);
         return group;
       };
       const makePanel = (scale = 1) => {
@@ -125,14 +145,11 @@ export default function EnergyVision() {
       };
 
       const crystalStage = new THREE.Group();
-      const perovskite = makeCell(false); perovskite.position.x = -1.65; perovskite.scale.setScalar(0.9);
-      const antiperovskite = makeCell(true); antiperovskite.position.x = 1.65; antiperovskite.scale.setScalar(0.9); crystalStage.add(perovskite, antiperovskite);
+      crystalStage.add(makePerovskiteNetwork());
       const solarStage = makePanel(0.92); solarStage.rotation.y = -0.18; solarStage.position.y = 0.25;
       const groups = [crystalStage, solarStage, makeBatteryModule(), makeSystem()];
       groups.forEach((group, index) => { group.visible = index === 0; scene?.add(group); });
       groupsRef.current = groups;
-      const floor = new THREE.Mesh(new THREE.CircleGeometry(5.8, 64), new THREE.MeshStandardMaterial({ color: 0xded8cb, roughness: 1 }));
-      floor.rotation.x = -Math.PI / 2; floor.position.y = -1.55; floor.receiveShadow = true; scene.add(floor);
       const size = () => { if (!renderer) return; const width = host.clientWidth; const height = Math.max(280, Math.min(410, width * 0.72)); renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); };
       resizeObserver = new ResizeObserver(size); resizeObserver.observe(host); size(); setReady(true);
       const render = () => { if (stopped || !renderer || !scene) return; controls?.update(); renderer.render(scene, camera); frame = requestAnimationFrame(render); };
@@ -151,10 +168,10 @@ export default function EnergyVision() {
   const active = stages[stage];
   return <div className="energy-vision" ref={hostRef}>
     <div className={`energy-canvas-shell${ready ? ' is-ready' : ''}`}>
-      <div className="energy-fallback" aria-hidden="true"><span className="fallback-crystal">ABX₃</span><span>↗</span><span>Solar</span><span>↘</span><span>Storage</span><span>→</span><span>BESS</span></div>
+      <div className="energy-fallback" aria-hidden="true"><span className="fallback-crystal">ABX₃</span><span>→</span><span>Solar</span><span>+</span><span>Batteries</span><span>→</span><span>Systems</span></div>
       <canvas ref={canvasRef} className="energy-canvas" aria-hidden="true" />
       <div className={`energy-scene-labels stage-${stage}`} aria-hidden="true">
-        {stage === 0 ? <><span>Halide perovskite · ABX₃</span><span>Li-rich antiperovskite · Li₃OCl-type</span></> : <span>{stage === 1 ? 'Thin film → solar module' : stage === 2 ? 'Solid electrolyte → battery module' : 'Solar generation + battery storage'}</span>}
+        {stage === 0 ? <><span className="species-cs">Cs · A site</span><span className="species-pb">Pb · B site</span><span className="species-i">I · X site</span></> : <span>{stage === 1 ? 'Thin film → solar module' : stage === 2 ? 'Cell interfaces → impedance → degradation' : 'Solar generation + battery storage'}</span>}
       </div>
       <p className="energy-drag" aria-hidden="true">Drag to rotate</p>
     </div>
