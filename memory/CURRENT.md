@@ -38,6 +38,9 @@
 - The placement gallery now uses animated, keyboard-focusable cards. The 2025
   placement leads with `EPFL · PV-Lab`; ThinkSwiss appears as the scholarship
   context rather than the primary research affiliation.
+- Every gallery card uses the same information order: lab and year, role or
+  program, then the work performed. Funding/program labels no longer replace
+  research context on only one card.
 - Visitor-facing language calls this section `Experience` and `Research beyond
   ASU`. It uses factual research topics and contributions rather than framing
   the ongoing work as a completed journey or story.
