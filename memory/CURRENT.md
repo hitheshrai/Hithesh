@@ -35,6 +35,9 @@
   desktop/mobile preview check. The Three.js chunk remains dynamically loaded.
 - Preview screenshots are generated under `artifacts/website-preview/`, which
   is ignored by Git.
+- The placement gallery now uses animated, keyboard-focusable cards. The 2025
+  placement leads with `EPFL · PV-Lab`; ThinkSwiss appears as the scholarship
+  context rather than the primary research affiliation.
 
 Next: integrate the new CV when the user supplies it. Future copy changes
 should preserve the distinction between completed work, public evidence, and

@@ -60,21 +60,21 @@ export default function Experience() {
 
           <p className="rail-hint" aria-hidden="true">Swipe through the placements →</p>
           <div className="placement-gallery" role="region" aria-label="Photographs from four research placements" tabIndex={0}>
-            <figure className="placement-photo">
+            <figure className="placement-photo" tabIndex={0}>
               <img src="/assets/purdue-surf.jpg" width="800" height="600" alt="Hithesh standing beside his perovskite stability poster at Purdue University." loading="lazy" />
-              <figcaption>Purdue SURF · 2023</figcaption>
+              <figcaption><strong>Purdue SURF · 2023</strong><span>Perovskite stability</span></figcaption>
             </figure>
-            <figure className="placement-photo">
+            <figure className="placement-photo" tabIndex={0}>
               <img src="/assets/hzb-presentation.jpg" width="800" height="600" alt="Hithesh discussing his pair-distribution-function research poster at Helmholtz-Zentrum Berlin." loading="lazy" />
-              <figcaption>HZB · 2024</figcaption>
+              <figcaption><strong>HZB · 2024</strong><span>Local structure and phase behavior</span></figcaption>
             </figure>
-            <figure className="placement-photo">
+            <figure className="placement-photo" tabIndex={0}>
               <img src="/assets/thinkswiss-certificate.jpg" width="800" height="533" alt="Hithesh receiving a ThinkSwiss certificate after his EPFL summer research." loading="lazy" />
-              <figcaption>ThinkSwiss · 2025</figcaption>
+              <figcaption><strong>EPFL · PV-Lab · 2025</strong><span>ThinkSwiss research scholar</span></figcaption>
             </figure>
-            <figure className="placement-photo">
+            <figure className="placement-photo" tabIndex={0}>
               <img src="/assets/nims-team.jpg" width="1024" height="768" alt="Hithesh with colleagues during his research internship at the National Institute for Materials Science." loading="lazy" />
-              <figcaption>NIMS · 2026</figcaption>
+              <figcaption><strong>NIMS · 2026</strong><span>Automated electrochemical experiments</span></figcaption>
             </figure>
           </div>
         </div>
