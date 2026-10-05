@@ -66,7 +66,7 @@ export default function Experience() {
             </figure>
             <figure className="photo-card placement-photo" tabIndex={0}>
               <img src="/assets/hzb-presentation.jpg" width="800" height="600" alt="Hithesh discussing his pair-distribution-function research poster at Helmholtz-Zentrum Berlin." loading="lazy" />
-              <figcaption><strong>HZB · Berlin · 2024</strong><span>International Summer Student</span><span>X-ray and neutron PDF analysis</span></figcaption>
+              <figcaption><strong>HZB · Berlin · 2024</strong><span>International Summer Student</span><span>Studying atomic arrangements with X-ray and neutron scattering</span></figcaption>
             </figure>
             <figure className="photo-card placement-photo" tabIndex={0}>
               <img src="/assets/thinkswiss-certificate.jpg" width="800" height="533" alt="Hithesh receiving a ThinkSwiss certificate after his EPFL summer research." loading="lazy" />

@@ -3,6 +3,7 @@ import { mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 const output = fileURLToPath(new URL('../artifacts/website-preview/', import.meta.url));
+const previewUrl = process.env.PREVIEW_URL ?? 'http://127.0.0.1:4173/';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 
@@ -11,7 +12,7 @@ async function capture(name, viewport) {
   const errors = [];
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
+  await page.goto(previewUrl, { waitUntil: 'networkidle' });
   await page.locator('.energy-canvas-shell.is-ready').waitFor({ timeout: 15000 });
   await page.screenshot({ path: `${output}/${name}-top.png`, fullPage: false });
   await page.getByRole('button', { name: /Systems/ }).click();

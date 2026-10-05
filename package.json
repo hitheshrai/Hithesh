@@ -9,6 +9,7 @@
         "build": "vite build",
         "design:audit": "impeccable detect src/",
         "lint": "eslint .",
+        "share-card": "node scripts/generate-share-card.mjs",
         "preview": "vite preview"
     },
     "dependencies": {

@@ -31,11 +31,13 @@ Open <http://127.0.0.1:4173/>.
 npm run build
 npm run lint
 npm run design:audit
+npm run share-card
 npx tsc --noEmit
 node scripts/preview-check.mjs
 ```
 
-The Playwright script writes desktop and mobile review images to
+`npm run share-card` regenerates the social image from the current homepage
+message. The Playwright preview script writes desktop and mobile review images to
 `artifacts/website-preview/` inside the project.
 
 ## Project structure

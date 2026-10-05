@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import type { Group, Material, Object3D, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 
 const stages = [
-  { short: 'Materials', kicker: 'Fundamentals', title: 'Structure sets the starting point', text: 'Halide perovskites anchor the solar work. Composition, processing, and interfaces decide how the material behaves.' },
-  { short: 'Solar', kicker: 'Generation', title: 'A good film is only the start', text: 'The next question is what gets lost between a promising perovskite film and a solar module that lasts.' },
-  { short: 'Batteries', kicker: 'Diagnostics', title: 'Follow what changes inside the cell', text: 'Graduate work uses impedance and physical checks to study interfaces, degradation, and which signals can be trusted.' },
-  { short: 'Systems', kicker: 'Scale', title: 'The questions meet at the grid', text: 'Solar makes energy. Storage makes it available when it is needed. Better systems depend on understanding both.' },
+  { short: 'Materials', kicker: 'Materials', title: 'How composition and processing affect a film', text: 'Perovskites are a family of materials that includes semiconductors used in solar research. The work asks how composition, processing, and interfaces change their behavior.' },
+  { short: 'Solar', kicker: 'Devices', title: 'From making a film to testing a device', text: 'The solar research includes thin-film processing, device fabrication, and measurements used to investigate performance and stability.' },
+  { short: 'Batteries', kicker: 'Measurements', title: 'What changes as a battery ages?', text: 'Electrical measurements and physical checks help test which signals and model interpretations remain plausible as a cell degrades.' },
+  { short: 'Systems', kicker: 'Longer-term interest', title: 'Generation and storage at system scale', text: 'A longer-term question is how device performance and degradation affect decisions about solar generation and battery storage.' },
 ] as const;
 
 type StageIndex = 0 | 1 | 2 | 3;

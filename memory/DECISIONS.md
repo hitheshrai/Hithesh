@@ -1,5 +1,15 @@
 # Decisions
 
+## 2026-10-04 — Contribution before direction
+
+The homepage now names solar materials, battery degradation, and practical AI
+in the opening screen. Rolston Lab is the main research section, with question,
+contribution, output or status, and public evidence for each strand. The three
+ASU Forge records establish the progression from PAIOS mobile-ion measurements
+to additive-mediated ion-migration control and ambient blade-coated CsPbX₃
+films. Research-vision graphics remain supporting context rather than evidence
+of a completed result.
+
 ## 2026-10-04 — Research-first, limited public detail
 
 The local draft leads with fundamentals and energy systems. AI appears as one

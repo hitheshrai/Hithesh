@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-const links = [['Research', 'research'], ['Experience', 'experience'], ['Publications', 'publications'], ['Projects', 'engineering'], ['About', 'about'], ['Contact', 'contact']];
+const links = [['Research', 'research'], ['Experience', 'experience'], ['Papers & posters', 'publications'], ['Engineering', 'engineering'], ['About', 'about'], ['Contact', 'contact']];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
