@@ -1,54 +1,55 @@
 # hitheshrai.com
 
-My personal site.
+Personal research website for Hithesh Rai Purushothama.
 
-Most research portfolios are a reverse-chronological list of jobs, and mine never
-looked right that way. The work happened in six places across four countries, and
-the moving around was part of the point. So the site is a map you scroll through
-instead. The view travels between the places and draws the route behind it.
-Halfway along it turns around and comes back to Tempe, which is what actually
-happened.
+The site follows a connected path from solar materials and battery degradation
+to computation, applied AI, and energy systems. It is intentionally selective:
+the public pages show a research direction and a small set of verifiable work,
+rather than reproducing a full CV.
 
-The research is perovskite solar cells, and lately battery interfaces. I make the
-films, run the measurements, and build the models on whatever comes out of them.
+## Stack
 
-Live at **[hitheshrai.com](https://hitheshrai.com)**.
+- React, TypeScript, and Vite
+- Three.js for the interactive research-vision scene
+- Plain responsive CSS
+- PostHog, loaded only on the production hostname
 
-## Running it
+## Local development
 
-Node 20 or newer.
+Use Node.js 20 or newer.
 
 ```bash
 npm install
-npm run dev
+npm run dev -- --host 127.0.0.1 --port 4173
 ```
 
-`npm run build` writes the static site to `dist/`. Hosting is Vercel, which
-builds from `main` on every push.
+Open <http://127.0.0.1:4173/>.
 
-## The route
+## Checks
 
-- **Tempe** · *Arizona State, Rolston Lab.* Wide-bandgap perovskite films,
-  blade-coated in open air. Most labs work in a glovebox; ambient is what
-  manufacturing actually needs, and it's harder.
+```bash
+npm run build
+npm run lint
+npx tsc --noEmit
+node scripts/preview-check.mjs
+```
 
-- **West Lafayette** · *Purdue, one summer.* Went looking through the perovskite
-  literature for what actually improves a device, instead of guessing at the
-  bench.
+The Playwright script writes desktop and mobile review images to
+`C:/Users/hithe/Downloads/website-preview/`.
 
-- **Berlin** · *Helmholtz-Zentrum.* Local structure in ferroelectrics, by X-ray
-  and neutron scattering. The average lattice looks fine. The disorder that
-  matters shows up close in.
+## Project structure
 
-- **Neuchâtel** · *EPFL.* Single-junction cells at 19%, built in a lab that makes
-  most of its own equipment.
+- `src/data/site.ts` contains public copy, experience, publications, and links.
+- `src/components/` contains the page sections and visualizations.
+- `src/index.css` contains the visual system and responsive layouts.
+- `src/lib/atlas.ts` supplies the compact research-location map geometry.
+- `docs/content-sources.md` records evidence and editorial decisions.
+- `memory/` contains project status, decisions, and session handoffs.
 
-- **Tempe again** · *ASU Next Lab.* Language models small enough to run on
-  hardware you can carry somewhere with no internet.
+The public CV is intentionally withheld until its next revision. The current
+social share image is `public/assets/og-redesign.png`.
 
-- **Tsukuba** · *NIMS.* Impedance data an autonomous lab can act on without a
-  person reading the plot first.
+## Deployment
 
-## Contact
-
-hraipuru@asu.edu
+Vercel builds and deploys the `main` branch. The production domain is
+<https://www.hitheshrai.com>.
