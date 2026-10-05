@@ -1,63 +1,45 @@
-# Current state — 2026-10-04
+﻿# Current state — 2026-10-04
 
 - The research-first redesign is live at <https://www.hitheshrai.com>.
-- Release commit: `ed50022` (`Redesign site around connected energy research`).
-- Pull request: <https://github.com/hitheshrai/Hithesh/pull/27>.
-- Merge commit on `main`: `750a790bb4a0b9be066e3b17f5a95b0a7c8d1a74`.
-- GitHub and Vercel reported a successful production deployment. The live
-  domain returned HTTP 200 and served the new hero, interactive research
-  vision, and Next Lab programme-work copy.
-- The public site is deliberately selective. It connects undergraduate solar
-  research, graduate battery-degradation work, computation, applied AI, and
-  energy systems without reproducing the full CV.
-- The old CV and its public link remain removed. The user will provide a new
-  version later.
-- IPEROP represents the cesium-perovskite thread. The separate Open-Air PVSC
-  presentation is intentionally omitted; the linked formamidinium PVSC
-  proceedings paper remains.
-- The Three.js hero moves from an ideal cubic CsPbI₃ structure to solar,
-  completed battery diagnostics, and a combined energy-system vision.
-  Antiperovskites are no longer part of the central public narrative.
-- ASU Rolston Lab is the research home. The narrative moves from narrow- to
-  wide-bandgap solar perovskites during the B.S.E. to batteries, degradation,
-  and impedance during the M.S.
-- Next Lab is framed through programme-management evidence while preserving
-  the verified titles: Studio Associate from Sep 2023 and Management Intern
-  from Mar 2026. Copy names concrete work on offline Jetson models, EDge AI
-  presentations, and testable research and voice-assistant prototypes.
-- EPICS · 2Unify dates are 2022–2024. The Zoom image is from an Enterprise
-  Technology Town Hall, and the photovoltaic image is a First Solar
-  reliability site visit.
-- The site avoids repetitive first-person phrasing by naming teams and precise
-  contributions. This is an intentional editorial choice for a collaborative
-  research identity.
-- Final release checks passed: build, ESLint, TypeScript, and the Playwright
-  desktop/mobile preview check. The Three.js chunk remains dynamically loaded.
-- Preview screenshots are generated under `artifacts/website-preview/`, which
-  is ignored by Git.
-- The placement gallery now uses animated, keyboard-focusable cards. The 2025
-  placement leads with `EPFL · PV-Lab`; ThinkSwiss appears as the scholarship
-  context rather than the primary research affiliation.
-- Every gallery card uses the same information order: lab and year, role or
-  program, then the work performed. Funding/program labels no longer replace
-  research context on only one card.
-- The first Impeccable standardization pass removed numbered section markers,
-  raised functional metadata to a readable 12px scale, changed long metadata
-  labels to sentence case, unified border tokens, and extended the shared
-  photo-card interaction to the projects gallery. The intentional warm palette
-  remains. The visual contract is recorded in `docs/design-system.md`.
-- Impeccable 4.1.0 is pinned as a local development dependency. Run
-  `npm run design:audit` for the repeatable source scan; rendered URL audits
-  additionally require a local Chromium browser.
-- The hero crystal stage now uses a VESTA-style 2×2×2 ideal cubic CsPbI₃
-  supercell with shared PbI₆ octahedra, labeled Cs/Pb/I sites, and a unit-cell
-  boundary. Decorative flooring and automatic rotation were removed. The four
-  stages are Materials, Solar, Batteries, and Systems; antiperovskites no longer
-  appear as if they were completed research.
-- Visitor-facing language calls this section `Experience` and `Research beyond
-  ASU`. It uses factual research topics and contributions rather than framing
-  the ongoing work as a completed journey or story.
+- Current website release commit: `c47b49a` (`Center the site on documented
+  research contributions`). It was pushed directly to GitHub `main`; the live
+  domain returned HTTP 200 with the new metadata and passed the production
+  Playwright desktop/mobile check.
+- The opening now names the three public themes directly: solar materials,
+  battery degradation, and practical AI. The short description names thin-film
+  fabrication, battery measurements, computational analysis, and team-based
+  offline-AI work.
+- ASU's Renewable Energy Materials and Devices Lab (Rolston Lab) is the main
+  research section. Each card separates the question, contribution, and output,
+  status, or evidence boundary.
+- The perovskite card now links the consolidated ASU Forge participant record.
+  The three documented projects are: PAIOS mobile-ion characterization in spring
+  2023, additive-mediated ion-migration control in fall 2023, and ambient
+  blade-coated CsPbX₃ films in spring 2025. The homepage does not add a lifetime
+  or device-performance claim beyond those records.
+- Research beyond ASU covers Purdue, HZB, EPFL, and NIMS. EPFL's unqualified
+  19% number was removed pending measurement and attribution context. The NIMS
+  entry states that a lithium-conservation check exposed an artifact in one
+  model result and that result was rejected.
+- Next Lab is framed as team-based applied AI and engineering. EDge AI names the
+  Jetson trade-offs, partner demonstrations, and the verified ASU presentation
+  leadership without changing the user's official role title.
+- The hero retains the contained, lazily loaded Three.js ideal cubic CsPbI₃
+  reference structure and selectable Materials, Solar, Batteries, and Systems
+  views. These captions distinguish completed work from longer-term interests.
+- The research fact layout uses an 88px label column and 13px body text. The
+  previously confirmed Contribution/text overlap is resolved at desktop and
+  390px phone width.
+- The public CV remains withheld until the user supplies its replacement.
+- `public/assets/og-redesign.png` now matches the current hero message. Run
+  `npm run share-card` to regenerate it deterministically with Playwright.
+- Checks passed on the release: `npm run build`, `npm run lint`,
+  `npx tsc --noEmit`, `npm run design:audit`, local Playwright at 1440×1000 and
+  390×844, and the same Playwright check against production. Both production
+  widths reported zero console errors and body width equal to viewport width.
+- Review artifacts are written under `artifacts/website-preview/` and ignored by
+  Git. Source evidence and claim boundaries are in `docs/content-sources.md`.
 
-Next: integrate the new CV when the user supplies it. Future copy changes
-should preserve the distinction between completed work, public evidence, and
-the longer-term research vision documented in `docs/content-sources.md`.
+Next: integrate the new CV when supplied. Future edits should preserve the
+separation between documented contributions, team outcomes, ongoing work, and
+longer-term research interests.
