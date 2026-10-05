@@ -3,10 +3,10 @@ import { coastPaths, projectX, projectY, routeArc } from '../lib/atlas';
 
 const placementIds = new Set(['purdue', 'hzb', 'epfl', 'nims']);
 const chapters: Record<string, string> = {
-  purdue: 'Map the evidence',
-  hzb: 'Look beneath the average',
-  epfl: 'Return to the device',
-  nims: 'Transfer the method',
+  purdue: 'Devices and research data',
+  hzb: 'Local structure',
+  epfl: 'Thin-film photovoltaics',
+  nims: 'Battery diagnostics',
 };
 
 export default function Experience() {
@@ -18,10 +18,10 @@ export default function Experience() {
       <div className="section wrap">
         <div className="section-heading" data-reveal>
           <div>
-            <p className="eyebrow">02 / Research placements</p>
-            <h2 id="experience-title">One question, carried across four labs.</h2>
+            <p className="eyebrow">02 / Research experience</p>
+            <h2 id="experience-title">Research beyond ASU.</h2>
           </div>
-          <p>Evidence → structure → devices → autonomous measurement.</p>
+          <p>Solar cells, local structure, thin-film processing, and battery diagnostics.</p>
         </div>
 
         <div className="experience-intro" data-reveal="scale">
@@ -58,8 +58,8 @@ export default function Experience() {
             </div>
           </div>
 
-          <p className="rail-hint" aria-hidden="true">Swipe through the placements →</p>
-          <div className="placement-gallery" role="region" aria-label="Photographs from four research placements" tabIndex={0}>
+          <p className="rail-hint" aria-hidden="true">Swipe through the labs →</p>
+          <div className="placement-gallery" role="region" aria-label="Photographs from four research labs" tabIndex={0}>
             <figure className="placement-photo" tabIndex={0}>
               <img src="/assets/purdue-surf.jpg" width="800" height="600" alt="Hithesh standing beside his perovskite stability poster at Purdue University." loading="lazy" />
               <figcaption><strong>Purdue SURF · 2023</strong><span>Perovskite stability</span></figcaption>

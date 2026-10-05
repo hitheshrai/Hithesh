@@ -38,6 +38,9 @@
 - The placement gallery now uses animated, keyboard-focusable cards. The 2025
   placement leads with `EPFL · PV-Lab`; ThinkSwiss appears as the scholarship
   context rather than the primary research affiliation.
+- Visitor-facing language calls this section `Experience` and `Research beyond
+  ASU`. It uses factual research topics and contributions rather than framing
+  the ongoing work as a completed journey or story.
 
 Next: integrate the new CV when the user supplies it. Future copy changes
 should preserve the distinction between completed work, public evidence, and
