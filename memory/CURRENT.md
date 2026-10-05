@@ -6,9 +6,11 @@
   domain returned HTTP 200 with the new metadata and passed the production
   Playwright desktop/mobile check.
 - The opening now names the three public themes directly: solar materials,
-  battery degradation, and practical AI. The short description names thin-film
-  fabrication, battery measurements, computational analysis, and team-based
-  offline-AI work.
+  battery degradation, and practical AI. It names thin-film fabrication,
+  battery measurements, and computational tools, then connects the Next Lab and
+  SolarSPELL team's offline-AI tests to educational access in underserved
+  communities, including the Global South. This is stated as a goal rather than
+  a completed deployment outcome.
 - ASU's Renewable Energy Materials and Devices Lab (Rolston Lab) is the main
   research section. Each card separates the question, contribution, and output,
   status, or evidence boundary.
@@ -24,6 +26,8 @@
 - Next Lab is framed as team-based applied AI and engineering. EDge AI names the
   Jetson trade-offs, partner demonstrations, and the verified ASU presentation
   leadership without changing the user's official role title.
+- The projects rail now includes the user-supplied full Next Lab team photo while
+  retaining the Enterprise Technology Town Hall, AEE, and First Solar images.
 - The hero retains the contained, lazily loaded Three.js ideal cubic CsPbI₃
   reference structure and selectable Materials, Solar, Batteries, and Systems
   views. These captions distinguish completed work from longer-term interests.
