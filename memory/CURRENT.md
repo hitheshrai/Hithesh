@@ -1,8 +1,7 @@
-﻿# Current state — 2026-10-04
+﻿# Current state — 2026-10-05
 
 - The research-first redesign is live at <https://www.hitheshrai.com>.
-- Current website release commit: `c47b49a` (`Center the site on documented
-  research contributions`). It was pushed directly to GitHub `main`; the live
+- Current website release commit: `5f465e8` (`Add Next Lab team context to the`r`n  homepage`). It was pushed directly to GitHub `main`; the live
   domain returned HTTP 200 with the new metadata and passed the production
   Playwright desktop/mobile check.
 - The opening now names the three public themes directly: solar materials,
@@ -35,6 +34,9 @@
   previously confirmed Contribution/text overlap is resolved at desktop and
   390px phone width.
 - The public CV remains withheld until the user supplies its replacement.
+- The IPEROP poster uses the user-confirmed author list H. R. Purushothama,
+  H. Nguyen, K. Bakshi, and N. Rolston. The linked nanoGe record still omits
+  Nguyen and Bakshi; that difference is documented in `docs/content-sources.md`.
 - `public/assets/og-redesign.png` now matches the current hero message. Run
   `npm run share-card` to regenerate it deterministically with Playwright.
 - Checks passed on the release: `npm run build`, `npm run lint`,
